@@ -1,0 +1,149 @@
+    
+  <div class="card">
+    <div class="card-header card-header-icon" >
+      <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+        <i class="material-icons">search</i>
+      </div>
+      <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width:   60%;">Rapport Pérodique par type de Bons</h2>
+  </div>
+    <div class="card-body">
+      <form #form="ngForm">
+
+        <div class="row">
+        
+        <div class="col-md-3" style="margin-top: 0px;">
+            <!-- <legend>date Facture</legend> -->
+            <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder=" la date du" id="date1" name="date1" [(ngModel)]="date1" (click)="picker.open()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3" style="margin-top: 0px;">
+          <!-- <legend>date Facture</legend> -->
+          <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Au" id="date2" name="date2" [(ngModel)]="date2" (click)="picker1.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1 startView="year"></mat-datepicker>
+          </mat-form-field>
+      </div>
+       <div class="col-md-3 form-group" style="margin-top: -1px;">
+        <mat-form-field>
+          <mat-select placeholder="Type Bons" name="typeBons" [(ngModel)]="typeBons"
+            >
+            <mat-option *ngFor="let typeB of listypeBon" [value]="typeB.value">
+              {{ typeB.value }} 
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </div> 
+      <!-- <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input matInput type="text" placeholder="Matricule" id="Matricule"
+              name="Matricule" [(ngModel)]="matricule" >
+          </mat-form-field>
+        </div> -->
+      <div class="card-footer" style="padding-left: 40%;">
+        <button mat-raised-button type="submit" 
+         (click)=" getBonsPeriode();form.resetForm()" class="btn btn-fill btn-success"><i
+            class="material-icons">search</i>Rechercher</button>
+      </div>
+        
+      </div>
+      </form>
+      </div>
+      </div>
+      <!---Liste Bon-->
+      <div class="col-md-12" *ngIf="listBonGlobalsPrestation">
+        <div class="card">
+          <div class="card-header card-header-icon">
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+              <i class="material-icons">list</i>
+      
+            </div>
+            <h2 class="text-center" 
+            style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">Bon de {{d3}} du {{d1}} au {{d2}}
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="material-datatable">
+            <table id="datatable" class="table table-bordered " 
+             #TABLE cellspacing="0" width="100%" style="width:100%" >
+      
+              <thead style="font-weight:bold;background-color: #5b42ff;color: white">
+           <tr>
+                <th cope="col"> Matricule</th>
+                <th cope="col">Nom Participant</th>
+                <th cope="col">Prenom Participant</th>
+                <th cope="col">Prestataire </th>
+                <th cope="col">Date Saisie</th>
+                <th>Action</th>
+               <th *ngIf="isLinetterie==true">Certification</th>
+
+               <!-- <th cope="col">Action</th> -->
+
+
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let element of listBonGlobalsPrestation; let i=index">
+                  <td><b>{{element.ipm_employe?.matricule}}</b></td>
+                  <td><b>{{element.ipm_employe?.nom}}</b></td>
+                  <td><b>{{element.ipm_employe?.prenom}}</b></td>
+                  <td><b>{{element.ipm_prestataire?.nom_prestataire}}</b></td>
+                  <td ><b>{{element.dateEtablissement | date:'dd/MM/yyyy'}}</b></td>
+                  <td>
+                      <button mat-raised-button class="btn btn-fill btn-success btn-round"
+                              (click)="imprimer(element)">imprimer
+                      </button>
+                  </td>
+                    <td *ngIf="isLinetterie==true && element?.certification==false">
+                        <button mat-raised-button class="btn btn-fill btn-info btn-round"
+                               (click)="certifierBon(element)">Certifier
+                        </button>
+                    </td>
+                  <!-- <td><button  mat-raised-button (click)="getDetBon(element)" type="button" class="btn btn-round btn-info" id="edit">
+                    <i class="material-icons" >help</i></button> </td> -->
+                  <!-- <td><b>{{element.part_ipm}}</b></td>
+                  <td><b>{{element.part_patient}}</b></td> -->
+                
+                  <!-- <td>
+                    <button class="btn btn-info btn-block" 
+                   data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
+                    </button></td> -->
+      
+      
+                </tr>
+              </tbody>
+              <!-- <tfoot style="font-weight:bold;">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h4>TOTAL</h4>
+                  </td>
+                  <td>{{}}</td>
+                  <td>{{}}</td>
+                  <td>{{}}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+      
+                </tr>
+              </tfoot> -->
+      
+            </table>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button mat-raised-button class="btn btn-fill btn-success btn-round" 
+                  (click)="printSituationBons()">imprimer
+                 </button>
+            </div> 
+          </div>
+      
+        </div>
+      </div>
+
+   <!---Liste Bon-->

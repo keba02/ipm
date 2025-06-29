@@ -1,0 +1,321 @@
+<style>
+  #menu{font-size: 16px; letter-spacing: 1.3px; font-weight: 500;}
+</style>
+<div class="main-content">
+    <div class="container-fluid">
+<!--       
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card card-chart">
+            <div class="card-header card-header-rose" data-header-animation="true">
+              <div class="ct-chart" id="websiteViewsChart"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-actions">
+                <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                  <i class="material-icons">build</i> Fix Header!
+                </button>
+                <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh" [matTooltipPosition]="'below'">
+                  <i class="material-icons">refresh</i>
+                </button>
+                <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Change Date" [matTooltipPosition]="'below'">
+                  <i class="material-icons">edit</i>
+                </button>
+              </div>
+              <h4 class="card-title">Website Views</h4>
+              <p class="card-category">Last Campaign Performance</p>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">access_time</i> campaign sent 2 days ago
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-chart">
+            <div class="card-header card-header-success" data-header-animation="true">
+              <div class="ct-chart" id="dailySalesChart"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-actions">
+                <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                  <i class="material-icons">build</i> Fix Header!
+                </button>
+                <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh" [matTooltipPosition]="'below'">
+                  <i class="material-icons">refresh</i>
+                </button>
+                <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Change Date" [matTooltipPosition]="'below'">
+                  <i class="material-icons">edit</i>
+                </button>
+              </div>
+              <h4 class="card-title">Daily Sales</h4>
+              <p class="card-category">
+                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">access_time</i> updated 4 minutes ago
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-chart">
+            <div class="card-header card-header-info" data-header-animation="true">
+              <div class="ct-chart" id="completedTasksChart"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-actions">
+                <button mat-raised-button type="button" class="btn btn-danger btn-link fix-broken-card">
+                  <i class="material-icons">build</i> Fix Header!
+                </button>
+                <button mat-raised-button type="button" class="btn btn-info btn-link" matTooltip="Refresh" [matTooltipPosition]="'below'">
+                  <i class="material-icons">refresh</i>
+                </button>
+                <button mat-raised-button type="button" class="btn btn-default btn-link" matTooltip="Change Date" [matTooltipPosition]="'below'">
+                  <i class="material-icons">edit</i>
+                </button>
+              </div>
+              <h4 class="card-title">Completed Tasks</h4>
+              <p class="card-category">Last Campaign Performance</p>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">access_time</i> campaign sent 2 days ago
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <!-- <i class="material-icons">weekend</i> -->
+                <i class="material-icons">person</i>
+              </div>
+              <!-- <p class="card-category">Bookings</p> 
+             <h3 class="card-title">184</h3> -->
+           
+              <p class="card-category" style="font-size: 26px">Total Participant</p>
+              <h3 class="card-title" style="font-size: 26px;">{{nbre}}</h3>
+          
+            
+              
+            </div>
+            
+            <div class="card-footer">
+              <div class="stats">
+                <!-- <i class="material-icons text-danger">warning</i> -->
+                <button mat-raised-button data-toggle="modal"
+                data-target="#statu" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                 <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                   
+                </button>
+                <!-- <a href="#pablo">Get More Space...</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-rose card-header-icon">
+              <div class="card-icon">
+                <!-- <i class="material-icons">equalizer</i> -->
+                <i class="material-icons">person</i>
+              </div>
+              <!-- <p class="card-category">Website Visits</p>
+              <h3 class="card-title">75.521</h3> -->
+              <p class="card-category" style="font-size: 26px">Conjoints</p>
+              <h3 class="card-title" style="font-size: 26px;">{{nbreconjoint}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <button mat-raised-button data-toggle="modal"
+                data-target="#sexeConjoint" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                 <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                   
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <!-- <i class="material-icons">store</i> -->
+                <i class="material-icons">person</i>
+              </div>
+              <!-- <p class="card-category">Revenue</p>
+              <h3 class="card-title">$34,245</h3> -->
+              <p class="card-category" style="font-size: 26px">Enfants</p>
+              <h3 class="card-title" style="font-size: 26px;">{{nbrenfant}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <button mat-raised-button data-toggle="modal"
+                data-target="#enfa" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                 <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                   
+                </button>
+                <!-- <i class="material-icons">date_range</i> Last 24 Hours -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="fa fa-twitter"></i>
+              </div>
+              <p class="card-category" style="font-size: 23px">Nombre de Bons Par Mois</p>
+              <h3 class="card-title">{{nombreBons}}</h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <div class="stats">
+                  <button mat-raised-button data-toggle="modal"
+                  data-target="#bons" style="margin:10px;" type="button"  style="background-color: rgb(47, 47, 201);">
+                   <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+                     
+                  </button>
+                  <!-- <i class="material-icons">date_range</i> Last 24 Hours -->
+                </div>
+                <!-- <i class="material-icons">update</i> Just Updated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
+
+<!--modal dahsbord -->
+<div class="modal fade" id="statu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+            <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+                Totals Hommes: <span style="color:blue">{{nombreHommes}}</span><br>
+                Totals Femmes: <span style="color:blue">{{nombreFemmes}}</span>
+            </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->
+
+<!--modal categories ages enfants -->
+<div class="modal fade" id="enfa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+            <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+                Totals Enfants moins de 5 ans:  <span style="color:blue">{{this.agenfan}}</span><br>
+                Totals Enfants plus de 5 ans:  <span style="color:blue">{{this.agenfa}}</span>
+            </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="container-fluid">
+          <form class="form-horizontal">
+        <div class="modal-body" style="width: 700px;">
+      
+            
+        </div>
+        <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
+      
+        </div>
+      </form>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->
+
+<!--modal sexe conjoint -->
+<div class="modal fade" id="sexeConjoint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+        <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+          Totals Hommes: <span style="color:blue">{{nombreHommeConj}}</span><br>
+          Totals Femmes: <span style="color:blue">{{nombreFemmeConj}}</span>
+      </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="container-fluid">
+          <form class="form-horizontal">
+        <div class="modal-body" style="width: 700px;">
+      
+            
+        </div>
+        <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
+      
+        </div>
+      </form>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->
+
+<!--modal bon par prestattions -->
+<div class="modal fade" id="bons" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="background-color: whitesmoke;color: black;">
+        <div class="modal-header" style="background-color: whitesmoke;"
+        >
+            <h3 class="modal-title" id="noticeModal" style="font-weight:bold; padding-bottom: 10px;">
+                <p style="color:blue">Nombre de Bons </p>
+                 Pharmacie:  <span style="color:blue">{{this.nombreph}}</span><br>
+                 Consultation:  <span style="color:blue">{{this.nombrecons}}</span><br>
+                 Lettre De Garantie:  <span style="color:blue">{{this.nombrelettre}}</span><br>
+               Lunetterie:  <span style="color:blue">{{this.nombrebonlunette}}</span>
+            </h3>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <div class="container-fluid">
+          <form class="form-horizontal">
+        <div class="modal-body" style="width: 700px;">
+      
+            
+        </div>
+        <div class="text-center" style="margin-top: 40px; padding-bottom: 1cm;">
+      
+        </div>
+      </form>
+      </div>
+    </div>
+
+</div>
+</div>
+
+<!--fin modal-->

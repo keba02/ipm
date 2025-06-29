@@ -1,0 +1,177 @@
+<div class="modal fade" id="bare"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+      <!--Content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Prise en Compte des Baremes</h4>
+          <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
+        <!--Modal cascading tabs-->
+        <div class="modal-c-tabs">
+          <!-- Tab panels -->
+          <div class="tab-content">
+              <!--Body-->
+              <div class="modal-body mb-1">
+                <div class="col-md-6 form-group">     
+                        
+                  <input type="text" id="min" name="min"
+                   [(ngModel)]="baremes.min" class="form-control" placeholder="Minimum">
+             
+                </div>
+                <div class="col-md-6 form-group">   
+               
+                  <input type="text" id="max" 
+                   name="max" [(ngModel)]="baremes.max" class="form-control"
+                    placeholder="Maximum">
+          
+                </div>
+                <div class="col-md-6 form-group">     
+               
+                  <input type="text" id="montant" 
+                   name="montant" [(ngModel)]="baremes.montant" class="form-control" placeholder="Montant">
+    
+                </div>
+                
+                <div class="text-center mt-2">
+                  <button class="btn btn-info btn-round" data-dismiss="modal"
+                  (click)="saveBareme()">Enregistrer<i class="fas fa-sign-in-alt ml-1"></i></button>
+                </div>
+              </div>
+              <!--Footer-->
+              <div class="modal-footer">
+                
+        <button mat-raised-button type="button" class="btn btn-outline-info waves-effect ml-auto"
+         data-dismiss="modal">Close</button>
+              </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Modal: Login / Register Form-->
+  <!--Fin-->
+  <div class="main-content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header card-header-icon card-header-rose">
+                          <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                          </div>
+                          <!-- <button mat-raised-button type="button" class="btn btn-success">
+                            <i class="material-icons" data-toggle="modal" data-target="#bareme"
+                            >add_circle</i>
+                        </button>   -->
+                        <button mat-raised-button type="button" style="float:right;margin-top:1cm; 
+                        font-size: 16px;" data-toggle="modal" data-target="#bare" class="btn btn-success">
+                            <i class="material-icons" >add_circle</i> Ajouter Bareme
+                          </button>
+                          <h4 class="card-title">Liste des Des Barèmes</h4>
+                          
+                         
+                      </div>
+                          <div class="card-body table-full-width">
+                              <div class="material-datatable">
+                                  <table id="datatable" class="table table-striped" cellspacing="0" width="100%" style="width:100%" class="table table-hover">
+                                      <thead class="text-primary"> 
+                                      <tr>
+                                               <th scope="col">Code Bareme</th>
+                                               <th scope="col">Minimum</th>
+                                               <th scope="col">Maximum</th>
+                                               <th scope="col">Montant</th>
+                                               <th scope="col">ACTIONS</th>
+      
+                                             </tr>
+                                      </thead>
+                                      <tbody >
+                                            <tr *ngFor="let bar of listBareme">
+                                                <td >{{bar.idBareme}}</td>
+                                                <td >{{bar.min}}</td>
+                                                <td >{{bar.max}}</td>
+                                                <td >{{bar.montant}}</td>
+      
+                            
+                              
+                                                <td class="td-actions">
+                                                                                                
+                                                  <button mat-raised-button type="button" class="btn btn-primary" (click)="getBaremesById(bar)">
+                                                      <i class="material-icons" data-toggle="modal" data-target="#modifbareme" 
+                                                    >edit</i>
+                                                  </button>                                      
+                                                
+                                                </td>
+                                                
+                                          </tr>
+                                         
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+  
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
+              <!----------Modification des Barèmes------------>
+
+              <div class="modal fade" id="modifbareme"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog cascading-modal" role="document">
+                  <!--Content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Modification des Barèmes</h4>
+                      <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="material-icons">clear</i>
+                      </button>
+                    </div>
+                    <!--Modal cascading tabs-->
+                    <div class="modal-c-tabs">
+                      <!-- Tab panels -->
+                      <div class="tab-content">
+                          <!--Body-->
+                          <div class="modal-body mb-1">
+                            <div class="col-md-6 form-group">     
+                                    
+                              <input type="text" id="min" name="min"
+                               [(ngModel)]="currentBareme.min" class="form-control" placeholder="Minimum">
+                         
+                            </div>
+                            <div class="col-md-6 form-group">   
+                           
+                              <input type="text" id="max" 
+                               name="max" [(ngModel)]="currentBareme.max" class="form-control"
+                                placeholder="Maximum">
+                      
+                            </div>
+                            <div class="col-md-6 form-group">     
+                           
+                              <input type="text" id="montant" 
+                               name="montant" [(ngModel)]="currentBareme.montant" class="form-control" placeholder="Montant">
+                
+                            </div>
+                            
+                            <div class="text-center mt-2">
+                              <button class="btn btn-info btn-round" data-dismiss="modal"
+                              (click)="updateBareme()">Modifer<i class="fas fa-sign-in-alt ml-1"></i></button>
+                            </div>
+                          </div>
+                          <!--Footer-->
+                          <div class="modal-footer">
+                            
+                    <button mat-raised-button type="button" class="btn btn-outline-info waves-effect ml-auto" 
+                     data-dismiss="modal">Close</button>
+                          </div>
+                      </div>
+              
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Modal: Login / Register Form-->

@@ -1,0 +1,122 @@
+
+
+<style>
+    b {
+      color: black;
+    }
+  </style>
+  <!---->
+  <div class="card">
+    <div class="card-header card-header-icon">
+      <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+        <i class="material-icons">search</i>
+      </div>
+      <h2 class="text-center" style="background-color:whitesmoke; 
+      color: black; pading: 2px; width: 40%;">Recherche par Date</h2>
+    </div>
+    <div class="card-body">
+  
+      <form>
+        <div class="row">
+            <div class="form-group  col-md-3" style="margin-top: -20px;">
+                <label><b>Date Precompte</b> </label>
+                <!-- <input type="text" name="dateprecompte" class="form-control" id="matricule" [(ngModel)]="dateprecompte"> -->
+
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="datePrecompte" id="datePrecompte" name="datePrecompte" 
+                [(ngModel)]="datePrecompte" (click)="picker1.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 startView="year"></mat-datepicker>
+                </mat-form-field>
+            </div>
+       </div>
+
+       <div class="modal-footer justify-content-center">
+        <button mat-raised-button class="btn btn-raised btn-round btn-success" (click)="getDate()">recherche
+        </button>
+
+      </div>
+       </form>
+    </div>
+</div>              
+
+<style>
+    tr{font-weight: bold;}
+</style> 
+<div class="main-content" *ngIf="listPrecompte">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-rose">
+                        <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                          <i class="material-icons">list</i>
+                        </div>
+                        <!-- <button mat-raised-button type="button" class="btn btn-success">
+                          <i class="material-icons" data-toggle="modal" data-target="#modalLRForm"
+                          >add_circle</i>
+                      </button>   -->
+                        <h4 class="card-title">Liste des Precomptes</h4>
+                        
+                       
+                    </div>
+                        <div class="card-body table-full-width">
+                            <div class="material-datatable">
+                                
+                                <table id="datatable" class="table table-bordered table-striped" 
+                                #TABLE cellspacing="0" width="100%" style="width:100%" class="table table-hover">
+                                
+                                    <thead  style="background-color: whitesmoke;"> 
+                                    <tr>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Matricule</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Prenom</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Nom</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Solde</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">M.Rembourser</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Date Precompte</th> 
+    
+                                           </tr>
+                                    </thead>
+                                    <tbody >
+                                          <tr *ngFor=" let precom of listPrecompte">
+                                              <td class="text-center"><b>{{precom.ipm_employe.matricule}}</b></td>
+                                              <td class="text-center"><b>{{precom.ipm_employe.prenom}}</b></td>
+                                              <td class="text-center"><b>{{precom.ipm_employe.nom}}</b></td>
+                                              <td class="text-center"><b>{{precom.ipm_employe.solde}}</b></td>
+                                              <td class="text-center"><b>{{precom.montantRembou}}</b></td>
+                                              <td class="text-center"><b>{{precom.datePrecompte}}</b></td>
+                                              
+                            
+                                              <!-- <td class="td-actions">
+                                                
+                                                
+
+                                                <button mat-raised-button type="button" class="btn btn-primary">
+                                                    <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
+                                                >edit</i>
+                                                </button>                                      
+                                                 <button mat-raised-button type="button" class="btn btn-success">
+                                                  <i class="material-icons" [routerLink]="['/gestion-factures/Ajouterfactures/']" 
+                                                  >perm_identity</i>
+                                              </button>   
+                                              </td> -->
+                                              
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            
+                                <div class="modal-footer justify-content-center">
+                                    
+                                    <div class="modal-footer justify-content-center">
+                                        <button (click)="fileDownload()" mat-raised-button class="btn btn-info">
+                                          <i class="material-icons">checked</i>Exporter Fichier</button>
+                                        </div>
+                            </div>
+                        </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,97 @@
+<div class="row" >
+    <div class="card">
+
+        <!--          <div class="card-header card-header-icon" >-->
+        <!--            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">-->
+        <!--              <i class="material-icons">list</i>-->
+        <!--            </div>-->
+        <h2 class="text-center" style="background-color:rgba(17, 17, 227, 0.88);
+             color: white; padding: 2px; width: 40%;">Carnet Participants </h2>
+
+
+        <div class="card-body table-full-width">
+
+            <div class="material-datatable">
+                <div class="text-center">
+                    <mat-spinner *ngIf="!currentemploye" style="margin-left: 15cm;"></mat-spinner>
+
+                </div>
+
+                <table id="datatable" class="table table-bordered table-striped" width="100%" style="width:100%"
+                       class="table table-hover">
+
+                    <thead class="text-black">
+
+                    <tr>
+
+                        <th cope="col"><b> Numero Carnet</b></th>
+                        <th cope="col"><b> Nom</b></th>
+                        <th cope="col"><b> Prenom</b></th>
+                        <th cope="col"><b> Matricule</b></th>
+                        <th cope="col"><b> Reference</b></th>
+                        <th cope="col"><b> Service</b></th>
+                        <th cope="col"><b> Categorie</b></th>
+
+                        <th class="disabled-sorting text-center">Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr style="font-weight: 500;">
+                        <td class="text-center">
+
+                            <span *ngIf="currentemploye.statut" class="badge badge-success"> {{currentemploye.numero_carnet}}</span>
+                            <span *ngIf="!currentemploye.statut" class="badge badge-danger">{{currentemploye.numero_carnet}}</span>
+                        </td>
+                        <td>{{currentemploye.nom}}</td>
+                        <td>{{currentemploye.prenom}}</td>
+                        <!-- <td >{{employe.sexe}}</td> -->
+                        <td>{{currentemploye.matricule}}</td>
+                        <td>{{currentemploye.reference}}</td>
+                        <td>{{currentemploye.ipmService?.type_service}}</td>
+                        <td>{{currentemploye.ipm_categorie?.libelle}}</td>
+
+                        <td class="td-actions">
+
+                            <!-- <label mat-raised-button>
+                              <span style="margin:2px;" *ngIf="employe.statut!=''" class="badge badge-danger">X<i class="material-icons"></i></span>
+                              <span style="margin:2px;" *ngIf="employe.statut==''" class="btn btn-success"><i class="material-icons">check</i></span>
+                            </label>  -->
+                            <button mat-raised-button (click)="getEmploye(currentemploye)" data-toggle="modal"
+                                    data-target="#statu" style="margin:2px;" type="button" class="btn" style="background-color: rgb(101, 101, 110);">
+                                <i class="fa fa-user-times" aria-hidden="true" style="color: rgb(251, 252, 253)"></i>
+
+                            </button>
+                            <button mat-raised-button style="margin:2px;" type="button" class="btn btn-info">
+                                <i class="material-icons"
+                                   [routerLink]="['/gestion-employes/carnetEmploye/'+currentemploye.idemp]">person</i>
+                            </button>
+
+                            <button mat-raised-button style="margin:2px;"type="button" class="btn btn-warning ">
+                                <i class="material-icons"
+                                   [routerLink]="['/gestion-employes/ModifierEmployes/'+currentemploye.idemp]">edit</i>
+                            </button>
+                            <!-- <button mat-raised-button type="button" class="btn btn-danger ">
+                                                          <i class="fa fa-trash-o" (click)="supprimerEmploye(employe)"></i>
+                                                      </button> -->
+
+
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                    <!--                <button mat-raised-button (click)="upload()" type="button" style="font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white; margin-left: 20px;">-->
+                    <!--                  <i class="material-icons">file_download</i>Telecharger-->
+                    <!--                </button>-->
+                </table>
+                <button class="btn btn-danger"  style="margin-left:65%; float: right" (click)="retourner()"
+                ><i class="material-icons">arrow_back</i>retour
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>

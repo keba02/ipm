@@ -1,0 +1,373 @@
+<style>
+  .btn-group button {
+      background-color: #1240d4;
+      border: none;
+      /* Green border */
+      color: white;
+      /* White text */
+      padding: 10px 100px;
+      /* Some padding */
+      cursor: pointer;
+      /* Pointer/hand icon */
+      float: left;
+      /* Float the buttons side by side */
+
+  }
+
+  /* Clear floats (clearfix hack) */
+  .btn-group:after {
+      content: "";
+      clear: both;
+      display: table;
+  }
+
+  .btn-group button:not(:last-child) {
+      border-right: none;
+      /* Prevent double borders */
+  }
+
+</style>
+<div class="main-content">
+  <div class="container-fluid">
+<div class="row">
+  <div class="col-md-8">
+      <div class="card " style="margin-left:4cm;">
+          <div class="card-header card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                  <i class="material-icons">list</i>
+              </div>
+              <h4 class="card-title">remboursement</h4>
+          </div>
+          <div class="card-body ">
+              <div class="btn-group">
+                  <table>
+                      <thead>
+                          <th></th>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td> <button class="w-100"  data-toggle="modal"
+                                      data-target="#noticeModal">Saisissez un remboursement </button></td>
+                           <td><button class="w-100"  data-toggle="modal"
+                            data-target="#noticeModal2">importez un remboursement</button></td>
+                                 
+
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" >
+              <div class="modal-content"style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
+                  <div class="modal-header" style="background-color: whitesmoke;"
+                  >
+                      <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Remboursement par participant
+                      
+                      </h2>
+                      <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          <i class="material-icons">close</i>
+                      </button>
+                  </div>
+                  <div class="modal-body" style="width: 900px;">
+
+                      
+                          <form>
+                              <div class="row bordered" >
+                                <div class="input-group col-md-4 bordered ">
+                                  <input type="text" name="matricule" class="form-control" placeholder="Matricule" id="matricule"
+                                    [(ngModel)]="matricule">
+                                    <button mat-raised-button (click)="getMatricule()" style="margin-top: -7px;padding: 4px;"
+                                    class="btn btn-fill btn-success"><i class="material-icons">search</i>Rechercher</button>
+                                </div>
+                              </div>
+                            </form>
+                              <form>
+
+                                
+                                
+                                
+                              <div class="row bordered" >
+                              <div class="col-md-4 form-group bordered "  *ngIf="message">
+                                  <label for="Taux_ipm"><b>Nom</b></label><br />
+                                  {{message.nom}}
+                                </div>
+                                <div class="col-md-4 form-group"  *ngIf="message">
+                                  <label for="Prenom"><b>Prenom</b></label><br />
+                                  {{message.prenom}}
+                                </div>
+                                <div class="col-md-4 form-group"  *ngIf="message">
+                                  <label for="Numero Carnet"><b>Numero Carnet</b></label><br />
+                                  {{message.numero_carnet}}
+                                </div>
+                
+                              </div>
+                              <div class="row" *ngIf="message">
+                                  
+                                    <div class="col-md-4 form-group">
+                                      <label for="solde"><b>Solde</b></label><br/>
+                                        <span style="height: 30px;width: 85px; font-weight: bold" class="badge badge-danger"><b>{{message.solde}}F CFA</b></span>
+
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                      <label for="Montant"><b>Montant Remboursement</b><b class="text-danger">*</b>
+                                      </label><br />
+                                      <input type="text" name="montant" class="form-control" placeholder="montant F CFA" id="montant"
+                                    [(ngModel)]="montantR">
+                                    </div>
+
+                                  <div class="col-md-4" style="margin-top:1cm;">
+                                      <!-- <legend>date Facture</legend> -->
+                                      <mat-form-field>
+                                      <input matInput [matDatepicker]="picker1" placeholder="date" id="dateRemboursement" name="dateRemboursement" [(ngModel)]="date" (click)="picker1.open()">
+                                          <b class="text-danger">*</b>
+
+                                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker1 startView="year"></mat-datepicker>
+                                      </mat-form-field>
+                                  </div>
+
+                              </div>
+                            </form>
+                            <button mat-raised-button (click)="ajoutRemboursement()" *ngIf="message"
+                                    [disabled]="!montantR || !date"
+                                    class="btn btn-fill btn-success">Ajouter</button>
+
+
+
+                      <hr>
+                  </div>
+  
+                  <div class="card" *ngIf="desactive">
+                      <span  style="text-align:center; color:red;font-size: 30px;">Remboursement impossible:Votre Montant est Supérieur à Votre Solde !</span>
+                  </div>  
+                  <!-- <div class="card" *ngIf="!liste1">
+                    <p style="text-align:center; color:red;font-size: 30px;">Remboursement impossible car solde supérieur</p>
+                </div>  -->
+                  <div class="col-md-12" *ngIf="message">
+                      <div class="card">
+                        <div class="card-header card-header-icon">
+                          <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                            <i class="material-icons">list</i>
+                    
+                          </div>
+                          <h3  style="background-color:whitesmoke; color: black; pading: 5px; width: 40%;">liste remboursement
+                          </h3>
+                        </div>
+                        <div class="card-body">
+                    
+                          <table class="table table-hover table-bordered">
+                    
+                            <thead style="font-weight:bold;">
+                    
+                              <th cope="col"> Matricule</th>
+                              <th cope="col">Nom</th>
+                              <th cope="col">Prenom</th>
+                              <!-- <th cope="col">Code Prestation</th> -->
+                              <th cope="col">Numéro Carnet</th>
+                              <th cope="col">Cumul charge</th>
+                              <th cope="col">Montant Remboursement</th>
+                              
+                              <th cope="col">Date</th>
+                              <th cope="col">Action</th>
+                    
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let element of listRembourse ; let i=index">
+                                <td><b>{{element.matricule}}</b></td>
+                                <td><b>{{element.ipm_employe.nom}}</b></td>
+                                <td><b>{{element.ipm_employe.prenom}}</b></td>
+                                <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
+                                <td><b>{{element.ipm_employe.numero_carnet}}</b></td>
+                                <td><b>{{element.ipm_employe.cumul_charge}}</b></td>
+                                <td><b>{{element.montant}}</b></td>
+                               
+                                <td><b>{{date1}}</b></td>
+                                <td class="td_actions">
+                                  <i class="material-icons" class="btn btn-danger" (click)=deleteDetails(i)><span
+                                      class="fa fa-trash-o"></span></i>
+                                </td>
+                                <!-- <td>
+                                  <button class="btn btn-info btn-block" 
+                                 data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
+                                  </button></td> -->
+                    
+                    
+                              </tr>
+                            </tbody>
+                            <tfoot style="font-weight:bold;">
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                  <h4>TOTAL</h4>
+                                </td>
+                                <td>{{cumul}}</td>
+                                <td>{{totalMont}}</td>
+                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                    
+                              </tr>
+                            </tfoot>
+                    
+                          </table>
+                          <div class="modal-footer justify-content-center">
+                            <button class="btn btn-raised btn-round btn-success" (click)="ajoutRem()">Valider remboursement
+                            </button>
+                          </div>
+                        </div>
+                    
+                      </div>
+                    </div>
+                  
+              </div>
+          </div>
+      </div>
+
+      <!--import remboursement-->
+      <div class="modal fade" id="noticeModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" >
+              <div class="modal-content"style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
+                  <div class="modal-header" style="background-color: whitesmoke;"
+                  >
+                      <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Importation de Remboursement
+                      
+                      </h2>
+                      <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          <i class="material-icons">close</i>
+                      </button>
+                  </div>
+                  <div class="modal-body" style="width: 900px;">
+
+                      <!---->
+<div class="card">
+    <h4 class="text-center" style="background-color:rgba(17, 17, 227, 0.88); color: white;  width: 50%;">Remboursement par importation </h4>
+    <div class="card-header card-header-icon" >
+<!--    <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">-->
+<!--      <i class="material-icons">list</i>-->
+<!--    </div>-->
+</div>
+  <div class="card-body">
+    <form>
+
+      <div class="row">
+      
+
+      
+      
+      <div class="col-md-3" style="margin-top: 0px;">
+          <label> Date remboursement  <span style="color: red">*</span></label>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker1"  id="dateRemboursement" name="dateRemboursement" [(ngModel)]="dateRemboursement" (click)="picker1.open()">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1 startView="year"></mat-datepicker>
+        </mat-form-field>
+    </div>
+      
+    </div>
+    </form>
+
+
+  </div>
+</div>
+                          
+                            
+                  </div>
+                 
+                  <div class="col-md-12">
+                      <div class="card" *ngIf="dateRemboursement">
+                        <div class="card-header card-header-icon">
+                          <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                            <i class="material-icons">backup</i>
+                          </div>
+                          <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Importation fichier excel</h2>
+                      
+                        </div>
+                        <div class="card-body">
+                          <form >
+                            <input type="file" (change)="onFileChange($event)" />
+
+                              <button mat-raised-button style="margin-top:10px;" type="button"
+                                      class="btn btn-outline-danger" data-toggle="modal">
+                                  le fichier importé doit avoir un <strong>Matricule</strong>  et un <strong>Montant Remboursement</strong>
+                              </button>
+                          <table class="table table-hover table-bordered">
+                            <thead style="font-weight:bold;">
+                              <th cope="col"> Matricule</th>
+                              <!-- <th cope="col">Nom</th>
+                              <th cope="col">Prenom</th>
+                              <th cope="col">Numéro Carnet</th>
+                              <th cope="col">Cumul charge</th> -->
+                              <th cope="col">Montant Remboursement</th>
+                              
+                              <th cope="col">Date</th>
+                              <th cope="col">Action</th>
+                    
+                            </thead>
+                            <tbody>
+                              <tr *ngFor=" let fac of ws ; let i=index">
+                                <td><b>{{fac.Matricule}}</b></td>
+                                <!-- <td><b>{{fac.nom}}</b></td>
+                                <td><b>{{fac.ipm_employe.prenom}}</b></td>
+                                <td><b>{{fac.ipm_employe.numero_carnet}}</b></td>
+                                <td><b>{{fac.ipm_employe.cumul_charge}}</b></td> -->
+                                <td><b>{{fac.Montant}}</b></td>
+                               
+                                <td><b>{{date11}}</b></td>
+                                <td class="td_actions">
+                                  <i class="material-icons" class="btn btn-danger" (click)=deleteDetailrembs(i)><span
+                                      class="fa fa-trash-o"></span></i>
+                                </td>
+                                <!-- <td>
+                                  <button class="btn btn-info btn-block" 
+                                 data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
+                                  </button></td> -->
+                    
+                    
+                              </tr>
+                            </tbody>
+                            <tfoot style="font-weight:bold;">
+                              <!-- <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                  <h4>TOTAL</h4>
+                                </td>
+                                <td>{{cumul}}</td>
+                                <td>{{totalMont}}</td>
+                                
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                    
+                              </tr> -->
+                            </tfoot>
+                    
+                          </table>
+                          <div class="modal-footer justify-content-center">
+                            <button class="btn btn-raised btn-round btn-success" (click)="ajoutRemGlobale(ws)"  [disabled]="desactive==false">Valider remboursement
+                            </button>
+                          </div>
+                        </form>
+                        </div>
+                    
+                      </div>
+                    </div>
+                  
+              </div>
+          </div>
+      </div>
+     <!--import remboursement--> 
+
+</div>
+</div>

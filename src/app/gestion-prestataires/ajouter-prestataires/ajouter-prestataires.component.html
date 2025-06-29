@@ -1,0 +1,46 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">perm_identity</i>
+            </div>
+            <h4 class="card-title">Type Prestatatire 
+              <small class="category"></small>
+            </h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="this.pres_service.dataForm" (ngSubmit)="ajouterTypePres()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Libelle</label>
+                    <input type="text" class="form-control" formControlName="libelle" id="libelle">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Non Type Prestataire</label>
+                    <input type="text" class="form-control" formControlName="nom_type_prestaire" id="nom_type_prestaire">
+                  </div>
+                </div>
+     
+              </div>
+              <button mat-raised-button type="submit"  class="btn btn-success pull-right"> <span class="btn-label">
+                <i class="material-icons">check</i>
+            </span>Enregistrer</button>
+             
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+            
+           <!-- <button mat-raised-button class="btn btn-success">
+               <span class="btn-label">
+                   <i class="material-icons">check</i>
+               </span>Enregistrer</button>
+         -->

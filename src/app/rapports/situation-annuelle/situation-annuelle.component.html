@@ -1,0 +1,159 @@
+<!---->
+<div class="main-content">
+    <div class="container-fluid">
+      
+  <div class="card">
+      <div class="card-header card-header-icon" >
+        <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+          <i class="material-icons">search</i>
+        </div>
+
+        <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 80%;">Rapport annuel des cotisations </h2>
+
+       
+    </div>
+      <div class="card-body">
+        <form #form="ngForm">
+  
+          <div class="row">
+
+       
+          <div class="col-md-3" style="margin-bottom: 2px;">
+            <mat-form-field>
+            <mat-select  placeholder="Choisir une année">
+              <mat-option *ngFor="let year of years" [value]="year"  (click)="getChoixAnne(year)">{{ year }} </mat-option> 
+              
+            </mat-select>
+    
+          </mat-form-field>
+          </div>
+        <div class="card-footer" style="padding-left: 40%;">
+          <button mat-raised-button type="submit" 
+           (click)="getCumulCotisationByEmploye()" class="btn btn-fill btn-success"><i
+              class="material-icons">search</i>Rechercher</button>
+
+            <button mat-raised-button type="submit" *ngIf="isCotisationEffectiveTrouvee"
+                    (click)="exportationCotisationEffective()" class="btn btn-fill btn-success"><i
+                    class="material-icons">search</i>Exporter</button>
+            <mat-spinner *ngIf="loading"></mat-spinner>
+        </div>
+
+          
+        </div>
+        </form>
+        <div class="card" *ngIf="isCotisationEffectiveLancee &&  !loading &&!isCotisationEffectiveTrouvee ">
+          <p style="text-align:center; color:red;font-size: 30px;">Cotisations introuvales pour cette année</p>
+      </div> 
+        </div>
+        
+        </div>
+        
+        <!--liste creances-->
+  <div class="col-md-12" *ngIf="isCotisationEffectiveTrouvee" >
+      <div class="card" >
+        <div class="card-header card-header-icon">
+          <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+            <i class="material-icons">list</i>
+          </div>
+          <h2 class="text-center" 
+          style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;"> Cotisations pour l'année {{selectedY}}
+          </h2>
+        </div>
+          <div class="card-body table-full-width">
+              <div class="material-datatable">
+          <table id="datatable" class="table table-bordered table-hover text-black " style="width:100%" >
+            <thead style="font-weight:bold;">
+              <th cope="col">Prenom/Nom</th>
+              <th cope="col">Matricule</th>
+              <th cope="col">Cotisation Annuelle</th>
+              <th cope="col">Details</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let element of cumulCotisationEmploye;">
+                <td>{{element?.ipm_employe?.prenom + element?.ipm_employe?.nom}}<b></b></td>
+                  <td>{{element?.ipm_employe?.matricule}}<b></b></td>
+                  <td>{{element?.montant}}<b></b></td>
+                <td class="td_actions">
+                  <i class="material-icons" class="btn btn-info" (click)="detailCotisation(element)" data-toggle="modal"
+                  data-target="#noticeModal"><span
+                      class="fa fa-plus fa-fw"></span> </i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+         
+        </div>
+    
+      </div>
+    </div>
+    </div>
+  </div>
+  
+    <!--fin liste-->
+
+           <!--modal list service-->
+           <div class="modal fade" id="noticeModal" style="margin-left: -10%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           aria-hidden="true">
+           <div class="modal-dialog" >
+               <div class="modal-content"style="width: 1000px;">
+                   <div class="modal-header" style="background-color: whitesmoke;">
+                       <h3 class="modal-title" id="noticeModal"
+                        style="font-weight:bold; padding-bottom: 10px;">Details Cotisations
+                       </h3>
+                       <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                           <i class="material-icons">close</i>
+                       </button>
+                   </div>
+                   <div class="modal-body" style="width: 1000px;">
+
+                       <div class="row">
+                               <table class="table table-hover table-bordered col-md-12">
+                                   <thead>
+                                       <tr style="background-color:rgb(213, 213, 213);">
+<!--                                           <th style="font-weight: 500;">Matricule</th>-->
+<!--                                           <th  style="font-weight: 500;">Nom</th>-->
+<!--                                           <th  style="font-weight: 250;">Prénom Nom</th>-->
+                                           <th  style="font-weight: 250;">Date</th>
+                                           <th  style="font-weight: 250;">Montant Cotisation</th>
+<!--                                           <th  style="font-weight: 500;">Action</th>-->
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                       <tr *ngFor="let listelement of listCotisations" style="font-weight: 300;">
+<!--                                        <td>{{listelement.ipm_employe?.matricule}}</td>-->
+<!--                                        <td>{{listelement.ipm_employe?.nom}}</td>-->
+<!--                                        <td>{{listelement.ipm_employe?.prenom + listelement.ipm_employe?.nom}}</td>-->
+                                           <td>{{listelement.ipm_cotisation.date}}</td>
+                                           <td>{{listelement.montant}}</td>
+
+<!--                                           <td class="td_actions text-right">-->
+<!--                                               <button mat-raised-button type="button" class="btn btn-warning  btn-round btn-xs"-->
+<!--                                                   id="edit">-->
+<!--                                                   <i class="fa fa-home"></i></button>-->
+<!--                                           </td>-->
+                                       </tr>
+                                   <tr style="font-weight: 300;">
+                                       Montant total : <b>{{sommeDetailCotisation}}</b>
+                                   </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+<!--                           <div class="modal-footer justify-content-center">-->
+<!--                            <button mat-raised-button class="btn btn-fill btn-success btn-round" -->
+<!--                                  (click)="printSituationAnnuelle()">imprimer-->
+<!--                                 </button>-->
+<!--                            </div> -->
+                       
+                   </div>
+                   
+               </div>
+           </div>
+       </div>
+
+       <!--fin modal-->
+    
+    
+  
+  
+  

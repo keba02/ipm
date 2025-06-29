@@ -1,0 +1,799 @@
+ 
+<style>
+  #menu{font-size: 16px; letter-spacing: 1.3px; font-weight: 500;}
+  #smenu{font-size: 15px; letter-spacing: 1.3px; font-weight: 400;
+          border-bottom: 1px solid rgba(245, 245, 245, 0.806); padding: 5px;}
+        span{font-size: 17px;font-weight: 400;}
+        #titre{font-size: 18px;font-weight: 500;}
+  </style>
+          <div class="logo">
+            <a class="simple-text logo-mini">
+              <div class="logo-img">
+                  <img img src="/ipm-fronte/assets/img_poste/laposte.png"/>
+              </div>
+            </a>
+              <a href="/ipm-fronte/assets/img_poste/laposte.png" class="simple-text logo-normal text-white">
+                IPM-POSTE
+              </a>
+          </div>
+  
+  
+          <div class="sidebar-wrapper">
+  
+              <!-- <div class="user">
+                  <div class="photo">
+                      <img src="./assets/img/faces/avatar.jpg" />
+                  </div>
+                  <div class="user-info">
+                      <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+                          <span>
+                              Tania Andrew
+                              <b class="caret"></b>
+                          </span>
+                      </a>
+                      <div class="collapse" id="collapseExample">
+                          <ul class="nav">
+                              <li class="nav-item">
+                                  <a href="javascript:void(0)" class="nav-link">
+                                      <span class="sidebar-mini">MP</span>
+                                      <span class="sidebar-normal">My Profile</span>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="javascript:void(0)" class="nav-link">
+                                      <span class="sidebar-mini">EP</span>
+                                      <span class="sidebar-normal">Edit Profile</span>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="javascript:void(0)" class="nav-link">
+                                      <span class="sidebar-mini">S</span>
+                                      <span class="sidebar-normal">Settings</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div> -->
+               <div> 
+                 
+                <!-- <form class="navbar-form">
+                  <span class="bmd-form-group">
+                        <div class="input-group no-border">
+                           
+                          <button mat-raised-button type="submit" (click)="findByMatricule()" class="btn btn-white btn-round btn-just-icon">                        
+                            <i class="material-icons">search</i>
+                            <div class="ripple-container"></div>
+        
+                          </button>
+                          
+                        </div>
+                      </span>
+                </form> -->
+                <ul class="nav navbar-nav nav-mobile-menu">
+                  <li class="nav-item">
+                    <!-- <a class="nav-link" href="#pablo">
+                      <i class="material-icons">dashboard </i>
+                      <p>
+                        <span class="d-lg-none d-md-block">Stats</span>
+                      </p>
+                    </a> -->
+                  </li>
+                  <!-- <li class="nav-item dropdown">
+                    <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons">notifications</i>
+                      <span class="notification">5</span>
+                      <p>
+                        <span class="d-lg-none d-md-block">Some Actions</span>
+                      </p>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                      <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                      <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                      <a class="dropdown-item" href="#">Another Notification</a>
+                      <a class="dropdown-item" href="#">Another One</a>
+                    </div>
+                  </li> -->
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="#pablo">
+                      <i class="material-icons">person</i>
+                      <p>
+                        <span class="d-lg-none d-md-block">Account</span>
+                      </p>
+                    </a>
+                  </li> -->
+                </ul>
+              </div> 
+              <ul class="nav">
+                  <!-- <li routerLinkActive="active" *ngFor="let menuitem of menuItems" class="nav-item">
+                      
+                      <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'" class="nav-link">
+                          <i class="material-icons">{{menuitem.icontype}}</i>
+                          <p>{{menuitem.title}}</p>
+                      </a>
+                      
+                      <a data-toggle="collapse" href="#{{menuitem.collapse}}" *ngIf="menuitem.type === 'sub'" (click)="updatePS()" class="nav-link">
+                          <i class="material-icons">{{menuitem.icontype}}</i>
+                          <p id="menu">{{menuitem.title}}<b class="caret"></b></p>
+                      </a>
+  
+                     
+                      <div id="{{menuitem.collapse}}" class="collapse" *ngIf="menuitem.type === 'sub'">
+                          <ul class="nav">
+                              <li routerLinkActive="active" *ngFor="let childitem of menuitem.children" class="nav-item">
+                                  <a [routerLink]="[menuitem.path, childitem.path]" class="nav-link">
+                                      <span  class="sidebar-mini">{{childitem.ab}}</span>
+                                      <span id="smenu" class="sidebar-normal">{{childitem.title}}</span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div> 
+                  </li>
+                  <li class="nav-item">
+                      
+                  </li> -->
+                  <!--daesbord-->
+                  <li routerLinkActive="active" class="nav-item">
+                    <!--If is a single link-->
+                    <a [routerLink]="[menuItems[0].path]" *ngIf="menuItems[0].type === 'link'" class="nav-link">
+                        <i class="material-icons">{{menuItems[0].icontype}}</i>
+                        <p id="titre">{{menuItems[0].title}}</p>
+                    </a>
+                    <!--If it have a submenu-->
+        
+                    <a data-toggle="collapse" href="#{{menuItems[0].collapse}}" *ngIf="menuItems[0].type === 'sub'"
+                        (click)="updatePS()" class="nav-link">
+        
+                        <i class="material-icons">{{menuItems[0].icontype}}</i>
+                        <p id="titre">{{menuItems[0].title}}<b class="caret"></b></p>
+                    </a>
+        
+                    <!--Display the submenu items-->
+                    <div id="{{menuItems[0].collapse}}" class="collapse" *ngIf="menuItems[0].type === 'sub'">
+                        <ul class="nav">
+                            <li routerLinkActive="active" *ngFor="let childitem of menuItems[0].children" class="nav-item">
+                                <a [routerLink]="[menuItems[0].path, childitem.path]" class="nav-link">
+        
+                                    <span class="sidebar-mini">{{childitem.ab}}</span>
+                                    <span class="sidebar-normal">{{childitem.title}}</span>
+        
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+              </ul>
+                 <!--gestion employe-->
+              <ul class="nav" *ngIf="isSecretaire() ||  isOperateur() || isGerant() ||  isGerantLocal()">
+                <li routerLinkActive="active" class="nav-item">
+                    
+                    <a [routerLink]="[menuItems[1].path]" *ngIf="menuItems[1].type === 'link'" class="nav-link">
+                        <i class="material-icons">{{menuItems[1].icontype}}</i>
+                        <p >{{menuItems[1].title}}</p>
+                    </a>
+        
+                    <a data-toggle="collapse" href="#{{menuItems[1].collapse}}" *ngIf="menuItems[1].type === 'sub'"
+                        (click)="updatePS()" class="nav-link">
+        
+                        <i class="material-icons">{{menuItems[1].icontype}}</i>
+                        <p id="titre">{{menuItems[1].title}}<b class="caret"></b></p>
+                    </a>
+                    <div id="{{menuItems[1].collapse}}" class="collapse" *ngIf="menuItems[1].type === 'sub'">
+                      <ul class="nav" *ngIf="isSecretaire() || isGerant() || isOperateur() ||  isGerantLocal()">
+                        <li routerLinkActive="active" class="nav-item">
+                            <a [routerLink]="[menuItems[1].path,menuItems[1].children[0].path]" class="nav-link">
+    
+    
+                                <span class="sidebar-mini" >{{menuItems[1].children[0].ab}}</span>
+                                <span class="sidebar-normal" >{{menuItems[1].children[0].title}}</span>
+                                
+                            </a>
+                        </li>
+                        </ul>
+                        <ul class="nav" *ngIf=" isGerant()">
+                        <li routerLinkActive="active" class="nav-item">
+                          <a [routerLink]="[menuItems[1].path,menuItems[1].children[1].path]" class="nav-link">
+  
+  
+                              <span class="sidebar-mini">{{menuItems[1].children[1].ab}}</span>
+                              <span class="sidebar-normal">{{menuItems[1].children[1].title}}</span>
+                              
+                          </a>
+                      </li>
+                    </ul>
+  
+                    <ul class="nav" *ngIf="isSecretaire() || isGerant() || isOperateur() ||  isGerantLocal()">
+                      <li routerLinkActive="active" class="nav-item">
+                        <a [routerLink]="[menuItems[1].path,menuItems[1].children[2].path]" class="nav-link">
+  
+  
+                            <span class="sidebar-mini">{{menuItems[1].children[2].ab}}</span>
+                            <span class="sidebar-normal">{{menuItems[1].children[2].title}}</span>
+                            
+                        </a>
+
+                    </li>
+<!--                        <li routerLinkActive="active" class="nav-item">-->
+<!--                            <a [routerLink]="[menuItems[1].path,menuItems[1].children[0].path]" class="nav-link">-->
+
+
+<!--                                <span class="sidebar-mini">{{menuItems[1].children[0].ab}}</span>-->
+<!--                                <span class="sidebar-normal">{{menuItems[1].children[0].title}}</span>-->
+
+<!--                            </a>-->
+
+<!--                        </li>-->
+                  </ul>
+
+                    </div>
+                    </li>
+                    </ul>
+                      <!--gestion bon-->
+              <ul class="nav" *ngIf="isSecretaire() || isAgent() || isGerant() || isGerantLocal()">
+                <li routerLinkActive="active" class="nav-item">
+                    
+                    <a [routerLink]="[menuItems[2].path]" *ngIf="menuItems[2].type === 'link'" class="nav-link">
+                        <i class="material-icons">{{menuItems[2].icontype}}</i>
+                        <p>{{menuItems[2].title}}</p>
+                    </a>
+                    
+        
+                    <a data-toggle="collapse" href="#{{menuItems[2].collapse}}" *ngIf="menuItems[2].type === 'sub'"
+                        (click)="updatePS()" class="nav-link">
+        
+                        <i class="material-icons">{{menuItems[2].icontype}}</i>
+                        <p id="titre">{{menuItems[2].title}}<b class="caret"></b></p>
+                    </a>
+                    <div id="{{menuItems[2].collapse}}" class="collapse" *ngIf="menuItems[2].type === 'sub'">
+                      <ul class="nav" *ngIf="isSecretaire() || isGerant() || isAgent() || isGerantLocal()">
+                        <li routerLinkActive="active" class="nav-item">
+                            <a [routerLink]="[menuItems[2].path,menuItems[2].children[0].path]" class="nav-link">
+    
+    
+                                <span class="sidebar-mini">{{menuItems[2].children[0].ab}}</span>
+                                <span class="sidebar-normal">{{menuItems[2].children[0].title}}</span>
+                                
+                            </a>
+                        </li>
+                        </ul>
+                        <ul class="nav" *ngIf="isSecretaire() || isGerant() || isAgent() || isGerantLocal()">
+                        <li routerLinkActive="active" class="nav-item">
+                          <a [routerLink]="[menuItems[2].path,menuItems[2].children[1].path]" class="nav-link">
+  
+  
+                              <span class="sidebar-mini">{{menuItems[2].children[1].ab}}</span>
+                              <span class="sidebar-normal">{{menuItems[2].children[1].title}}</span>
+                              
+                          </a>
+                      </li>
+                    </ul>
+  
+                    <ul class="nav" *ngIf="isSecretaire() || isGerant() || isAgent() || isGerantLocal()">
+                      <li routerLinkActive="active" class="nav-item">
+                        <a [routerLink]="[menuItems[2].path,menuItems[2].children[2].path]" class="nav-link">
+  
+  
+                            <span class="sidebar-mini">{{menuItems[2].children[2].ab}}</span>
+                            <span class="sidebar-normal">{{menuItems[2].children[2].title}}</span>
+                            
+                        </a>
+                    </li>
+                  </ul>
+                  <ul class="nav" *ngIf="isSecretaire() || isGerant() || isAgent()|| isGerantLocal()">
+                    <li routerLinkActive="active" class="nav-item">
+                      <a [routerLink]="[menuItems[2].path,menuItems[2].children[3].path]" class="nav-link">
+  
+  
+                          <span class="sidebar-mini">{{menuItems[2].children[3].ab}}</span>
+                          <span class="sidebar-normal">{{menuItems[2].children[3].title}}</span>
+                          
+                      </a>
+                  </li>
+                </ul>
+                    </div>
+                    </li>
+                    </ul>
+                      <!--gestion facture-->
+                    <ul class="nav" *ngIf="isComptable() || isGerant() || isOperateur() || isGerantLocal()" >
+                      <li routerLinkActive="active" class="nav-item">
+                          
+                          <a [routerLink]="[menuItems[3].path]" *ngIf="menuItems[3].type === 'link'" class="nav-link">
+                              <i class="material-icons">{{menuItems[3].icontype}}</i>
+                              <p>{{menuItems[3].title}}</p>
+                          </a>
+                          
+              
+                          <a data-toggle="collapse" href="#{{menuItems[3].collapse}}" *ngIf="menuItems[3].type === 'sub'"
+                              (click)="updatePS()" class="nav-link">
+              
+                              <i class="material-icons">{{menuItems[3].icontype}}</i>
+                              <p id="titre">{{menuItems[3].title}}<b class="caret"></b></p>
+                          </a>
+                          
+                          <div id="{{menuItems[3].collapse}}" class="collapse" *ngIf="menuItems[3].type === 'sub'">
+                            <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant() || isGerantLocal()">
+                              <li routerLinkActive="active" class="nav-item">
+                                  <a [routerLink]="[menuItems[3].path,menuItems[3].children[0].path]" class="nav-link">
+          
+          
+                                      <span class="sidebar-mini">{{menuItems[3].children[0].ab}}</span>
+                                      <span class="sidebar-normal">{{menuItems[3].children[0].title}}</span>
+                                      
+                                  </a>
+                              </li>
+                              </ul>
+                              
+                              <ul class="nav" *ngIf=" isSecretaire() || isOperateur() || isGerant() || isGerantLocal()">
+                              <li routerLinkActive="active" class="nav-item">
+                                <a [routerLink]="[menuItems[3].path,menuItems[3].children[1].path]" class="nav-link">
+        
+        
+                                    <span class="sidebar-mini">{{menuItems[3].children[1].ab}}</span>
+                                    <span class="sidebar-normal">{{menuItems[3].children[1].title}}</span>
+                                    
+                                </a>
+                            </li>
+                          </ul>
+
+        
+                          <ul class="nav" *ngIf="isComptable() || isGerant() || isSecretaire() || isOperateur() || isGerantLocal() ">
+                            <li routerLinkActive="active" class="nav-item">
+                              <a [routerLink]="[menuItems[3].path,menuItems[3].children[2].path]" class="nav-link">
+        
+        
+                                  <span class="sidebar-mini">{{menuItems[3].children[2].ab}}</span>
+                                  <span class="sidebar-normal">{{menuItems[3].children[2].title}}</span>
+                                  
+                              </a>
+                          </li>
+                        </ul>
+                        
+                          </div>
+                          </li>
+                          </ul>
+                              <!--gestion prestataire-->
+                          <!-- secretaire enlever -->
+                          <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant() || isGerantLocal()" >
+                            <li routerLinkActive="active" class="nav-item">
+                                
+                                <a [routerLink]="[menuItems[4].path]" *ngIf="menuItems[4].type === 'link'" class="nav-link">
+                                    <i class="material-icons">{{menuItems[4].icontype}}</i>
+                                    <p>{{menuItems[4].title}}</p>
+                                </a>
+                                
+                    
+                                <a data-toggle="collapse" href="#{{menuItems[4].collapse}}" *ngIf="menuItems[4].type === 'sub'"
+                                    (click)="updatePS()" class="nav-link">
+                    
+                                    <i class="material-icons">{{menuItems[4].icontype}}</i>
+                                    <p id="titre">{{menuItems[4].title}}<b class="caret"></b></p>
+                                </a>
+                                <div id="{{menuItems[4].collapse}}" class="collapse" *ngIf="menuItems[4].type === 'sub'">
+                                  <ul class="nav" *ngIf=" isGerant()  ">
+                                    <li routerLinkActive="active" class="nav-item">
+                                        <a [routerLink]="[menuItems[4].path,menuItems[4].children[0].path]" class="nav-link">
+                
+                
+                                            <span class="sidebar-mini">{{menuItems[4].children[0].ab}}</span>
+                                            <span class="sidebar-normal">{{menuItems[4].children[0].title}}</span>
+                                            
+                                        </a>
+                                    </li>
+                                    </ul>
+                                    <ul class="nav" *ngIf=" isGerant() || isOperateur() || isSecretaire() || isGerantLocal()">
+                                    <li routerLinkActive="active" class="nav-item">
+                                      <a [routerLink]="[menuItems[4].path,menuItems[4].children[1].path]" class="nav-link">
+              
+              
+                                          <span class="sidebar-mini">{{menuItems[4].children[1].ab}}</span>
+                                          <span class="sidebar-normal">{{menuItems[4].children[1].title}}</span>
+                                          
+                                      </a>
+                                  </li>
+                                </ul>
+              
+                                
+                              
+                                </div>
+                                </li>
+                                </ul>
+                                <!--gestion prestation-->
+  
+                                <!-- secretaire enlever -->
+                          <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant() || isGerantLocal()" >
+                            <li routerLinkActive="active" class="nav-item">
+                                
+                                <a [routerLink]="[menuItems[5].path]" *ngIf="menuItems[5].type === 'link'" class="nav-link">
+                                    <i class="material-icons">{{menuItems[5].icontype}}</i>
+                                    <p>{{menuItems[5].title}}</p>
+                                </a>
+                                
+                    
+                                <a data-toggle="collapse" href="#{{menuItems[5].collapse}}" *ngIf="menuItems[5].type === 'sub'"
+                                    (click)="updatePS()" class="nav-link">
+                    
+                                    <i class="material-icons">{{menuItems[5].icontype}}</i>
+                                    <p id="titre">{{menuItems[5].title}}<b class="caret"></b></p>
+                                </a>
+                                <div id="{{menuItems[5].collapse}}" class="collapse" *ngIf="menuItems[5].type === 'sub'">
+                                  <ul class="nav" *ngIf=" isGerant() || isSecretaire() || isOperateur() || isGerantLocal() ">
+                                    <li routerLinkActive="active" class="nav-item">
+                                        <a [routerLink]="[menuItems[5].path,menuItems[5].children[0].path]" class="nav-link">
+                
+                
+                                            <span class="sidebar-mini">{{menuItems[5].children[0].ab}}</span>
+                                            <span class="sidebar-normal">{{menuItems[5].children[0].title}}</span>
+                                            
+                                        </a>
+                                    </li>
+                                    </ul>
+                                    <!-- <ul class="nav" *ngIf="isGerant() || isOperateur() ">
+                                    <li routerLinkActive="active" class="nav-item">
+                                      <a [routerLink]="[menuItems[5].path,menuItems[5].children[1].path]" class="nav-link">
+              
+              
+                                          <span class="sidebar-mini">{{menuItems[5].children[1].ab}}</span>
+                                          <span class="sidebar-normal">{{menuItems[5].children[1].title}}</span>
+                                          
+                                      </a>
+                                  </li>
+                                </ul>  -->
+              
+                                
+                              
+                                </div>
+                                </li>
+                                </ul>
+                                <!--gestion Bareme-->
+                                
+                          <ul class="nav" *ngIf="isGerant()" >
+                            <li routerLinkActive="active" class="nav-item">
+                                
+                                <a [routerLink]="[menuItems[6].path]" *ngIf="menuItems[6].type === 'link'" class="nav-link">
+                                    <i class="material-icons">{{menuItems[6].icontype}}</i>
+                                    <p>{{menuItems[6].title}}</p>
+                                </a>
+                                
+                    
+                                <a data-toggle="collapse" href="#{{menuItems[6].collapse}}" *ngIf="menuItems[6].type === 'sub'"
+                                    (click)="updatePS()" class="nav-link">
+                    
+                                    <i class="material-icons">{{menuItems[6].icontype}}</i>
+                                    <p id="titre">{{menuItems[6].title}}<b class="caret"></b></p>
+                                </a>
+                                <div id="{{menuItems[6].collapse}}" class="collapse" *ngIf="menuItems[6].type === 'sub'">
+                                  <ul class="nav" *ngIf=" isGerant()">
+                                    <li routerLinkActive="active" class="nav-item">
+                                        <a [routerLink]="[menuItems[6].path,menuItems[6].children[0].path]" class="nav-link">
+                
+                
+                                            <span class="sidebar-mini">{{menuItems[6].children[0].ab}}</span>
+                                            <span class="sidebar-normal">{{menuItems[6].children[0].title}}</span>
+                                            
+                                        </a>
+                                    </li>
+                                    </ul>
+                                   
+              
+                                
+                              
+                                </div>
+                                </li>
+                                </ul>
+                                <!--gestion remboursement-->
+                                <ul class="nav" *ngIf="isSecretaire() ||isOperateur() || isGerant() || isComptable() || isGerantLocal()"  >
+                                  <li routerLinkActive="active" class="nav-item">
+                                      
+                                      <a [routerLink]="[menuItems[7].path]" *ngIf="menuItems[7].type === 'link'" class="nav-link">
+                                          <i class="material-icons">{{menuItems[7].icontype}}</i>
+                                          <p>{{menuItems[7].title}}</p>
+                                      </a>
+                                      
+                          
+                                      <a data-toggle="collapse" href="#{{menuItems[7].collapse}}" *ngIf="menuItems[7].type === 'sub'"
+                                          (click)="updatePS()" class="nav-link">
+                          
+                                          <i class="material-icons">{{menuItems[7].icontype}}</i>
+                                          <p id="titre">{{menuItems[7].title}}<b class="caret"></b></p>
+                                      </a>
+                                      <div id="{{menuItems[7].collapse}}" class="collapse" *ngIf="menuItems[7].type === 'sub'">
+                                        <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant() || isComptable() || isGerantLocal()">
+                                          <li routerLinkActive="active" class="nav-item">
+                                              <a [routerLink]="[menuItems[7].path,menuItems[7].children[0].path]" class="nav-link">
+                      
+                      
+                                                  <span class="sidebar-mini">{{menuItems[7].children[0].ab}}</span>
+                                                  <span class="sidebar-normal">{{menuItems[7].children[0].title}}</span>
+                                                  
+                                              </a>
+                                          </li>
+                                          </ul>
+                                          <ul class="nav" *ngIf="isGerant() || isComptable() ">
+                                            <li routerLinkActive="active" class="nav-item">
+                                                <a [routerLink]="[menuItems[7].path,menuItems[7].children[1].path]" class="nav-link">
+                        
+                        
+                                                    <span class="sidebar-mini">{{menuItems[7].children[1].ab}}</span>
+                                                    <span class="sidebar-normal">{{menuItems[7].children[1].title}}</span>
+                                                    
+                                                </a>
+                                            </li>
+                                            </ul>
+                                         
+                    
+                                      
+                                    
+                                      </div>
+                                      </li>
+                                      </ul>
+  
+                                 <!--remboursements-->      
+                                
+                          <ul class="nav" *ngIf="  isOperateur() || isGerant() || isComptable() || isGerantLocal()"  >
+                            <li routerLinkActive="active" class="nav-item">
+                                
+                                <a [routerLink]="[menuItems[8].path]" *ngIf="menuItems[8].type === 'link'" class="nav-link">
+                                    <i class="material-icons">{{menuItems[8].icontype}}</i>
+                                    <p>{{menuItems[8].title}}</p>
+                                </a>
+                                
+                    
+                                <a data-toggle="collapse" href="#{{menuItems[8].collapse}}" *ngIf="menuItems[8].type === 'sub'"
+                                    (click)="updatePS()" class="nav-link">
+                    
+                                    <i class="material-icons">{{menuItems[8].icontype}}</i>
+                                    <p id="titre">{{menuItems[8].title}}<b class="caret"></b></p>
+                                </a>
+                                <div id="{{menuItems[8].collapse}}" class="collapse" *ngIf="menuItems[8].type === 'sub'">
+                                  <ul class="nav" *ngIf=" isSecretaire()||isOperateur() || isGerant() || isComptable() || isGerantLocal()">
+                                    <li routerLinkActive="active" class="nav-item">
+                                        <a [routerLink]="[menuItems[8].path,menuItems[8].children[0].path]" class="nav-link">
+                
+                
+                                            <span class="sidebar-mini">{{menuItems[8].children[0].ab}}</span>
+                                            <span class="sidebar-normal">{{menuItems[8].children[0].title}}</span>
+                                            
+                                        </a>
+                                    </li>
+                                    </ul>
+                                    <ul class="nav" *ngIf="isGerant() || isSecretaire() || isOperateur() || isGerantLocal() || isComptable()">
+                                      <li routerLinkActive="active" class="nav-item">
+                                          <a [routerLink]="[menuItems[8].path,menuItems[8].children[1].path]" class="nav-link">
+                  
+                  
+                                              <span class="sidebar-mini">{{menuItems[8].children[1].ab}}</span>
+                                              <span class="sidebar-normal">{{menuItems[8].children[1].title}}</span>
+                                              
+                                          </a>
+                                      </li>
+                                      </ul>
+                                      <!-- <ul class="nav" *ngIf="isGerant() || isOperateur()">
+                                        <li routerLinkActive="active" class="nav-item">
+                                            <a [routerLink]="[menuItems[8].path,menuItems[8].children[2].path]" class="nav-link">
+                    
+                    
+                                                <span class="sidebar-mini">{{menuItems[8].children[2].ab}}</span>
+                                                <span class="sidebar-normal">{{menuItems[8].children[2].title}}</span>
+                                                
+                                            </a>
+                                        </li>
+                                        </ul> -->
+                                      </div>
+                                    </li>
+                                  </ul>
+                                  <!----Cotisation--------------->
+                                          
+                                                <ul class="nav" *ngIf="  isOperateur() || isGerant() || isComptable() || isGerantLocal()">
+                                                  <li routerLinkActive="active" class="nav-item">
+                                                      
+                                                      <a [routerLink]="[menuItems[9].path]" *ngIf="menuItems[9].type === 'link'" class="nav-link">
+                                                          <i class="material-icons">{{menuItems[9].icontype}}</i>
+                                                          <p>{{menuItems[9].title}}</p>
+                                                      </a>
+                                                      
+                                          
+                                                      <a data-toggle="collapse" href="#{{menuItems[9].collapse}}" *ngIf="menuItems[9].type === 'sub'"
+                                                          (click)="updatePS()" class="nav-link">
+                                          
+                                                          <i class="material-icons">{{menuItems[9].icontype}}</i>
+                                                          <p id="titre">{{menuItems[9].title}}<b class="caret"></b></p>
+                                                      </a>
+                                                      <div id="{{menuItems[9].collapse}}" class="collapse" *ngIf="menuItems[9].type === 'sub'">
+                                                          <!--     Dans Cotisation : ajout cotisations -->
+
+                                                          <ul class="nav" *ngIf="isSecretaire() || isOperateur() || isGerant() || isGerantLocal()">
+                                                          <li routerLinkActive="active" class="nav-item">
+                                                              <a [routerLink]="[menuItems[9].path,menuItems[9].children[0].path]" class="nav-link">
+                                      
+                                      
+                                                                  <span class="sidebar-mini">{{menuItems[9].children[0].ab}}</span>
+                                                                  <span class="sidebar-normal">{{menuItems[9].children[0].title}}</span>
+                                                                  
+                                                              </a>
+                                                          </li>
+                                                          </ul>
+                                                          <!--     Dans Cotisation : liste des cotisations previsionnelles-->
+                                                          <ul class="nav" *ngIf="isSecretaire() || isGerant() || isComptable() || isOperateur() || isGerantLocal() ">
+                                                            <li routerLinkActive="active" class="nav-item">
+                                                                <a [routerLink]="[menuItems[9].path,menuItems[9].children[1].path]" class="nav-link">
+                                        
+                                        
+                                                                    <span class="sidebar-mini">{{menuItems[9].children[1].ab}}</span>
+                                                                    <span class="sidebar-normal">{{menuItems[9].children[1].title}}</span>
+                                                                    
+                                                                </a>
+                                                            </li>
+                                                            </ul>
+
+                                                        </div>
+                                          
+                                                      </li>
+                                                    </ul>
+                                  <!---Fin Cotisation------------->
+                                        <!-- utilisateurs -->
+                                        <ul class="nav" *ngIf="  isGerant()" >
+                                          <li routerLinkActive="active" class="nav-item">
+                                              
+                                              <a [routerLink]="[menuItems[10].path]" *ngIf="menuItems[10].type === 'link'" class="nav-link">
+                                                  <i class="material-icons">{{menuItems[10].icontype}}</i>
+                                                  <p>{{menuItems[10].title}}</p>
+                                              </a>
+                                              
+                                  
+                                              <a data-toggle="collapse" href="#{{menuItems[10].collapse}}" *ngIf="menuItems[10].type === 'sub'"
+                                                  (click)="updatePS()" class="nav-link">
+                                  
+                                                  <i class="material-icons">{{menuItems[10].icontype}}</i>
+                                                  <p id="titre">{{menuItems[10].title}}<b class="caret"></b></p>
+                                              </a>
+                                              <div id="{{menuItems[10].collapse}}" class="collapse" *ngIf="menuItems[10].type === 'sub'">
+                                                <ul class="nav" *ngIf=" isGerant()">
+                                                  <li routerLinkActive="active" class="nav-item">
+                                                      <a [routerLink]="[menuItems[10].path,menuItems[10].children[0].path]" class="nav-link">
+                              
+                              
+                                                          <span class="sidebar-mini">{{menuItems[10].children[0].ab}}</span>
+                                                          <span class="sidebar-normal">{{menuItems[10].children[0].title}}</span>
+                                                          
+                                                      </a>
+                                                  </li>
+                                                  </ul>
+                                                </div>
+
+                                              </li>
+                                            </ul>
+                                                 
+                                                   
+                           <!--Rapports--->
+                           <ul class="nav" *ngIf="isGerant()" >
+                            <li routerLinkActive="active" class="nav-item">
+                                
+                                <a [routerLink]="[menuItems[11].path]" *ngIf="menuItems[11].type === 'link'" class="nav-link">
+                                    <i class="material-icons">{{menuItems[11].icontype}}</i>
+                                    <p>{{menuItems[11].title}}</p>
+                                </a>
+                                
+                    
+                                <a data-toggle="collapse" href="#{{menuItems[11].collapse}}" *ngIf="menuItems[11].type === 'sub'"
+                                    (click)="updatePS()" class="nav-link">
+                    
+                                    <i class="material-icons">{{menuItems[11].icontype}}</i>
+                                    <p id="titre">{{menuItems[11].title}}<b class="caret"></b></p>
+                                </a>
+                                <div id="{{menuItems[11].collapse}}" class="collapse" *ngIf="menuItems[11].type === 'sub'">
+                                  <ul class="nav" *ngIf="isGerant()">
+                                    <li routerLinkActive="active" class="nav-item">
+                                        <a [routerLink]="[menuItems[11].path,menuItems[11].children[0].path]" class="nav-link">
+                
+                
+                                            <span class="sidebar-mini">{{menuItems[11].children[0].ab}}</span>
+                                            <span class="sidebar-normal">{{menuItems[11].children[0].title}}</span>
+                                            
+                                        </a>
+                                    </li>
+                                    </ul>
+                                    <ul class="nav" *ngIf="isGerant()">
+                                      <li routerLinkActive="active" class="nav-item">
+                                          <a [routerLink]="[menuItems[11].path,menuItems[11].children[1].path]" class="nav-link">
+                  
+                  
+                                              <span class="sidebar-mini">{{menuItems[11].children[1].ab}}</span>
+                                              <span class="sidebar-normal">{{menuItems[11].children[1].title}}</span>
+                                              
+                                          </a>
+                                      </li>
+                                      </ul>
+
+                                      <ul class="nav" *ngIf="isGerant()">
+                                        <li routerLinkActive="active" class="nav-item">
+                                            <a [routerLink]="[menuItems[11].path,menuItems[11].children[2].path]" class="nav-link">
+                    
+                    
+                                                <span class="sidebar-mini">{{menuItems[11].children[2].ab}}</span>
+                                                <span class="sidebar-normal">{{menuItems[11].children[2].title}}</span>
+                                                
+                                            </a>
+                                        </li>
+                                        </ul>
+                                        <ul class="nav" *ngIf="isGerant()">
+                                          <li routerLinkActive="active" class="nav-item">
+                                              <a [routerLink]="[menuItems[11].path,menuItems[11].children[3].path]" class="nav-link">
+                      
+                      
+                                                  <span class="sidebar-mini">{{menuItems[11].children[3].ab}}</span>
+                                                  <span class="sidebar-normal">{{menuItems[11].children[3].title}}</span>
+                                                  
+                                              </a>
+                                          </li>
+                                          </ul>
+                                          <ul class="nav" *ngIf="isGerant()">
+                                            <li routerLinkActive="active" class="nav-item">
+                                                <a [routerLink]="[menuItems[11].path,menuItems[11].children[4].path]" class="nav-link">
+                                                    <span class="sidebar-mini">{{menuItems[11].children[4].ab}}</span>
+                                                    <span class="sidebar-normal">{{menuItems[11].children[4].title}}</span>                          
+                                                </a>
+                                            </li>
+                                            </ul>
+                                            <!-- <ul class="nav" *ngIf="isGerant()">
+                                              <li routerLinkActive="active" class="nav-item">
+                                                  <a [routerLink]="[menuItems[11].path,menuItems[11].children[5].path]" class="nav-link">
+                                                      <span class="sidebar-mini">{{menuItems[11].children[5].ab}}</span>
+                                                      <span class="sidebar-normal">{{menuItems[11].children[5].title}}</span>                          
+                                                  </a>
+                                              </li>
+                                              </ul> -->
+                                  </div>
+
+                                </li>
+                              </ul>
+                                
+            
+                               
+                                <!--Fin Rapports--->
+                           <!-- <ul class="nav" *ngIf="isGerant()">
+                            <li routerLinkActive="active" class="nav-item">
+                                
+                                <a [routerLink]="[menuItems[10].path]" *ngIf="menuItems[10].type === 'link'" class="nav-link">
+                                    <i class="material-icons">{{menuItems[10].icontype}}</i>
+                                    <p>{{menuItems[10].title}}</p>
+                                </a>
+                                
+                    
+                                <a data-toggle="collapse" href="#{{menuItems[10].collapse}}" *ngIf="menuItems[10].type === 'sub'"
+                                    (click)="updatePS()" class="nav-link">
+                    
+                                    <i class="material-icons">{{menuItems[10].icontype}}</i>
+                                    <p id="titre">{{menuItems[10].title}}<b class="caret"></b></p>
+                                </a>
+                                <div id="{{menuItems[10].collapse}}" class="collapse" *ngIf="menuItems[10].type === 'sub'">
+                                  <ul class="nav" *ngIf="isGerant()">
+                                    <li routerLinkActive="active" class="nav-item">
+                                        <a [routerLink]="[menuItems[10].path,menuItems[10].children[0].path]" class="nav-link">
+                
+                
+                                            <span class="sidebar-mini">{{menuItems[10].children[0].ab}}</span>
+                                            <span class="sidebar-normal">{{menuItems[10].children[0].title}}</span>
+                                            
+                                        </a>
+                                    </li>
+                                    </ul>
+                                    <ul class="nav" *ngIf="isGerant()">
+                                      <li routerLinkActive="active" class="nav-item">
+                                          <a [routerLink]="[menuItems[10].path,menuItems[10].children[1].path]" class="nav-link">
+                  
+                  
+                                              <span class="sidebar-mini">{{menuItems[10].children[1].ab}}</span>
+                                              <span class="sidebar-normal">{{menuItems[10].children[1].title}}</span>
+                                              
+                                          </a>
+                                      </li>
+                                      </ul>
+                                      
+                               
+                                </div>
+                                </li>
+                                </ul> -->
+  
+          <!-- </div> -->
+  

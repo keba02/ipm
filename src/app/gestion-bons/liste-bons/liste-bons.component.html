@@ -1,0 +1,880 @@
+<!--Types Bons -->
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row tab-content tab-space" style="margin-top:-5.5cm;">
+
+
+
+    </div>
+    <div class="card-body">
+      <ul class="nav nav-pills nav-pills-warning" role="tablist">
+
+      </ul>
+      <div class="tab-content tab-space">
+
+          <!----> 
+            
+        <div class="col-md-11 tab-pane active" id="link0" *ngIf="mess1">
+          <div class="card " style="margin-left:1cm;">
+            <div class="card-header  card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">search</i>
+              </div>
+              <h3 class="card-title"
+                style="background-color:whitesmoke; font-weight: 400; color: black; padding: 4px; width: 35%;">
+                Rechercher Employe</h3>
+            </div>
+            <div class="card-body ">
+              <form class="navbar-form">
+                <span class="bmd-form-group">
+                  <div class="input-group no-border">
+                    <input type="text" name="matricule" class="form-control" placeholder="Matricule" id="matricule"
+                      [(ngModel)]="matricule">
+
+                  </div>
+                </span>
+
+
+              </form>
+            </div>
+
+            
+            <div class="card-footer" style="padding-left: 80%;">
+              <button mat-raised-button type="submit" class="nav-link" data-toggle="tab" href="#link1"
+                (click)="findByMatricule()" class="btn btn-fill btn-success"><i
+                  class="material-icons">search</i>Rechercher</button>
+            </div>
+          </div>
+        </div>
+
+
+
+            
+         <!-- --> 
+
+
+        <div class="col-md-11 tab-pane active" id="link0">
+          <div class="card " style="margin-left:1cm;">
+            <div class="card-header  card-header-icon">
+<!--              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">-->
+<!--                <i class="material-icons">search</i>-->
+<!--              </div>-->
+              <h3 class="card-title p-2"  style="background-color:rgba(17, 17, 227, 0.88);border-radius: initial; font-weight: 800;font-size: large; color: whitesmoke; padding: 8px;margin-right:auto; width: 28%;">
+                Rechercher un Participant</h3>
+            </div>
+            <div class="card-body ">
+              <form class="navbar-form">
+                <span class="bmd-form-group">
+                  <div class="input-group no-border">
+                    <input type="text" name="matricule" class="form-control" placeholder="Matricule" id="matricule"
+                      [(ngModel)]="matricule">
+
+                  </div>
+                </span>
+
+
+              </form>
+            </div>
+
+            <!--[disabled]="!searchForm.form.invalid"-->
+            <div class="card-footer" style="padding-left: 80%;">
+              <button mat-raised-button type="submit" class="nav-link " data-toggle="tab" href="#link1"
+                (click)="findByMatricule()" class="btn btn-fill btn-success"><i
+                  class="material-icons">search</i>Rechercher</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="link1">
+          <div class="card" *ngIf="message">
+            <div class="card-header  card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">assignment</i>
+              </div>
+              <h3 class="card-title"
+                style="background-color:whitesmoke; font-weight: 400; color: black; padding: 4px; width: 40%;">Bon
+                Pharmaceutique Employé</h3>
+            </div>
+
+            <div class="card p-4" style="font-weight:500 ;">
+              <form>
+                <div>
+                  <style>
+                    label {
+                      font-weight: bold;
+                      color: black;
+                    }
+                  </style>
+                  <div class="row">
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label>Prénom :</label>
+                        {{message.prenom}}
+                      </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label> Nom :</label>
+                        {{message.nom}}
+                      </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Numero Carnet:</label>
+                        {{message.numero_carnet}}
+                      </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Age :</label>
+                        <b> {{ageE}}</b>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Date Naissance:</label>
+                      {{message.date_nais}}
+                    </div>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Sexe:</label>
+                      {{message.sexe}}
+                    </div>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Lieu de Naissance:</label>
+                      {{message.lieu_nais}}
+                    </div>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Services:</label>
+                      {{message.ipmService?.type_service}}
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-4 form-group" style="margin-top: 5px;font-weight:bold;color: black">
+                    <mat-form-field>
+                      <label for="lPrestataires">lPrestataires</label>
+                      <mat-select name="prestataires" [(ngModel)]="code_presta">
+                        <mat-option *ngFor="let prest of lprestataires" [value]="prest.code_prestataire"
+                          (click)="getnom(prest)">
+                          {{ prest.nom_prestataire }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-2 form-group">
+                    <label>Nombre d'article</label>
+                    <input type="number" class="form-control" id="nombre_article" [(ngModel)]="nombre_article"
+                      name="nombre_article">
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <label>Designation</label>
+                    <input type="text" class="form-control" id="designation" [(ngModel)]="designation"
+                      name="designation">
+                  </div>
+                  <div class="col-md-2 form-group">
+                    
+                    <label class="bmd-label-floating">Nombre de Bon :</label>
+                    
+                    <b> {{listBon.length}}</b>
+                    
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="row">
+                  <div class="col-md-4 btn btn-file" style="margin-left:30% ;">Joindre Ordonnance
+                    <input type="file" class="form-control" name="image" (change)="selectOrdonn($event)">
+                    <!-- <img [src]="OrdonnanceURL" height=" 100" width="100"> -->
+  
+                </div>
+                  <br/>
+                  <span> <b style="color: #00b0ff">{{nomOrdon}}</b></span>
+
+<!--                  <b class="text-danger">-->
+<!--                    ordonnance obligatoire !!!-->
+<!--                  </b>-->
+                  <!-----Row Vide   data-toggle="modal"
+                          data-target="#modalconjoints"----------------------------->
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-6" style="font-weight:bold;color: black">
+                    <mat-form-field appearance="fill">
+                      <mat-select placeholder="Choisir Conjoints" name="conjoints" ([ngModel])="id_conjoint">
+                        <mat-option *ngFor="let conjoint of conjoints" [value]="conjoint.idconj" class="nav-link "
+                          data-toggle="tab" href="#link2" role="tablist" (click)="getconjointbon(conjoint)">
+                          {{ conjoint.prenom_conjoint}} {{ conjoint.nom_conjoint}}
+                        </mat-option>
+                      </mat-select>
+
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6" style="font-weight:bold;color: black">
+                    <mat-form-field appearance="fill">
+                      <mat-select placeholder="Choisir Enfants" name="enfants" ([ngModel])="id_enfant">
+                        <mat-option *ngFor="let enfant of enfants" [value]="enfant.idenf" class="nav-link "
+                          data-toggle="tab" href="#link3" role="tablist" (click)="getenfantbon(enfant)">
+                          {{ enfant.prenom_enfant}} {{ enfant.nom_enfant}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button mat-raised-button type="button" (click)="BonNow()" class="btn btn-success btn-round"
+                    data-dismiss="modal">
+                    Enregistrer</button>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <!-- <button mat-raised-button type="button" (click)="upload()" class="btn btn-green btn-round" data-dismiss="modal">
+                    Exporter</button> -->
+                    <div class="col-md-6" style="font-weight:bold;color: black;float: right;">
+                      <i mat-raised-button type="button" class="nav-link"
+                      data-toggle="tab"  style="width: 100px;" (click)="retourserach()"  role="tablist" class="btn btn-info btn-round">
+                      <span class="material-icons">arrow_back</span></i>
+                    
+                    </div>
+                </div> 
+
+                <!-- <div class="modal-footer justify-content-center">
+                  <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"
+                    data-target="#noticeModal">Voir Bon Pharmaceutique</button>
+
+                </div> -->
+                <div>
+                  <!-- <h4>{{message}} </h4> -->
+                </div>
+
+              </form>
+
+
+              <!-- </div>
+                        </div>
+                      </div>
+          
+                    </div>
+                  </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="link2">
+          <div class="card" *ngIf="message">
+            <div class="card-header card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">assignment</i>
+              </div>
+              <h3 class="text-center"
+                style="background-color:whitesmoke; color: black; padding: 2px; width: 45%; font-weight: 500;">Bon
+                Pharmaceutique conjoint</h3>
+            </div>
+            <button mat-raised-button type="submit" class="nav-link" data-toggle="tab" href="#link1"
+        class="btn btn-fill btn-success" style="width: 4cm" (click)="viderConjoint()"><i
+         class="material-icons">search</i>Participant</button>
+            <div class="card-body">
+              <form>
+                <div class="card-header card-header-icon card-header-info" class="btn-btn primary">
+
+                  <div class="row">
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label>Prénom Conjoint :</label>
+                        <b> {{messageconjoint?.prenom_conjoint}}</b>
+                      </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label> Sexe :</label>
+                        <b> {{messageconjoint?.sexe_conjoint}}</b>
+                      </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label> Nom Conjoint :</label>
+                        <b> {{messageconjoint?.nom_conjoint}}</b>
+                      </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Date Naissance :</label>
+                        <b> {{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Matricule :</label>
+                      <b> {{message?.matricule}}</b>
+                    </div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Lieu de Naissance :</label>
+                      <b> {{messageconjoint?.lieu_naiss_conj}}</b>
+                    </div>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Age :</label>
+                      <b> {{Ageconjoin}}</b>
+                    </div>
+                  </div>
+
+                </div>
+
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 form-group" style="margin-top:1px;">
+                    <label class="bmd-label-floating">Prestataires Conjoints :</label>
+                    <mat-form-field>
+                      <mat-select name="lprestataires" [(ngModel)]="code_presta">
+                        <mat-option *ngFor="let prest of lprestataires" [value]="prest.code_prestataire"
+                          (click)="getnom(prest)">
+                          <b> {{ prest.nom_prestataire }}</b>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label>Nombre d'article</label>
+                    <input type="number" class="form-control" id="nombre_article" [(ngModel)]="nombre_article"
+                      name="nombre_article">
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label>Designation</label>
+                    <input type="text" class="form-control" id="designation" [(ngModel)]="designation"
+                      name="designation">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 btn btn-file" style="margin-left:30% ;">Joindre Ordonnance
+                    <input type="file" class="form-control" name="image" (change)="selectOrdonnConj($event)">
+                    <!-- <img [src]="OrdonnanceURL" height=" 100" width="100" *ngIf="OrdonnancefURL"> -->
+                </div>
+                  <span><b style="color: #00b0ff">{{nomOrdonConj}}</b></span>
+
+                  <!-----Row Vide   data-toggle="modal"
+                          data-target="#modalconjoints"----------------------------->
+                </div>
+
+
+
+
+
+
+                <div class="modal-footer justify-content-center">
+                  <button mat-raised-button type="button" (click)="BonConjoint()" class="btn btn-success btn-round"
+                    data-dismiss="modal">
+                    Enregistrer</button>
+                </div>
+                <!-- <div class="modal-footer justify-content-center">
+                  <button mat-raised-button type="button" (click)="uploadConjoint()" class="btn btn-green btn-round" data-dismiss="modal">
+                    Exporter</button>
+                </div> -->
+                <!-- <div class="modal-footer justify-content-center">
+                  <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"
+                    data-target="#noticeConjoint"> Details Conjoint</button>
+
+                </div> -->
+                <div>
+
+                </div>
+
+              </form>
+
+
+
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="link3">
+          <div class="card" *ngIf="message">
+            <div class="card-header card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">assignment</i>
+              </div>
+              <h3 class="text-center"
+                style="background-color:whitesmoke; color: black; padding: 2px; width: 45%; font-weight: 500;">Bon
+                Pharmaceutique Enfant </h3>
+            </div>
+            <div class="card-body">
+              <button mat-raised-button type="submit" class="nav-link" data-toggle="tab" href="#link1"
+                 class="btn btn-fill btn-success"(click)="viderEnfant()"><i
+                  class="material-icons">search</i>Participant</button>
+              <form>
+
+                <style>
+                  b {
+                    color: black;
+                    font-weight: 500;
+                  }
+                </style>
+                <div class="row">
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label>Prénom Enfant : </label>
+                      <b> {{messageenfant?.prenom_enfant}}</b>
+                    </div>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label> Nom Enfant : </label>
+                      <b> {{messageenfant?.nom_enfant}}</b>
+                    </div>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Sexe:</label>
+                      <b> {{messageenfant?.sexe_enfant}}</b>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Age:</label>
+                      <b> {{AgeEnfant}}</b>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Date Naissance : </label>
+                      <b> {{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>
+                    </div>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Lieu de Naissance : </label>
+                      <b> {{messageenfant?.lieu_nais_enfant}}</b>
+                    </div>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <label>Nombre d'article</label>
+                    <input type="number" class="form-control" id="nombre_article" [(ngModel)]="nombre_article"
+                      name="nombre_article">
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <label>Designation</label>
+                    <input type="text" class="form-control" id="designation" [(ngModel)]="designation"
+                      name="designation">
+                  </div>
+
+                </div>
+
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <mat-form-field>
+                      <label for="Prestataires Enfants">Prestataires Enfants</label>
+                      <mat-select name="prestataires" [(ngModel)]="code_presta">
+                        <mat-option *ngFor="let prest of lprestataires" [value]="prest.code_prestataire"
+                          (click)="getnom(prest)">
+                          {{ prest.nom_prestataire }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 btn btn-file" style="margin-left:30% ;">Joindre Ordonnance
+                    <input type="file" class="form-control" name="image" (change)="selectOrdonnEnf($event)">
+                    <!-- <img [src]="OrdonnanceURL" height=" 100" width="100" *ngIf="OrdonnancefURL"> -->
+                </div>
+                  <span> <b style="color: #00b0ff">{{nomOrdonEnf}}</b></span>
+                  <!-----Row Vide   data-toggle="modal"
+                          data-target="#modalconjoints"----------------------------->
+                </div>
+
+
+                <!-- 
+                                    <div class="col-md-6 form-group">
+                                      <label>Prix Unitaire</label>
+                                      <input type="text" class="form-control" id="prix_unitaire" [(ngModel)]="prix_unitaire"
+                                        name="prix_unitaire">
+                                    </div> -->
+
+
+
+
+                                    <div class="modal-footer justify-content-center">
+                                      <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal" [disabled]="desactive"
+                                        (click)="BonEnfant()">Enregistrer
+                                      </button>
+                                      <!-- <button mat-raised-button type="button" (click)="uploadEnfant()" class=" btn btn-raised btn-round btn btn-danger btn-round"
+                                        >
+                                        Exporter</button> -->
+                    
+                                    </div>                     
+                <!-- <div class="modal-footer justify-content-center">
+                  <button mat-raised-button class="btn btn-raised btn-round btn-success" data-toggle="modal"
+                    data-target="#noticeenfant">Details Enfant</button>
+
+                </div> -->
+                <div>
+                  <!-- <h4>{{message}} </h4> -->
+                </div>
+
+              </form>
+
+
+              <!-- </div>
+                        </div>
+                      </div>
+          
+                    </div>
+                  </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Types Bons -->
+<!-- <div class="col-md-12"> -->
+
+<!-- Exemple ngTemplate-->
+
+<!-- Fin Exemple ngTemplate-->
+<!-- notice modal -->
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  *ngIf="message">
+  <div class="modal-dialog modal-notice">
+    <div class="modal-content" style="width: 600px;">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="myModalLabel">How Do You Become an Affiliate?</h5> -->
+        <button mat-button type="button" class="close " data-dismiss="modal" aria-hidden="true">
+          <i style="margin-top: -1.3cm; color: red; font-size: 30px;" class="material-icons">close</i>
+        </button>
+
+
+      </div>
+      <div class="modal-body">
+
+
+        <div class="" style="margin-top: -1cm;">
+          <div>
+            <img src="/assets/img_poste/header1.png" style="width: 100%;" alt="Thumbnail Image" alt="" />
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-12">
+            <h4 style="text-align:right; font-weight: bold; margin-top: 25px;">Dakar le:{{jstoday}}</h4>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Prénom :</label>
+              <b> {{message.prenom}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Nom :</label>
+              <b> {{message.nom}}</b>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <hr>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Prestataire :</label>
+              <b>{{p}}</b>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Numero Carnet:</label>
+              {{message.idemp}}
+            </div>
+          </div> -->
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Services:</label>
+              <b> {{message.ipm_service?.type_service}}</b>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-body table-full-width">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead class="">
+                <tr style="background-color: whitesmoke;">
+                  <th style="font-weight: 600px">Matricule Participant</th>
+                  <th style="font-weight: 600px">Designation</th>
+                  <th style="font-weight: 600px">Nombre D'article</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{message.matricule}}</td>
+                  <td>{{designation}}</td>
+                  <td>{{nombre_article}}</td>
+
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <button mat-raised-button type="button" (click)="BonNow()" class="btn btn-success btn-round"
+          data-dismiss="modal">
+          Enregistrer</button>
+      </div>
+      <!-- <div class="modal-footer justify-content-center">
+        <button mat-raised-button type="button" (click)="upload()" class="btn btn-green btn-round" data-dismiss="modal">
+          Exporter</button>
+      </div> -->
+
+    </div>
+
+
+  </div>
+</div>
+<!-- end notice modal -->
+
+
+<!--modal Conjoints  -->
+<div class="modal fade" id="noticeConjoint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" *ngIf="message">
+  <div class="modal-dialog modal-notice">
+    <div class="modal-content" style="width: 600px;">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="myModalLabel">How Do You Become an Affiliate?</h5> -->
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">close</i>
+        </button>
+
+
+      </div>
+      <div class="modal-body">
+        
+
+        <div class="" style="margin-top: -1cm;">
+          <div>
+            <img src="/assets/img_poste/header1.png" style="width: 100%;" alt="Thumbnail Image" alt="" />
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-12">
+            <h4 style="text-align:right; font-weight: bold; margin-top: 25px;">Dakar le:{{jstoday}}</h4>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Matricule Participant:</label>
+              <b> {{message.matricule}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Prénom Conjoint :</label>
+              <b> {{messageconjoint?.prenom_conjoint}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Nom Conjoint :</label>
+              <b> {{messageconjoint?.nom_conjoint}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Date Naissance :</label>
+              <b> {{messageconjoint?.date_naiss_conj | date: 'dd/MM/yyyy'}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Lieu de Naissance :</label>
+              <b> {{messageconjoint?.lieu_naiss_conj}}</b>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 form-group">
+              <div class="form-group">
+                <label class="bmd-label-floating">Services:</label>
+                {{message.ipm_service?.type_service}}
+              </div>
+            </div> -->
+        </div>
+        <hr>
+        <div class="card-body table-full-width">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead class="text-black">
+                <tr>
+
+                  <th style="font-weight:600;">Prestataire</th>
+                  <th style="font-weight:600;">Designation</th>
+                  <th style="font-weight:600;">Nombre D'article</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{p}}</td>
+                  <td>{{designation}}</td>
+                  <td>{{nombre_article}}</td>
+
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button mat-raised-button type="button" (click)="BonConjoint()" class="btn btn-success btn-round"
+          data-dismiss="modal">
+          Enregistrer Bon Conjoint</button>
+      </div>
+      <!-- <div class="modal-footer justify-content-center">
+        <button mat-raised-button type="button" (click)="uploadConjoint()" class="btn btn-green btn-round"
+          data-dismiss="modal">
+          Exporter</button>
+      </div> -->
+    </div>
+
+
+  </div>
+</div>
+<!-- end notice modal -->
+
+
+
+<!--modal Enfants -->
+<div class="modal fade" id="noticeenfant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  *ngIf="message">
+  <div class="modal-dialog modal-notice">
+    <div class="modal-content" style="width: 600px;">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="myModalLabel">How Do You Become an Affiliate?</h5> -->
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">close</i>
+        </button>
+
+
+      </div>
+      <div class="modal-body">
+
+        <div class="" style="margin-top: -1cm;">
+          <div>
+            <img src="/assets/img_poste/header1.png" style="width: 100%;" alt="Thumbnail Image" alt="" />
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-12">
+            <h4 style="text-align:right; font-weight: bold; margin-top: 25px;">Dakar le:{{jstoday}}</h4>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Matricule Participant :</label>
+              <b> {{message.matricule}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Prénom Enfant:</label>
+              <b> {{messageenfant?.prenom_enfant}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Nom Enfant :</label>
+              <b> {{messageenfant?.nom_enfant}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Date Naissance :</label>
+              <b> {{messageenfant?.date_nais_enfant | date: 'dd/MM/yyyy'}}</b>
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <div class="form-group">
+              <label class="bmd-label-floating">Lieu de Naissance :</label>
+              <b> {{messageenfant?.lieu_nais_enfant}}</b>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 form-group">
+              <div class="form-group">
+                <label class="bmd-label-floating">Services:</label>
+                {{message.ipm_service?.type_service}}
+              </div>
+            </div> -->
+        </div>
+        <div class="card-body table-full-width">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead class="text-black">
+                <tr style="background-color: whitesmoke">
+
+                  <th style="font-weight: 600px ;">Prestataire</th>
+                  <th style="font-weight: 600px ;">Nombre d'article</th>
+                  <th style="font-weight: 600px ;">Designation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{p}}</td>
+                  <td>{{nombre_article}}</td>
+                  <td>{{designation}}</td>
+
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button mat-raised-button type="button" (click)="BonEnfant()" class="btn btn-success btn-round"
+          data-dismiss="modal">
+          Enregistrer Bon Enfant</button>
+      </div>
+      <!-- <div class="modal-footer justify-content-center">
+        <button mat-raised-button type="button" (click)="uploadEnfant()" class="btn btn-green btn-round"
+          data-dismiss="modal">
+          Exporter</button>
+      </div> -->
+    </div>
+
+
+  </div>
+</div>
+<!-- end notice modal -->

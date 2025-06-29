@@ -1,0 +1,120 @@
+
+<form class="form-horizontal" style="width: 800px; margin: 0 auto;">
+  <input type="hidden" class="form-control" >
+  <h3 class="text-center p-4" style="background:white">Modification de l'employe </h3>
+
+  <div class="form-group row card-header">
+    
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input readonly matInput type="text" class="form-control" id="idemp" placeholder="IdEmp" [(ngModel)]="currentemploye.idemp" name="idemp" >
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="nom" placeholder="Nom" [(ngModel)]="currentemploye.nom" name="nom">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="prenom" placeholder="Prenom" [(ngModel)]="currentemploye.prenom" name="prenom">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group"  style="margin-top:-25px;">
+      <!-- <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="sexe" placeholder="Sexe" [(ngModel)]="currentemploye.sexe" name="sexe">
+      </mat-form-field> -->
+      <label>Sexe </label><br>
+            {{sexe_emploi}}
+          <mat-select formControlName="sexe_emploi" class="form-control" id="sexe_emploi" 
+          >
+            <mat-option *ngFor="let sexEmploi of sexe" [value]="sexEmploi.value" (click)="getSexe(sexEmploi)">
+              {{ sexEmploi.value }}
+            </mat-option>
+          </mat-select>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="adresse_domicile" placeholder="Adresse Domicile" [(ngModel)]="currentemploye.adresse_domicile" name="adresse_domicile">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field>
+        <input matInput  id="date_nais" placeholder="Date Naissance"  [(ngModel)]="currentemploye.date_nais" name="date_nais">
+        <!-- <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 startView="year"></mat-datepicker> -->
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="lieu_nais" placeholder="Lieu de Naissance" [(ngModel)]="currentemploye.lieu_nais" name="lieu_nais">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="telephone" placeholder="Telephone" [(ngModel)]="currentemploye.telephone" name="telephone">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field >
+        <input matInput  id="date_recrutement" placeholder="Date Recrutement" [(ngModel)]="currentemploye.date_recrutement" name="date_recrutement">
+        <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker> -->
+      </mat-form-field>
+    </div>
+    
+      <div class="col-md-6 form-group"  style="margin-top:-20px;">
+        
+          <label>Situation familiale </label><br>
+            {{typesituation_familial}}
+          <mat-select formControlName="situation_familial" class="form-control" id="situation" 
+          [(ngModel)]="currentemploye.situation_familial">
+            <mat-option *ngFor="let situat of situation_familial" [value]="situat.value" (click)="getsituation(situat)">
+              {{ situat.value }}
+            </mat-option>
+          </mat-select>
+        
+      
+      <!-- <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="situation_familial" placeholder="Situation Matrimonial" [(ngModel)]="currentemploye.situation_familial" name="situation_familial">
+      </mat-form-field> -->
+    </div>
+    <div [formGroup]="" class="col-md-6 form-group">
+      <label>Service </label><br>
+      {{type_service}}
+        <mat-select  name="service" id="service"  class="form-control"  [(ngModel)]="type_service">
+          <mat-option *ngFor="let serv of service" [value]="serv.idService" (click)="getserv(serv)">
+            {{ serv.type_service }}
+          </mat-option>
+        </mat-select>
+         
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="matricule" placeholder="Matricule" [(ngModel)]="currentemploye.matricule" name="matricule" >
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 form-group">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" class="form-control" id="reference" placeholder="Reference" [(ngModel)]="currentemploye.reference" name="reference">
+      </mat-form-field>
+    </div>
+    <div [formGroup]="" class="col-md-6 form-group">
+      <mat-form-field>
+        {{this.type_categorie}}
+        <mat-select   id="categorie"  [(ngModel)]="type_categorie" name="categorie">
+          <mat-option *ngFor="let cat of categorie" [value]="cat.code_categorie" (click)="getCategor(cat)" >
+            {{ cat.libelle }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>   
+    </div>
+    
+      <button type="submit" class="btn btn-success" (click)="updateEmploye()"><i class="material-icons">check</i> Modifier</button>
+  
+      <button class="btn btn-danger"  style="margin-left:65%;" (click)="retourner()"
+      ><i class="material-icons">arrow_back</i>retour
+  </button>
+
+  </div>
+</form>

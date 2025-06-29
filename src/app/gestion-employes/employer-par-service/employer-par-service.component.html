@@ -1,0 +1,65 @@
+ <!--modql employe-->
+       
+                    
+ <div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon" >
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+              <i class="material-icons">list</i>
+            </div>
+            <h3 style="background-color:whitesmoke; color: black; padding: 5px; font-weight: 400; width: 80%;">Liste des employés du service {{nomService}}</h3>
+        </div>
+        
+            <div class="card-body">
+               
+
+ <div class="material-datatable">
+    <div class="text-center">
+        <mat-spinner *ngIf="!listEmployer" style="margin-left: 15cm;"></mat-spinner>
+       
+      </div>
+    <table id="datatable" class="table  table-hover table-bordered"
+        cellspacing="0" width="100%" style="width:100%; font-weight: bold;">
+
+        <thead style="background-color: whitesmoke;">
+
+            <tr>
+                <th style="font-weight: bold;" class="text-center" cope="col"> Matricule</th>
+                <th style="font-weight: bold;" class="text-center" cope="col">Prenom</th>
+                <th style="font-weight: bold;" class="text-center" cope="col">Nom</th>
+                <th style="font-weight: bold;" class="text-center" cope="col">Adresse</th>
+                <!-- <th cope="col">Code Prestation</th> -->
+
+                <th style="font-weight: bold;" class="text-center" cope="col">cumule charge</th>
+                <th style="font-weight: bold;" class="text-center" cope="col">Solde</th>
+                <th style="font-weight: bold;" class="text-center" cope="col">Telephone</th>
+                <th style="font-weight: bold;" class="text-center" cope="col">Numero carnet</th>
+                <!-- <th class="text-center" cope="col">Action</th>
+                <th class="text-center" cope="col"></th> -->
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let employ of listEmployer">
+                <td class="text-center">{{employ.matricule}}</td>
+                <td class="text-center">{{employ.prenom}}</td>
+                <td class="text-center">{{employ.nom}}</td>
+                <td class="text-center">{{employ.adresse_domicile}}</td>
+                <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>
+ -->
+                <td class="text-center">{{employ.cumul_charge}}</td>
+                <td class="text-center">{{employ.solde}}</td>
+                <td class="text-center">{{employ.telephone}}</td>
+                <td class="text-center">{{employ.numero_carnet}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<!--finmodal-->

@@ -1,0 +1,752 @@
+<div class="modal fade" id="bare" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Prise en Compte des Cotisations</h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <!--Modal cascading tabs-->
+            <div class="modal-c-tabs">
+                <!-- Tab panels -->
+                <div class="tab-content">
+                    <!--Body-->
+                    <div class="modal-body mb-1">
+                        <form>
+                            <div class="card-body table-full-width">
+                                <div class="material-datatable">
+                                    <!--*ngIf="agree" -->
+                                    <!--                            <mat-form-field>-->
+                                    <!--                              &lt;!&ndash; <label for="Categorie"><b>Categorie</b> </label> &ndash;&gt;-->
+                                    <!--                              <mat-select name="categorie"  id="categorie" placeholder="Selectionner cat" [(ngModel)]="categorie">-->
+                                    <!--                                <mat-option  *ngFor="let prest of categories" [value]="prest.code_categorie" -->
+                                    <!--                                (click)="getnomCategorie(prest)">{{ prest.libelle }}-->
+                                    <!--                                  -->
+                                    <!--                                </mat-option>-->
+                                    <!--                              </mat-select>-->
+                                    <!--                            </mat-form-field>-->
+                                    <table id="datatable1" class="table table-hover table-bordered text-black"
+                                           cellspacing="0" width="100%" style="width:100%">
+
+                                        <thead style="background-color: whitesmoke;">
+
+                                        <tr>
+                                            <th>Categorie</th>
+                                            <th>Montant à Cotiser</th>
+                                            <th style="font-weight: 500;" class="text-right">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let prest of categories">
+                                            <td>{{prest.libelle}}</td>
+                                            <td>{{prest.montant}}</td>
+                                            <td class="td-actions text-center">
+                                                <button mat-raised-button="button" type="button"
+                                                        class="mat-raised-button mat-button-base btn btn-warning">
+                                                    <i class="material-icons" data-toggle="modal" data-target="#bareee" (click)="midif(prest)" (click)="getnomCategorie(prest)">edit</i>
+                                                </button>
+                                                <!--                                    <input type="text" name="montant" class="form-control" id="montant" [(ngModel)]="montant">-->
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!--                      <div class=" col-md-5" style="margin-top: -20px;">-->
+                                <!--                       -->
+                                <!--                        <input type="text" name="montant" class="form-control" id="montant" [(ngModel)]="montant">                      </div>-->
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+
+                        <button mat-raised-button type="button" class="btn btn-outline-info waves-effect ml-auto"
+                                data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal  debut modification montant cotisation -->
+
+<div class="modal fade" id="bareee" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title btn btn-rounded"
+                    style="background-color:rgba(17, 17, 227, 0.88);color: white;width: unset">Modifier Montant</h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <!--Modal cascading tabs-->
+            <div class="modal-c-tabs">
+                <!-- Tab panels -->
+                <div class="tab-content">
+                    <div class="material-datatable  col-md-5" style="margin-top: -15px;">
+
+<!--                        <mat-form-field>-->
+                            <!-- <label for="Categorie"><b>Categorie</b> </label> -->
+<!--                            <mat-select  name="categorie" id="categorie" -->
+<!--                                        [(ngModel)]="categorie">-->
+<!--                                <mat-option value="blue" *ngFor="let prest of categories" [value]="prest.code_categorie"-->
+<!--                                            (click)="getnomCategorie(prest)">{{ prest.libelle }}-->
+
+<!--                                </mat-option>-->
+<!--                            </mat-select>-->
+                            <input type="text"  class="form-control"
+                                   [(ngModel)]="categorie" style="width: auto;" id="categorie">
+<!--                        </mat-form-field>-->
+
+                    </div>
+                    <div class="col-md-5"  style="margin-top: -50px;float: right;">
+                        <input type="text"   class="form-control"
+                               [(ngModel)]="montant" style="width: auto;" id="montant" name="montant">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-info btn-round" data-dismiss="modal" (click)="Enregistrer()"
+                    >Modifier<i class="fas fa-sign-in-alt ml-1"></i></button>
+                </div>
+                </div>
+
+
+        </div>
+    </div>
+</div>
+<!--Modal  fin modification montant cotisation -->
+
+<!--Modal cotisation Entité -->
+
+<div class="modal fade" id="entite" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content" style="width:155%; ">
+            <div class="modal-header">
+                <h4 class="modal-title">Prise en Compte des Cotisations par entité</h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+
+            <div class="modal-c-tabs">
+
+                <div class="tab-content" >
+                    <!--Body-->
+                    <div class="modal-body ml-1" >
+                        <form #form="ngForm">
+                            <div class="row">
+                                <div class="col-md-5 mr-1" style="margin-top: -25px; width: auto">
+
+                                    <mat-form-field>
+
+                                        <mat-select name="entite" id="entite" placeholder="Selectionner l'entité"
+                                                    [(ngModel)]="entite">
+                                            <mat-option *ngFor="let prest of listEntity" [value]="prest.idEntity"
+                                                        (click)="getnomEntity(prest);form.resetForm()">{{ prest.nom_entity }}
+
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+
+                    <div class="col-md-12" *ngIf="listCotisationEntity">
+                        <div class="card">
+                            <div class="card-header card-header-icon card-header-rose">
+                                <div class="card-icon">
+                                    <i class="material-icons">assignment</i>
+                                </div>
+
+
+                                <h4 class="card-title">Liste prévisionnelle Des Cotisations de
+                                    l'entité {{nomEntity}} </h4>
+
+
+                            </div>
+                            <div [ngSwitch]="condition">
+                                <div *ngSwitchCase="1" >Contenu de remplacement 1
+                                    <div class="card-body table-full-width">
+                                        <div class="material-datatable">
+                                            <table id="datatable1" class="table table-hover table-bordered text-black"
+                                                    style="width:100%">
+
+                                                <thead style="background-color: whitesmoke;">
+
+                                                <tr>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Matricule
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Prenom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Nom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Catégorie
+                                                    </th>
+                                                    <!-- <th cope="col">Code Prestation</th> -->
+
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Solde
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Montant
+                                                        à cotiser
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Numero
+                                                        carnet
+                                                    </th>
+                                                    <!-- <th class="text-center" cope="col">Action</th>
+                                                    <th class="text-center" cope="col"></th> -->
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let employ of listCotisationEntity">
+                                                    <td class="text-center">{{employ.matricule}}</td>
+                                                    <td class="text-center">{{employ.prenom}}</td>
+                                                    <td class="text-center">{{employ.nom}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.libelle}}</td>
+                                                    <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>-->
+                                                    <td class="text-center">{{employ.solde | number:'1.0-0'}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.montant | number:'1.0-0'}}</td>
+
+                                                    <td class="text-center">{{employ.numero_carnet}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="modal-footer justify-content-center">
+                                                <button (click)="fileDownloadEntity()" mat-raised-button
+                                                        class="btn btn-info">
+                                                    <i class="material-icons">checked</i>Exporter Fichier
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="2">Contenu de remplacement 2
+                                    <div class="card-body table-full-width">
+                                        <div class="material-datatable">
+                                            <table id="datatable1" class="table table-hover table-bordered text-black"
+                                                   cellspacing="0" width="100%" style="width:100%">
+
+                                                <thead style="background-color: whitesmoke;">
+
+                                                <tr>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Matricule
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Prenom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Nom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Catégorie
+                                                    </th>
+                                                    <!-- <th cope="col">Code Prestation</th> -->
+
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Solde
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Montant
+                                                        à cotiser
+                                                    </th>
+
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Numero
+                                                        carnet
+                                                    </th>
+                                                    <!-- <th class="text-center" cope="col">Action</th>
+                                                    <th class="text-center" cope="col"></th> -->
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let employ of listCotisationEntity">
+                                                    <td class="text-center">{{employ.matricule}}</td>
+                                                    <td class="text-center">{{employ.prenom}}</td>
+                                                    <td class="text-center">{{employ.nom}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.libelle}}</td>
+                                                    <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>-->
+                                                    <td class="text-center">{{employ.solde | number:'1.0-0'}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.montant | number:'1.0-0'}}</td>
+
+                                                    <td class="text-center">{{employ.numero_carnet}}</td>
+                                                </tr>
+                                                </tbody>
+
+
+                                            </table>
+                                            <div class="modal-footer justify-content-center">
+                                                <button (click)="fileDownloadEntity()" mat-raised-button
+                                                        class="btn btn-info">
+                                                    <i class="material-icons">checked</i>Exporter Fichier
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="3">Contenu de remplacement 3
+                                    <div class="card-body table-full-width">
+                                        <div class="material-datatable">
+                                            <table id="datatable1" class="table table-hover table-bordered text-black"
+                                                   cellspacing="0" width="100%" style="width:100%">
+
+                                                <thead style="background-color: whitesmoke;">
+
+                                                <tr>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Matricule
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Prenom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Nom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Catégorie
+                                                    </th>
+                                                    <!-- <th cope="col">Code Prestation</th> -->
+
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Solde
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Montant
+                                                        à cotiser
+                                                    </th>
+
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Numero
+                                                        carnet
+                                                    </th>
+                                                    <!-- <th class="text-center" cope="col">Action</th>
+                                                    <th class="text-center" cope="col"></th> -->
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let employ of listCotisationEntity">
+                                                    <td class="text-center">{{employ.matricule}}</td>
+                                                    <td class="text-center">{{employ.prenom}}</td>
+                                                    <td class="text-center">{{employ.nom}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.libelle}}</td>
+                                                    <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>-->
+                                                    <td class="text-center">{{employ.solde | number:'1.0-0'}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.montant | number:'1.0-0'}}</td>
+
+                                                    <td class="text-center">{{employ.numero_carnet}}</td>
+                                                </tr>
+                                                </tbody>
+
+
+                                            </table>
+                                            <div class="modal-footer justify-content-center">
+                                                <button (click)="fileDownloadEntity()" mat-raised-button
+                                                        class="btn btn-info">
+                                                    <i class="material-icons">checked</i>Exporter Fichier
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="4">Contenu de remplacement 4
+                                    <div class="card-body table-full-width">
+                                        <div class="material-datatable">
+                                            <table id="datatable1" class="table table-hover table-bordered text-black"
+                                                   cellspacing="0" width="100%" style="width:100%">
+
+                                                <thead style="background-color: whitesmoke;">
+
+                                                <tr>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Matricule
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Prenom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Nom
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">
+                                                        Catégorie
+                                                    </th>
+                                                    <!-- <th cope="col">Code Prestation</th> -->
+
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Solde
+                                                    </th>
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Montant
+                                                        à cotiser
+                                                    </th>
+
+                                                    <th style="font-weight: 600;" class="text-center" cope="col">Numero
+                                                        carnet
+                                                    </th>
+                                                    <!-- <th class="text-center" cope="col">Action</th>
+                                                    <th class="text-center" cope="col"></th> -->
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let employ of listCotisationEntity">
+                                                    <td class="text-center">{{employ.matricule}}</td>
+                                                    <td class="text-center">{{employ.prenom}}</td>
+                                                    <td class="text-center">{{employ.nom}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.libelle}}</td>
+                                                    <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>-->
+                                                    <td class="text-center">{{employ.solde | number:'1.0-0'}}</td>
+                                                    <td class="text-center">{{employ.ipm_categorie.montant | number:'1.0-0'}}</td>
+
+                                                    <td class="text-center">{{employ.numero_carnet}}</td>
+                                                </tr>
+                                                </tbody>
+
+
+                                            </table>
+                                            <div class="modal-footer justify-content-center">
+                                                <button (click)="fileDownloadEntity()" mat-raised-button
+                                                        class="btn btn-info">
+                                                    <i class="material-icons">checked</i>Exporter Fichier
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--LISTE DES COTISATIONS EFFECTIVES-->
+<!--<div class="modal fade" id="cotisationseffectives" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog cascading-modal" role="document">-->
+<!--        &lt;!&ndash;Content&ndash;&gt;-->
+<!--        <div class="modal-content" style="width:155%; ">-->
+<!--            <div class="modal-header">-->
+<!--                <h4 class="modal-title">Liste des cotisations effectives</h4>-->
+<!--                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
+<!--                    <i class="material-icons">clear</i>-->
+<!--                </button>-->
+<!--                <div class="card-body table-full-width">-->
+<!--                    <div class="material-datatable" *ngIf="isCotisationEffectiveLancee">-->
+<!--                        <mat-spinner *ngIf="!trouve"></mat-spinner>-->
+<!--                        <table id="datatableCotisationEffective" class="table table-hover table-bordered text-black"-->
+<!--                               cellspacing="0" width="100%" style="width:100%" *ngIf="isCotisationEffectiveTrouvee">-->
+
+
+
+<!--                            <thead style="background-color: whitesmoke;">-->
+
+<!--                            <tr>-->
+<!--                                <th style="font-weight: 600;" class="text-center" cope="col"> Matricule</th>-->
+<!--                                <th style="font-weight: 600;" class="text-center" cope="col">Prenom/Nom</th>-->
+<!--                                &lt;!&ndash;                                    <th style="font-weight: 600;" class="text-center" cope="col">Nom</th>&ndash;&gt;-->
+<!--                                <th style="font-weight: 600;" class="text-center" cope="col">Catégorie</th>-->
+<!--                                &lt;!&ndash; <th cope="col">Code Prestation</th> &ndash;&gt;-->
+
+<!--                                <th style="font-weight: 600;" class="text-center" cope="col">Solde</th>-->
+
+<!--                                <th style="font-weight: 600;" class="text-center" cope="col">Montant à cotiser</th>-->
+<!--                                <th style="font-weight: 600;" class="text-center" cope="col">Cotisation Annuelle</th>-->
+
+<!--                                &lt;!&ndash;                                    <th style="font-weight: 600;" class="text-center" cope="col">Numero carnet</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <th style="font-weight: 600;" >Action</th>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <th class="text-center" cope="col"></th>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr *ngFor="let employ of cumulCotisationEmploye">-->
+<!--                                <td class="text-center">{{employ.ipm_employe.matricule}}</td>-->
+<!--                                <td>{{employ.ipm_employe.prenom +" "+employ.ipm_employe.nom}}</td>-->
+<!--                                &lt;!&ndash;                                    <td class="text-center">{{employ.ipm_employe.nom}}</td>&ndash;&gt;-->
+<!--                                <td class="text-center">{{employ.ipm_employe.ipm_categorie.libelle}}</td>-->
+<!--                                &lt;!&ndash; <td>{{fac.ipm_prestation?.code_prestation}}</td>-->
+<!--                  &ndash;&gt;-->
+<!--                                <td class="text-center">{{employ.ipm_employe.solde | number:'1.0-0'}}</td>-->
+
+<!--                                <td class="text-center">{{employ.ipm_employe.ipm_categorie.montant | number:'1.0-0'}}</td>-->
+<!--                                <td class="text-center">{{employ.montant | number:'1.0-0'}}</td>-->
+
+<!--                                &lt;!&ndash;                                    <td class="text-center">{{employ.ipm_employe.numero_carnet}}</td>&ndash;&gt;-->
+<!--                                <td  class="text-center">-->
+<!--                                    <button mat-raised-button type="button"  (click)="detailCotisation(employ.ipm_employe)" data-toggle="modal" data-target="#bareeees" color="primary">-->
+<!--                                        Voir Cotisation-->
+<!--                                    </button>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+
+
+<!--                        </table>-->
+<!--                        <div class="modal-footer justify-content-center" >-->
+<!--                            <button (click)="exportationCotisationEffective()" *ngIf="isCotisationEffectiveTrouvee" mat-raised-button class="btn btn-info">-->
+<!--                                <i class="material-icons">checked</i>Exporter Fichier-->
+<!--                            </button>-->
+
+<!--                        </div>-->
+<!--                        <div *ngIf="!isCotisationEffectiveTrouvee" style="float: left">-->
+<!--                             <span style="color: red;text-align: center">-->
+<!--                            AUCUNE DONNEE TROUVÉE-->
+<!--                             </span>-->
+
+<!--                    </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--Fin-->
+<!--LISTE DES COTISATIONS PREVISIONNELLES-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-rose">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <br><br>
+
+<!--                        PAERTIE COMMENTÉE CAR MAINTENANT, LE BOUTON REDIRIGE VERS LES RAPPORTS -->
+<!--                        <button mat-raised-button type="button" style="float:right;margin-top:1cm;-->
+<!--                        font-size: 16px;" data-toggle="modal"-->
+<!--                                data-target="#cotisationseffectives" class="btn btn-success "-->
+<!--                                (click)="getCumulCotisationByEmploye()">-->
+<!--                            <i class="material-icons">add_circle</i> Liste des Cotisations-->
+<!--                        </button>-->
+                        <button mat-raised-button type="button" style="float:right;margin-top:1cm;
+                        font-size: 16px;"  class="btn btn-success "
+                                (click)="redirectionVersRaapportCotisationAnnuelle()">
+                            <i class="material-icons">add_circle</i>
+                            Liste des Cotisations
+                        </button>
+
+                        <button mat-raised-button type="button" style="float:right;margin-top:1cm; 
+                        font-size: 16px;" data-toggle="modal" data-target="#bare" class="btn btn-success" *ngIf="!isOperateur() && !isSecretaire()">
+                            <i class="material-icons"> edit</i> Modifer Cotisations
+                        </button>
+                        <button mat-raised-button type="button" style="float:right;margin-top:1cm; 
+                        font-size: 16px;" data-toggle="modal" data-target="#entite" class="btn btn-success">
+                            <i class="material-icons">add_circle</i> Cotisations Par Entité
+                        </button>
+                        <br><br><br><br>
+
+                        <h4 class="card-title">Liste prévisionnelle Des Cotisations</h4>
+                        <mat-spinner *ngIf="!trouve"></mat-spinner>
+
+
+                    </div>
+                    <div class="card-body table-full-width">
+                        <div class="material-datatable">
+                            <table id="datatableCotisationPrevisionnelle" class="table table-hover table-bordered text-black"
+                                   cellspacing="0" width="100%" style="width:100%">
+
+                                <thead style="background-color: whitesmoke;">
+
+                                <tr>
+                                    <th style="font-weight: 600;" class="text-center" cope="col"> Matricule</th>
+                                    <th style="font-weight: 600;" class="text-center" cope="col">Prenom/Nom</th>
+<!--                                    <th style="font-weight: 600;" class="text-center" cope="col">Nom</th>-->
+                                    <th style="font-weight: 600;" class="text-center" cope="col">Catégorie</th>
+                                    <!-- <th cope="col">Code Prestation</th> -->
+
+                                    <th style="font-weight: 600;" class="text-center" cope="col">Solde</th>
+<!--                                    <th style="font-weight: 600;" class="text-center" cope="col">Cotisation Annuelle</th>-->
+
+                                    <th style="font-weight: 600;" class="text-center" cope="col">Montant à cotiser</th>
+
+<!--                                    <th style="font-weight: 600;" class="text-center" cope="col">Numero carnet</th>-->
+                                    <th style="font-weight: 600;" >Action</th>
+<!--                                    <th class="text-center" cope="col"></th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let employ of employe">
+                                    <td class="text-center">{{employ?.matricule}}</td>
+                                    <td>{{employ.prenom +" "+employ.nom}}</td>
+<!--                                    <td class="text-center">{{employ.ipm_employe.nom}}</td>-->
+                                    <td class="text-center">{{employ.ipm_categorie.libelle}}</td>
+                                    <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>
+                      -->
+                                    <td class="text-center">{{employ.solde | number:'1.0-0'}}</td>
+<!--                                    <td class="text-center">{{employ.montant | number:'1.0-0'}}</td>-->
+
+                                    <td class="text-center">{{employ.ipm_categorie.montant | number:'1.0-0'}}</td>
+
+<!--                                    <td class="text-center">{{employ.ipm_employe.numero_carnet}}</td>-->
+                                    <td  class="text-center">
+<!--                                        <button (click)="detailCotisation(employ)" mat-raised-button type="button" color="primary" ata-toggle="modal"-->
+<!--                                                data-target="#detailCotis">-->
+<!--                                            <i class="material-icons">details</i>DETAILS-->
+<!--                                        </button>-->
+                                        <button mat-raised-button type="button"  (click)="detailCotisation(employ)" data-toggle="modal" data-target="#bareeees" color="primary">
+                                            Voir Cotisation
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+
+                            </table>
+                            <div class="modal-footer justify-content-center">
+                                <button (click)="exportationCotisationPrevisionnelle()" mat-raised-button class="btn btn-info">
+                                    <i class="material-icons">checked</i>Exporter Fichier
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Details Cotisation-->
+
+<div class="modal fade" id="bareeees" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content" *ngIf="isDetailsCotisationTrouve">
+        <div class="modal-header">
+            <h4 class="modal-title"> Details des Cotisations</h4>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">clear</i>
+            </button>
+        </div>
+            <div class="modal-c-tabs" >
+                <!-- Tab panels -->
+                <div class="tab-content">
+                    <!--Body-->
+                    <div class="modal-body mb-1">
+                        <form>
+                            <div class="card-body table-full-width">
+                                <div class="material-datatable">
+                                    <table id="datatable1" class="table table-hover table-bordered text-black"
+                                           cellspacing="0" width="100%" style="width:100%">
+
+                                        <thead style="background-color: whitesmoke;">
+
+                                        <tr>
+<!--                                            <th>ID</th>-->
+                                            <th>MONTANT  </th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let detail of this.totalDetail">
+<!--                                        <td>{{detail.id_Det_Coti}}</td>-->
+                                        <td>{{detail.montant}}</td>
+                                        </tr>
+                                       <td style="background-color: #c0ca33"><b>Totale:{{this.somme}}</b></td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal-content" *ngIf="!isDetailsCotisationTrouve">
+        <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="material-icons">clear</i>
+            </button>
+        </div>
+        <div class="modal-c-tabs" >
+            <!-- Tab panels -->
+            <div class="tab-content">
+                <!--Body-->
+                <div class="modal-body mb-1" style="color: red;text-align: center">
+                    AUCUNE COTISATION TROUVÉE
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+                    <!----------Modification des Barèmes------------>
+
+<div class="modal fade" id="modifbareme" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modification des Cotisations</h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <!--Modal cascading tabs-->
+            <div class="modal-c-tabs">
+                <!-- Tab panels -->
+                <div class="tab-content">
+                    <!--Body-->
+                    <div class="modal-body mb-1">
+                        <div class="col-md-6 form-group">
+
+                            <input type="text" id="min" name="min"
+                                   class="form-control" placeholder="Categorie">
+
+                        </div>
+                        <div class="col-md-6 form-group">
+
+                            <input type="text" id="max"
+                                   name="max" class="form-control"
+                                   placeholder="Maximum">
+
+                        </div>
+                        <div class="col-md-6 form-group">
+
+                            <input type="text" id="montant"
+                                   name="montant" class="form-control" placeholder="Montant">
+
+                        </div>
+
+                        <div class="text-center mt-2">
+                            <button class="btn btn-info btn-round" data-dismiss="modal"
+                            >Modifer<i class="fas fa-sign-in-alt ml-1"></i></button>
+                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal: Login / Register Form-->

@@ -1,0 +1,83 @@
+<style>
+    tr{font-weight: bold;}
+</style> 
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-rose">
+                        <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                          <i class="material-icons">list</i>
+                        </div>
+                        <!-- <button mat-raised-button type="button" class="btn btn-success">
+                          <i class="material-icons" data-toggle="modal" data-target="#modalLRForm"
+                          >add_circle</i>
+                      </button>   -->
+                        <h4 class="card-title">Liste des Precomptes</h4>
+                        
+                       
+                    </div>
+                        <div class="card-body table-full-width">
+                            <div class="material-datatable">
+                                
+                                <table id="datatable" class="table table-bordered table-striped" 
+                                #TABLE cellspacing="0" width="100%" style="width:100%" class="table table-hover">
+                                
+                                    <thead  style="background-color: whitesmoke;"> 
+                                    <tr>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Matricule</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Prenom</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Nom</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Solde</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">M.Rembourser</th>
+                                             <th style="font-weight: 600;" class="text-center" cope="col">Date Precompte</th> 
+    
+                                           </tr>
+                                    </thead>
+                                    <tbody >
+                                          <tr *ngFor=" let precom of listPanier;">
+                                              <td class="text-center"><b>{{precom.matricule}}</b></td>
+                                              <td class="text-center"><b>{{precom.prenom}}</b></td>
+                                              <td class="text-center"><b>{{precom.nom}}</b></td>
+                                              <td class="text-center"><b>{{precom.solde}}</b></td>
+                                              <td class="text-center"><b>{{precom.cumul_charge}}</b></td>
+                                              <td class="text-center"><b>{{dateprecompte}}</b></td>
+                                              
+                            
+                                              <!-- <td class="td-actions">
+                                                
+                                                
+
+                                                <button mat-raised-button type="button" class="btn btn-primary">
+                                                    <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
+                                                >edit</i>
+                                                </button>                                      
+                                                 <button mat-raised-button type="button" class="btn btn-success">
+                                                  <i class="material-icons" [routerLink]="['/gestion-factures/Ajouterfactures/']" 
+                                                  >perm_identity</i>
+                                              </button>   
+                                              </td> -->
+                                              
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            
+                                <div class="modal-footer justify-content-center">
+                                    <button (click)="savePrecom()" mat-raised-button class="btn btn-success">
+                                      <i class="material-icons">checked</i>Enregistrer Precompte</button>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button (click)="fileDownload()" mat-raised-button class="btn btn-info">
+                                          <i class="material-icons">checked</i>Exporter Fichier</button>
+                                        </div>
+                            </div>
+                        </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+

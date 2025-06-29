@@ -1,0 +1,52 @@
+h3{
+    text-transform: uppercase;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+
+  .btn-group button {
+      background-color: #1240d4;
+      border: none;
+      /* Green border */
+      color: white;
+      /* White text */
+      padding: 10px 100px;
+      /* Some padding */
+      cursor: pointer;
+      /* Pointer/hand icon */
+      float: left;
+      /* Float the buttons side by side */
+
+  }
+
+  /* Clear floats (clearfix hack) */
+  .btn-group:after {
+      content: "";
+      clear: both;
+      display: table;
+  }
+
+  .btn-group button:not(:last-child) {
+      border-right: none;
+      /* Prevent double borders */
+  }
+  
+    tr{font-weight: bold;}

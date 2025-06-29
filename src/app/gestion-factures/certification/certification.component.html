@@ -1,0 +1,493 @@
+<style>
+    tr{font-weight: bold;}
+</style>
+<div class="col-md-12 mt-5">
+    <div class="card">
+        <div class="card-header card-header-icon"  >
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+              <i class="material-icons">list</i>
+            </div>
+            <h2 style="background-color:whitesmoke; color: black; padding: 2px; width: 100%;"> Facture numero :{{numero}}
+                <div class="col-md-6 form-group">
+                    <mat-form-field>
+                        Statut
+                        <mat-select name="statutChoisi" [(ngModel)]="statutChoisi">
+                            <mat-option *ngFor="let statut of listStatut" [value]="statut">
+                                {{ statut?.statutFacture }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+
+<!--                <button mat-raised-button  style="float: right;" class="btn btn-fill btn-success" data-dismiss="modal" (click)="updateFact()"-->
+<!--                >Statuer-->
+<!--                </button>-->
+                <button mat-raised-button  style="float: right;" class="btn btn-fill btn-success" placeholder="Veuillez changer le Statut" data-dismiss="modal" (click)=updateFact()
+                        > Statuer
+                </button>
+<!--                <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="RejeterFacture()"-->
+<!--                 *ngIf="certifier!=true else test">Rejeter-->
+<!--                </button>-->
+<!--                <ng-template #test>-->
+                    
+                    <h4 class="text-white text-center bg-success p-2" style="float: left; font-size: 20px;">
+                        <i class="material-icons">checked</i>
+                        Votre facture est <b style="color: red">{{facture?.ipmStatutFacture?.statutFacture}}</b>
+                    </h4>
+<!--                    <button mat-raised-button  style="float: right;" class="btn btn-fill btn-danger" data-dismiss="modal" (click)="annullationfac()"-->
+<!--                    >Annuler Facture-->
+<!--                    </button>-->
+<!--                </ng-template> -->
+              
+                 
+          
+        </h2>
+
+            
+          </div>
+        <div class="material-datatable">
+            <div class="card-body">
+
+
+
+                <table id="datatable" class="table table-hover table-bordered" cellspacing="0"
+                    width="100%" style="width:100%">
+
+                    <thead>
+
+                        <tr style="background-color: whitesmoke">
+                            
+                            <th class="text-center" cope="col" ><b>Matricule</b></th>
+                            <th class="text-center" cope="col"><b>Prenom</b></th>
+                            <th class="text-center" cope="col"><b>Nom</b></th>
+                            <th class="text-center" cope="col"><b>Prestation</b></th>
+                            <!-- <th cope="col">Code Prestation</th> -->
+
+                            <th class="text-center" cope="col"><b>Montant Facture</b></th>
+                            <th class="text-center" cope="col"><b>Charge_ipm</b></th>
+                            <th class="text-center" cope="col"><b>Charge_agent</b></th>
+                         <!-- <th class="text-center" cope="col"><b>Date</b></th> -->
+                            <th class="text-center" cope="col"><b>Action</b></th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let fact of listFactures">
+                            <td class="text-center">{{fact.ipm_employe?.matricule}}</td>
+                            <td class="text-center">{{fact.ipm_employe?.prenom}}</td>
+                            <td class="text-center">{{fact.ipm_employe?.nom}}</td>
+                            <td class="text-center">{{fact.ipm_prestation?.libelle}}</td>
+                            <!-- <td>{{fac.ipm_prestation?.code_prestation}}</td>
+                         -->
+                            <td class="text-center">{{fact.montant_facture | number:'.2'}}</td>
+                            <td class="text-center">{{fact.part_ipm | number:'.2'}}</td>
+                            <td class="text-center">{{fact.part_patient | number:'.2'}}</td>
+                            <!-- <td class="text-center">{{fact.date_facture}}</td> -->
+                            <td class="td_actions text-right">
+                                <button mat-raised-button (click)="getFactureById(fact)" type="button"
+                                    class="btn btn-round btn-xs" id="edit">
+                                    <i class="material-icons" data-toggle="modal"
+                                        data-target="#Modal2">details</i>
+
+                                </button>
+                                        <button data-toggle="modal"
+                                        data-target="#Modal3" mat-raised-button (click)="getFactureById(fact)" *ngIf="statfact==2" type="button" class="btn btn-round btn-danger" style="background-color:rgba(17, 178, 227, 0.88)" id="edit">
+                                            <i class="material-icons"  >edit</i></button>
+                                             
+                            </td>
+                            <!-- <td>
+                            <div [ngSwitch]="fac.certifier" *ngIf="">
+                                <div *ngSwitchCase="true">
+                                    
+                                  <mat-checkbox checked="true"></mat-checkbox>
+                                </div>
+                                
+                                <div *ngSwitchDefault>
+                                    
+                                  <mat-checkbox (click)="getCertified(fac)"></mat-checkbox>
+                                </div>
+                            </div>
+                          
+                        </td> -->
+
+                        </tr>
+                    </tbody>
+                
+
+                </table>
+<!--                <button mat-raised-button  style="float: right;" class="btn btn-fill btn-success"(click)="reglementer()" -->
+<!--                    >règlementer-->
+<!--                    </button>-->
+                <footer>
+                <button mat-raised-button class="btn btn-fill btn-success btn-round"
+                style="margin-right: 28.5cm;" (click)="imprimerfacture()">imprimer
+               </button>
+                <button mat-raised-button class="btn btn-fill btn-danger btn-round"  style="margin-bottom: 60px;float: right" (click)="retourner()"
+                >retour
+                </button>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--formulaire-->
+<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h4 class="modal-title text-white" id="Modal2" style="font-weight:bold;">Detail
+                </h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-12 col-sm-offset-2">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="nom">nom :{{nom}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="prenom">prenom :
+                                        {{prenom}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Matricule">Matricule
+                                        :{{matricule}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Prestation">Prestation :
+                                        {{prestation}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Prestataire">Prestataire
+                                        {{prestataire}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Date de Facture">Date de
+                                        Facture : {{dateFacture}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Date d'enregistrement">Date
+                                        d'enregistremen: {{dateEnregistrement}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Montant">Montant
+                                        :{{montant}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Part IPM">Part IPM
+                                        :{{part_ipm}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Part Patient">Part Patient
+                                        :{{part_patient}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Solde">SOLDE
+                                        :{{solde}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Cumul Charge">Cumul Charge
+                                        :{{cumulCharge}}</label>
+
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--end formulaire-->
+<!--formulaire modification-->
+<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 700px;">
+            <div class="modal-header bg-success">
+                <h4 class="modal-title text-white" id="Modal3" style="font-weight:bold;">Detail
+                </h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-12 col-sm-offset-2">
+                        <form >
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                            
+                                    <mat-form-field>
+                                        {{this.pre}}
+                                        <mat-select name="Prestataires"   id="Prestataires"  formControlName="Prestataires">
+                                            <!-- <mat-option>None</mat-option> -->
+                                          <mat-option *ngFor="let prest of listPrestataire" [value]="prest.code_prestataire" 
+                                            (click)="getnomprestataire(prest)">
+                                            {{ prest.nom_prestataire }}
+                                           
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+
+                            </div>
+                             
+                                <div class="form-group col-md-5">
+                                  <mat-form-field>
+                                    {{this.prestationmodif}}
+                                    <mat-select  name="Prestation"
+                                      id="Prestation"  [(ngModel)]="Prestation">
+                                      <mat-option *ngFor="let pret of listPrestation" [value]="pret.code_prestation" (click)="getnom(pret)">
+                                        {{ pret.libelle }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                    
+                              </div>
+                              <hr>
+                              <div class="row" style="color:black;">
+                                <div class="col-md-3 form-group">
+                                  <label for="Matricule"><b>Matricule</b></label><br />
+                                     <b> {{matricule}}</b>
+                                  <!-- <input type="number" class="form-control" id="matricule" formControlName="Matricule"> -->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                  <label for="participant"> <b>participant</b></label><br />
+                                  <b>{{nom}} {{prenom}}</b>
+                                  <!-- <input type="text" class="form-control" id="Montant" formControlName="participant"> -->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                  <label for="prestation"><b>prestation</b></label><br />
+                                  <b>{{prestation}}</b>
+                                  <b>{{prestation_choisi}}</b>
+                                  <!-- <input type="text" class="form-control" id="prestation" formControlName="prestation"> -->
+                                </div>
+                                <div class="col-md-3 form-group">
+                                  <label for="Prestataires "><b>Prestataires</b></label><br />
+                                  <b>{{prestataire}}</b>
+                                  <b>{{prestataire_choisi}}</b>
+                                  <!-- <input type="number" class="form-control" id="matricule" formControlName="Matricule"> -->
+                                </div>
+                    
+                    
+                              </div>
+                              <hr>
+                              <div class="row">
+                                <div class="col-md-3 form-group">
+                                  <label for="Montant"><b>Montant Facture</b></label>
+<!--                                    <b> {{montant_facture}}</b>-->
+
+                            
+                                  <input type="number" class="form-control" id="Montant" value="{{montant_facture}}" [(ngModel)]="montant" name="montant">
+                                </div>
+                                <div class="col-md-3 form-group">
+                                  <label for="Code_acte"><b>Code acte</b></label><br />
+                                  
+                                  <input matInput type="number" class="form-control" id="Code_acte" [(ngModel)]="montant" formControlName="Code_acte">
+                                </div>
+                    
+                                <div class="col-md-3 form-group">
+                                  <label for="Taux_ipm"><b>Taux ipm</b></label><br />
+                                  {{taux_ipm}}
+                                  <input type="number" class="form-control" [(ngModel)]="taux_ipm
+                                  "  id="Taux_ipm" formControlName="Taux_ipm"> 
+                                </div>
+                    
+                              </div>
+                              <hr>
+                              <div class="row">
+                    
+                    
+                    
+                    
+                                <!-- <div class="form-group  col-md-3">
+                                    <label for="date_saisie">Date de saisie</label>
+                                    <input type="date" class="form-control" id="date_saisie" formControlName="date_saisie">
+                                  </div> -->
+                    
+                                <div class="form-group  col-md-3">
+                                  <label for="date_prestation"><b>date de prestation</b></label>
+                                  <input type="date" class="form-control" id="date_prestation" [(ngModel)]="dateFacture" name="date_prestation">
+                                </div>
+                    
+                    
+                              </div>
+                    
+                    
+                    
+                              <div class="modal-footer justify-content-center">
+                                <button mat-raised-button data-dismiss="modal"
+                                        class="btn btn-raised btn-round btn-success"(click)="modifierFacture()">Valider
+                                  </button>
+                    
+                              </div>
+                    
+                              <div>
+                              </div>
+                             
+                            <!-- <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="nom">nom:{{nom}}</label>
+                                    <input type="text" class="form-control" id="nom"
+                                        [(ngModel)]="nom" name="nom">
+                                 
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="prenom">prenom :{{prenom}}
+                                        </label>
+                                        <input type="text" class="form-control" id="prenom"
+                                        [(ngModel)]="prenom" name="prenom">
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Matricule">Matricule:{{matricule}}
+                                       </label>
+                                        <input type="text" class="form-control" id="matricule"
+                                        [(ngModel)]="matricule" name="matricule">
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                             
+                               
+                                <div class="form-group col-md-5">
+                                     <label style="font-weight:bold;" for="Prestation">Prestation :
+                                        {{prestation}}</label> 
+                                        <mat-form-field>
+                                            <label for="Prestataires"><b>Choisir une Prestation</b> </label>
+                                            <mat-select  name="Prestation"
+                                              class="form-control" id="Prestation">
+                                              <mat-option *ngFor="let pret of listPrestation" [value]="pret.code_prestation" (click)="getnom(pret)">
+                                                {{ pret.libelle }}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                            
+                                        <mat-form-field>
+                                            <label for="Prestataires"><b>Prestataires</b> </label>
+                                            <mat-select name="Prestataires" class="form-control" id="Prestataires" formControlName="Prestataires">
+                                              <mat-option *ngFor="let prest of listPrestataire" [value]="prest.code_prestataire"
+                                                (click)="getnomprestataire(prest)">
+                                                {{ prest.nom_prestataire }}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Date de Facture">Date de
+                                        Facture : {{dateFacture}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Date d'enregistrement">Date
+                                        d'enregistremen: {{dateEnregistrement}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Montant">Montant
+                                        :{{montant}}</label>
+                                        <input type="number" class="form-control" id="Montant" formControlName="Montant">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                        
+                                    <div class="col-md-3 form-group">
+                                      <label for="Taux_ipm"><b>Taux ipm</b></label><br />
+                                     {{taux_ipm}} 
+                                    <input type="number" class="form-control" id="Taux_ipm" formControlName="Taux_ipm"> 
+                                    </div>
+                        
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Solde">SOLDE
+                                        :{{solde}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group  col-md-3">
+                                    <label for="date_prestation"><b>date de prestation</b></label>
+                                    <input type="date" class="form-control" id="date_prestation" formControlName="date_prestation">
+                                  </div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Cumul Charge">Cumul Charge
+                                        :{{cumulCharge}}</label>
+
+                                </div> 
+                            </div> -->
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!------fin modal 3-->

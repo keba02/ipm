@@ -1,0 +1,204 @@
+<style>
+    tr{font-weight: bold;}
+</style>
+<div class="col-md-12 mt-5">
+    <div class="card">
+        <div class="card-header card-header-icon" >
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+              <i class="material-icons">list</i>
+            </div>
+            <h2 style="background-color:whitesmoke; color: black; pading: 2px; width: 100%;">  
+                <button mat-raised-button  style="float: right;" class="btn btn-fill btn-success" data-dismiss="modal" (click)="CertifierEmploye()"
+                *ngIf="certifier!= true else test">Certifier
+                </button>
+            
+            </h2>
+            
+            <ng-template #test>
+                <h4 class=" text-white text-center bg-success p-2" style="float: right; font-size: 20px;">
+                    <i class="material-icons">checked</i>
+                    remboursement  déja certfiée
+                </h4>
+            </ng-template> 
+
+            
+          </div>
+        <div class="material-datatable">
+            <div class="card-body">
+
+
+
+                <table id="datatable" class="table table-hover table-bordered" cellspacing="0"
+                    width="100%" style="width:100%">
+
+                    <thead>
+
+                        <tr style="background-color: whitesmoke">
+                            
+                            <th class="text-center" cope="col" ><b>Matricule</b></th>
+                            <th class="text-center" cope="col"><b>Prenom</b></th>
+                            <th class="text-center" cope="col"><b>Nom</b></th>
+                            <th class="text-center" cope="col"><b>Solde</b></th>
+                            
+                            <th class="text-center" cope="col"><b>Montant </b></th>
+                            
+                         <!-- <th class="text-center" cope="col"><b>Date</b></th> -->
+                            <!-- <th class="text-center" cope="col"><b>Action</b></th> -->
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let fact of listRembourse">
+                            <td class="text-center">{{fact.ipm_employe?.matricule}}</td>
+                            <td class="text-center">{{fact.ipm_employe?.prenom}}</td>
+                            <td class="text-center">{{fact.ipm_employe?.nom}}</td>
+                            <td class="text-center">{{fact.ipm_employe?.solde}}</td>
+
+                            
+                            <td class="text-center">{{fact.montant | number:'.2'}}</td>
+                            
+                            <!-- <td class="td_actions text-right">
+                                <button mat-raised-button (click)="getRembById(fact)" type="button"
+                                    class="btn btn-round btn-xs" id="edit">
+                                    <i class="material-icons" data-toggle="modal"
+                                        data-target="#Modal2">help</i></button>
+                            </td> -->
+                            <!-- <td>
+                            <div [ngSwitch]="fac.certifier" *ngIf="">
+                                <div *ngSwitchCase="true">
+                                    
+                                  <mat-checkbox checked="true"></mat-checkbox>
+                                </div>
+                                
+                                <div *ngSwitchDefault>
+                                    
+                                  <mat-checkbox (click)="getCertified(fac)"></mat-checkbox>
+                                </div>
+                            </div>
+                          
+                        </td> -->
+
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <button mat-raised-button class="btn btn-fill btn-danger"  style="margin-left: 25.5cm;" (click)="retourner()">retour
+    </button>
+</div>
+
+
+
+
+<!--formulaire-->
+<!-- <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h4 class="modal-title text-white" id="Modal2" style="font-weight:bold;">Detail
+                </h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-12 col-sm-offset-2">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="nom">nom :{{nom}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="prenom">prenom :
+                                        {{prenom}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Matricule">Matricule
+                                        :{{matricule}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Prestation">Prestation :
+                                        {{prestation}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Prestataire">Prestataire
+                                        {{prestataire}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Date de Facture">Date de
+                                        Facture : {{dateFacture}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Date d'enregistrement">Date
+                                        d'enregistremen: {{dateEnregistrement}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Montant">Montant
+                                        :{{montant}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Part IPM">Part IPM
+                                        :{{part_ipm}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Part Patient">Part Patient
+                                        :{{part_patient}}</label>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Solde">SOLDE
+                                        :{{solde}}</label>
+
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-5">
+                                    <label style="font-weight:bold;" for="Cumul Charge">Cumul Charge
+                                        :{{cumulCharge}}</label>
+
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<!--end formulaire-->

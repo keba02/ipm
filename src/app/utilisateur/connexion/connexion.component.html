@@ -1,0 +1,320 @@
+<style>
+  .btn-group button {
+    background-color: #1240d4;
+    border: none;
+    /* Green border */
+    color: white;
+    /* White text */
+    padding: 10px 100px;
+    /* Some padding */
+    cursor: pointer;
+    /* Pointer/hand icon */
+    float: left;
+    /* Float the buttons side by side */
+
+  }
+
+  /* Clear floats (clearfix hack) */
+  .btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .btn-group button:not(:last-child) {
+    border-right: none;
+    /* Prevent double borders */
+  }
+</style>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card " style="margin-left:8cm;">
+          <div class="card-header card-header-icon">
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+              <i class="material-icons">list</i>
+            </div>
+            <h3 style="background-color:whitesmoke; font-weight: 400; color: black; pading: 5px; width: 50%;"
+              class="card-title">Liste des Utilisateurs</h3>
+          </div>
+          <div class="card-body" style="padding-left: 3.5cm;">
+            <div class="btn-group">
+              <table>
+                <thead>
+                  <th></th>
+                </thead>
+
+
+
+                <tbody>
+                  <tr>
+                    <td> <button style="margin-bottom: 10px; font-size:17px;" class="w-100" data-toggle="modal"
+                        data-target="#noticeModal">Ajouter Utilisateur </button> <br />
+<!--                      <button style="margin-bottom: 10px; font-size:17px;" class="w-100" data-toggle="modal"-->
+<!--                        data-target="#noticeModalrole">Ajouter Role </button>-->
+                      <button style="margin-bottom: 10px; font-size:17px;" class="w-100" data-toggle="modal"
+                        data-target="#noticeModalroleUser">affecter role </button>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card " style="margin-left:4cm;">
+      <div class="card-header card-header-icon">
+        <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+          <i class="material-icons">list</i>
+        </div>
+      </div>
+      <div class="card-body ">
+        
+        <div class="row">
+          <table class="table table-hover table-bordered col-md-12">
+              <thead>
+                  <tr style="background-color:rgb(213, 213, 213);">
+                      <!-- <th style="font-weight: 500;">Matricule</th> -->
+                      <th  style="font-weight: 500;">Nom</th>
+                      <th  style="font-weight: 500;">Prénom</th>
+                      <th  style="font-weight: 500;">nom utilisateur</th>
+                      <th  style="font-weight: 500;">email</th>
+                      <th  style="font-weight: 500;">Fonction</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let lis of listUser" style="font-weight: 400;">
+                   <!-- <td>{{listelement.ipm_employe?.matricule}}</td> -->
+                   <td>{{lis.nom}}</td>
+                   <td>{{lis.prenom}}</td>
+                      <td>{{lis.login}}</td>
+                      <td>{{lis.email}}</td>
+                      <td>{{lis.fonction}}</td>
+                      <!-- <td class="td_actions text-right">
+                          <button mat-raised-button type="button" class="btn btn-warning  btn-round btn-xs"
+                              id="edit">
+                              <i class="fa fa-home"></i></button>
+                      </td> -->
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+
+      </div>
+      
+     
+
+
+     
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
+      <div class="modal-header" style="background-color: whitesmoke;">
+        <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Utilisateur</h2>
+
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <b class="btn btn-danger"> <i class="material-icons" style="color: red;">close</i> fermer</b>
+        </button>
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+      <div class="modal-body" style="width: 900px;">
+
+        <form class="theme-form">
+          <div class="row bordered">
+            <!-- <div class="input-group col-md-4 bordered ">
+                                    <input type="text" name="matricule" class="form-control" placeholder="Matricule" id="matricule"
+                                      [(ngModel)]="matricule">
+                                      <button mat-raised-button (click)="getMatricule()" style="margin-top: -7px;padding: 4px;"
+                                      class="btn btn-fill btn-success"><i class="material-icons">search</i>Rechercher</button>
+                                  </div> -->
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" class="form-control" id="login" placeholder="Username"
+                  [(ngModel)]="User.login" name="login" required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="password" placeholder="Mot de Passe" id="password" [(ngModel)]="User.password"
+                  name="password" required>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" class="form-control" id="prenom" placeholder="Prenom"
+                  [(ngModel)]="User.prenom" name="prenom" required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Nom" id="nom" [(ngModel)]="User.nom" name="nom" required>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="email" class="form-control" id="email" placeholder="Email"
+                  [(ngModel)]="User.email" name="email" required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Fonction" id="fonction" [(ngModel)]="User.fonction"
+                  name="fonction" required>
+
+              </mat-form-field>
+            </div>
+
+          </div>
+        </form>
+        <div class="modal-footer justify-content-center">
+          <button mat-raised-button data-dismiss="modal" (click)="AjoutUser()" class="btn btn-success">Ajouter</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--modal role-->
+<div class="modal fade" id="noticeModalrole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
+      <div class="modal-header" style="background-color: whitesmoke;">
+        <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Utilisateur</h2>
+
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <b class="btn btn-danger"> <i class="material-icons" style="color: red;">close</i> fermer</b>
+        </button>
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+      <div class="modal-body" style="width: 900px;">
+
+        <form class="theme-form">
+          <div class="row bordered">
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" class="form-control" id="typeRole" placeholder="nom " [(ngModel)]="typeRole"
+                  name="typeRole" required>
+
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" class="form-control" id="description" placeholder="description "
+                  [(ngModel)]="description" name="description" required>
+
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+
+        </form>
+        <div class="modal-footer justify-content-center">
+          <button mat-raised-button data-dismiss="modal" (click)="AjoutRole()" class="btn btn-success">Ajouter</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- fin modal role-->
+<!--  modal  roleUser-->
+<div class="modal fade" id="noticeModalroleUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 900px; margin-left:-3cm;margin-top: 3cm;">
+      <div class="modal-header" style="background-color: whitesmoke;">
+        <h2 class="modal-title p-2" id="noticeModal" style="font-weight:400;">Utilisateur</h2>
+
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <b class="btn btn-danger"> <i class="material-icons" style="color: red;">close</i> fermer</b>
+        </button>
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+      <div class="modal-body" style="width: 900px;">
+
+
+
+        <form>
+
+          <div class="row">
+
+
+            <div class="col-md-6 form-group" style="margin-top: -10px;">
+              <mat-form-field>
+                <mat-select placeholder="Utilisateur" formControlName="Utilisateur" class="form-control"
+                  id="Utilisateur">
+                  <mat-option *ngFor="let user of listUser" [value]="user.email" (click)="selectUser(user)">
+                    {{ user.email }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 form-group" style="margin-top: -10px;">
+              <mat-form-field>
+                <mat-select placeholder=" selectionner Role" formControlName="role" class="form-control" id="role">
+                  <mat-option *ngFor="let role of listRole" [value]="role.typeRole" (click)="selectRole(role)">
+                    {{ role.typeRole }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </form>
+        <div class="modal-footer justify-content-center">
+          <button mat-raised-button data-dismiss="modal" (click)="AjoutUserRole()"
+            class="btn btn-success">Ajouter</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- fin modal roleUser-->

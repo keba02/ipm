@@ -1,0 +1,168 @@
+
+
+<div class="main-content">
+    <div class="container-fluid">
+<!--        <form [formGroup]="uploadForm">-->
+<!--      -->
+<!--            <div class="modal-footer justify-content-center">-->
+<!--                <button (click)="ajoutEmploye(ws)"  mat-raised-button class="btn btn-success" [disabled]="desactive">-->
+<!--                  <i class="material-icons">checked</i>Ajouter </button>-->
+<!--                </div>-->
+<!--            -->
+<!--      <input type="file" (change)="onFileChange($event)" formControlName="myFile"/>-->
+<!--      <table class="table table-hover">-->
+
+<!--        &lt;!&ndash; Table service-->
+<!--            <thead  style="font-weight:bold;">-->
+<!--             <tr>-->
+<!--          <th cope="col"> code</th>          -->
+<!--          <th cope="col">service</th>-->
+<!--          <th cope="col">Entité</th>          -->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--          <tr *ngFor=" let fac of ws">-->
+<!--            <td  style="font-weight:bold;">{{fac.Categorie}}</td>            -->
+<!--            <td style="font-weight:bold;">{{fac.Service}}</td>-->
+<!--            <td style="font-weight:bold;"></td>-->
+<!--          </tr>-->
+<!--        </tbody> &ndash;&gt;-->
+<!--        &lt;!&ndash;table categorie-->
+<!--             <thead  style="font-weight:bold;">-->
+<!--        <tr>-->
+
+<!--            <th cope="col"> categorie</th>-->
+<!--            -->
+<!--            -->
+<!--           -->
+<!--            -->
+<!--          </tr>-->
+<!--  -->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--            <tr *ngFor=" let fac of ws">-->
+<!--              <td  style="font-weight:bold;">{{fac.Categorie}}</td>-->
+<!--              -->
+<!--              -->
+<!--              -->
+<!--             -->
+<!--  -->
+<!--            </tr>-->
+<!--          </tbody> &ndash;&gt;-->
+<!--          <thead  style="font-weight:bold;">-->
+<!--            <tr>-->
+<!--    -->
+<!--                <th cope="col"> matricule</th>-->
+<!--                <th cope="col"> NOM</th>-->
+<!--                <th cope="col"> PRENOM</th>-->
+<!--                <th cope="col"> SEXE</th>-->
+<!--                <th cope="col"> DATE</th>-->
+<!--                <th cope="col"> SOLDE</th> -->
+<!--              </tr>-->
+<!--      -->
+<!--              </thead>-->
+<!--              <tbody>-->
+<!--                <tr *ngFor=" let fac of ws">-->
+<!--                  <td  style="font-weight:bold;">{{fac.Matricule}}</td>-->
+<!--                  <td  style="font-weight:bold;">{{fac.NOM}}</td>-->
+<!--                  <td  style="font-weight:bold;">{{fac.PRENOMS}}</td>-->
+<!--                  <td  style="font-weight:bold;">{{fac.Sexe}}</td>-->
+<!--                  <td  style="font-weight:bold;">{{fac.DateNaiss}}</td>-->
+<!--                  <td  style="font-weight:bold;">{{fac.Solde}}</td>-->
+
+
+
+
+
+<!--                  -->
+<!--                  -->
+<!--                  -->
+<!--                 -->
+<!--      -->
+<!--                </tr>-->
+<!--              </tbody>-->
+<!--        -->
+<!--      </table>-->
+<!--      -->
+<!--    </form>-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card " style="margin-left:8cm;">
+                    <div class="card-header card-header-icon">
+                        <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                            <i class="material-icons">list</i>
+                        </div>
+                        <h3 style="background-color:whitesmoke; font-weight: 400; color: black; pading: 5px; width: 50%;" class="card-title">Liste des Entités</h3>
+                    </div>
+                    <div class="card-body" style="padding-left: 3.5cm;">
+                        <div class="btn-group">
+                            <table>
+                                <thead>
+                                <th> </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let list of listEntity">
+                                        <td> <button style="margin-bottom: 10px; font-size:17px;" class="w-100" (click)="getService(list)" data-toggle="modal"
+                                                data-target="#noticeModal">{{list.nom_entity}} </button></td>
+                                        <!-- <td><button>{{list.nom_entity}}</button></td>
+                    <td>  <button>{{list.nom_entity}}</button> -->
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--modal list service-->
+        <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content"style="width: 700px;">
+                    <div class="modal-header" style="background-color: whitesmoke;">
+                        <h3 class="modal-title" id="noticeModal"
+                         style="font-weight:bold; padding-bottom: 10px;">liste des services
+                            de {{nomEntity}}
+                        </h3>
+                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="width: 700px;">
+
+                        <div class="row">
+                                <table class="table table-hover table-bordered col-md-12">
+                                    <thead>
+                                        <tr style="background-color:rgb(213, 213, 213);">
+                                            <th style="font-weight: 500;">Code Service</th>
+                                            <th  style="font-weight: 500;">Type de Service</th>
+                                            <th  style="font-weight: 500;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let listserv of listService" style="font-weight: 400;">
+                                            <td>{{listserv.code_service}}</td>
+                                            <td>{{listserv.type_service}}</td>
+                                            <td class="td_actions text-right">
+                                                <button (click)="getEmploye(listserv)" mat-raised-button type="button" class="btn btn-warning  btn-round btn-xs"
+                                                    id="edit">
+                                                    <i class="fa fa-home"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!--fin modal-->
+       
+
+    </div>
+</div>

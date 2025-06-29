@@ -1,0 +1,175 @@
+<!--liste facture-->
+<style>
+    tr{font-weight: bold;}
+</style>
+
+<div class="col-md-12">
+
+    <div class="card">
+        <div class="material-datatable">
+            <div class="card-header card-header-icon" >
+                <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                  <i class="material-icons">list</i>
+                </div>
+                <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Liste des factures </h2>
+            </div>
+            <div class="card-body">
+
+                <table id="datatable" class="table table-hover table-bordered" cellspacing="0"
+                    width="100%" style="width:100%">
+                    <!-- <div *ngFor="let item of pageOfItems">{{item.nom}}</div> -->
+                    <thead style="background-color: whitesmoke; ">
+
+                        <tr>
+                            <!-- <th class="text-center"><b>Id</b> </th>-->
+                            <th  style="font-weight:bold;" cope="col"> Numero</th>
+                            <th style="font-weight:bold;" cope="col">Prestataire</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col" >Date Facture</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col" >Date Reception</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col">Montant Facture</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col">Charge ipm</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col">Charge agent</th>
+<!--                            <th style="font-weight:bold;text-align: center;" cope="col">réglement</th>-->
+                            <th style="font-weight:bold;text-align: center;" cope="col">Statut Facture</th>
+                            <!-- <th cope="col">Date</th> -->
+                            <th *ngIf="!isSecretaire() && !isOperateur() " style="font-weight:bold;text-align: center;" cope="col">Action</th>
+                      
+                            <!-- <th style="font-weight:bold;" cope="col"></th>  -->
+                        </tr>
+                    </thead>
+
+                    <tbody *ngIf="liste">
+                        <tr *ngFor=" let fac of liste">
+                            <td ><b>{{fac.numerofacture}}</b></td>
+                        <td ><b>{{fac.ipm_prestataire.nom_prestataire}}</b></td>
+                        <td class="text-center"><b>{{fac.dateFacture | date:'yyyy-MM-dd'}}</b></td>
+                        <td class="text-center"><b>{{fac.DateReception | date:'yyyy-MM-dd'}}</b></td>
+
+                      <td class="text-center"><b>{{fac.montantTotal | number:'1.0-0'}}</b></td>
+                    <td class="text-center"><b>{{fac.part_ipm | number:'1.0-0'}}</b></td>
+             <td class="text-center"><b>{{fac.part_patient | number:'1.0-0'}}</b></td>
+<!--             <td class="text-center" >-->
+<!--                <div *ngIf="fac.nombJour>75">-->
+<!--             <span *ngIf=" fac.reglement" class="badge badge-success">regler</span>-->
+<!--              <span *ngIf="!fac.reglement  " class="badge badge-danger">non regler</span>-->
+<!--            </div></td>-->
+
+             <td class="text-center" >
+                 <span  class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>
+<!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Annulée'" class="badge badge-danger">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+<!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Réglementée'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+<!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='En Instance de réglementation'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+<!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='En instance de certification'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+<!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Certifiée'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+
+             </td>
+                <!-- <b class="text-white text-center bg-info p-2">{{fac.ipmStatutFacture?.statutFacture}}</b></td> -->
+                            <td class="td_actions text-right" *ngIf="!isSecretaire() && !isOperateur()">
+                                <!-- <button mat-raised-button type="button" class="btn btn-outline-info">
+                                  *ngIf="fac.ipmStatutFacture?.statutFacture!='Annulée'"-->
+                                <button mat-raised-button (click)="getDetFactById(fac)" type="button" class="btn btn-round btn-xs" id="edit">
+                                    <i class="material-icons" >details</i></button>
+                                    
+                            </td>
+                            <!-- <td>
+                        <div [ngSwitch]="fac.certifier" *ngIf="">
+                            <div *ngSwitchCase="true">
+                                
+                              <mat-checkbox checked="true"></mat-checkbox>
+                            </div>
+                            
+                            <div *ngSwitchDefault>
+                                
+                              <mat-checkbox (click)="getCertified(fac)"></mat-checkbox>
+                            </div>
+                        </div>
+                      
+                    </td> -->
+                        </tr>
+                    </tbody>
+
+                    <tbody *ngIf="listes">
+                    <tr *ngFor=" let fac of listes">
+                        <td ><b>{{fac.numerofacture}}</b></td>
+                        <td ><b>{{fac.ipm_prestataire.nom_prestataire}}</b></td>
+                        <td class="text-center"><b>{{fac.dateFacture | date:'yyyy-MM-dd'}}</b></td>
+                        <td class="text-center"><b>{{fac.DateReception | date:'yyyy-MM-dd'}}</b></td>
+
+                        <td class="text-center"><b>{{fac.montantTotal | number:'1.0-0'}}</b></td>
+                        <td class="text-center"><b>{{fac.part_ipm | number:'1.0-0'}}</b></td>
+                        <td class="text-center"><b>{{fac.part_patient | number:'1.0-0'}}</b></td>
+                        <!--             <td class="text-center" >-->
+                        <!--                <div *ngIf="fac.nombJour>75">-->
+                        <!--             <span *ngIf=" fac.reglement" class="badge badge-success">regler</span>-->
+                        <!--              <span *ngIf="!fac.reglement  " class="badge badge-danger">non regler</span>-->
+                        <!--            </div></td>-->
+
+                        <td class="text-center" >
+                            <span  class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>
+                            <!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Annulée'" class="badge badge-danger">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+                            <!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Réglementée'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+                            <!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='En Instance de réglementation'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+                            <!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='En instance de certification'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+                            <!--                 <span *ngIf="fac.ipmStatutFacture?.statutFacture=='Certifiée'" class="badge badge-success">{{fac.ipmStatutFacture?.statutFacture}}</span>-->
+
+                        </td>
+                        <!-- <b class="text-white text-center bg-info p-2">{{fac.ipmStatutFacture?.statutFacture}}</b></td> -->
+                        <td class="td_actions text-right" *ngIf="!isSecretaire() && !isOperateur()">
+                            <!-- <button mat-raised-button type="button" class="btn btn-outline-info">
+                              *ngIf="fac.ipmStatutFacture?.statutFacture!='Annulée'"-->
+                            <button mat-raised-button (click)="getDetFactById(fac)" type="button" class="btn btn-round btn-xs" id="edit">
+                                <i class="material-icons" >details</i></button>
+
+                        </td>
+                        <!-- <td>
+                    <div [ngSwitch]="fac.certifier" *ngIf="">
+                        <div *ngSwitchCase="true">
+
+                          <mat-checkbox checked="true"></mat-checkbox>
+                        </div>
+
+                        <div *ngSwitchDefault>
+
+                          <mat-checkbox (click)="getCertified(fac)"></mat-checkbox>
+                        </div>
+                    </div>
+
+                </td> -->
+                    </tr>
+                    </tbody>
+
+
+                </table>
+
+
+
+
+                <!-- <thead class="text-primary">
+
+            
+         
+          <tfoot class="text-primary">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><h4>TOTAL<p><div></div>{{montantTotals}}<p></h4></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              
+            </tr>
+          </tfoot> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal modification -->
+
+        
+    

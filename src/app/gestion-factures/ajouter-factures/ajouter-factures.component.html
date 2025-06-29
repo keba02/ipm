@@ -1,0 +1,252 @@
+
+
+<!--saisi facture-->
+  <!---->
+  <div class="card">
+    <div class="card-header card-header-icon" >
+      <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+        <i class="material-icons">list</i>
+      </div>
+      <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Facture par importation </h2>
+  </div>
+    <div class="card-body">
+      <form>
+
+        <div class="row">
+        
+
+        <div class="col-md-3 form-group" style="margin-top: -10px;" >
+          <mat-form-field>
+            <mat-select  placeholder="Prestataires" formControlName="Prestataires" 
+            class="form-control" id="Prestataires"
+              formControlName="Prestataires">
+              <mat-option *ngFor="let prest of listPrestataire" [value]="prest.code_prestataire"
+              (click)="getnomprestataire(prest)">
+                {{ prest.nom_prestataire }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3 form-group" style="margin-top: -10px;">
+          <mat-form-field>
+            <mat-select placeholder="Choisir une Prestation" formControlName="Prestation" class="form-control" id="Prestation"
+            [(ngModel)]="Prestation">
+              <mat-option *ngFor="let pret of listPrestation" [value]="pret.code_prestation"
+              (click)="getnom(pret)">
+                {{ pret.libelle }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3 form-group" style="margin-top: -12px;">
+          <label for="Numéro"><b>Numéro Facture</b></label>
+          
+          <input type="number" class="form-control" id="Numéro" name="Numéro" [(ngModel)]="NumeroFacture">
+        </div>
+        <div class="col-md-3" style="margin-top: 0px;">
+          <!-- <legend>date Facture</legend> -->
+          <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="date Facture" id="dateFacture" name="dateFacture" [(ngModel)]="dateFacture" (click)="picker1.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1 startView="year"></mat-datepicker>
+          </mat-form-field>
+      </div>
+      <div class="col-md-3" style="margin-top: 0px;">
+        <!-- <legend>date Facture</legend> -->
+        <mat-form-field>
+        <input matInput [matDatepicker]="picker4" placeholder="date reception" id="reception" name="reception" [(ngModel)]="reception" (click)="picker4.open()">
+        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+        <mat-datepicker #picker4 startView="year"></mat-datepicker>
+        </mat-form-field>
+    </div>
+        
+      </div>
+      </form>
+
+
+    </div>
+  </div>
+  
+  <!-- Ajouter au ponier details facture --> 
+  <div class="card">
+   <div class="card-header card-header-icon">
+    <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+      <i class="material-icons">backup</i>
+    </div>
+    <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 40%;">Importation fichier excel</h2>
+
+  </div>
+    
+    <div class="card-body" >
+      <div class="row" *ngIf="ws">
+        <div class="form-group col-md-4" style="font-weight:bold;">
+          <h5 style="font-weight:bold;"> PRESTATAIRE :{{prestataire_choisi}}</h5>
+
+        </div>
+        <div class="form-group  col-md-4">
+          <h5 style="font-weight:bold;">PRESTATION :{{prestation_choisi}}</h5>
+
+        </div>
+        <div class="form-group  col-md-4">
+          <h5 style="font-weight:bold;">DATE Facture  :{{date1}}</h5>
+
+        </div>
+
+
+      </div>
+      <form [formGroup]="uploadForm">
+      
+          
+            <!-- <input type="file" (change)="onFileChange($event)" multiple="false" class="btn btn-outline-success" /> -->
+      <input type="file" (change)="onFileChange($event)" formControlName="myFile"/>
+      <table class="table table-hover" *ngIf="ws">
+
+        <thead  style="font-weight:bold;">
+
+          <th cope="col"> Matricule</th>
+          
+          <!-- <th cope="col">Prestation</th>
+          <th cope="col">Prestataire</th> -->
+          <th cope="col">TauxIpm</th>
+          <th cope="col">Montant</th>
+          <th cope="col">ChargeIpm</th>
+          <th cope="col">ChargeAgent</th>
+          <th cope="col">DateFacture</th>
+           <!-- <th cope="col">Action</th>  -->
+
+        </thead>
+        <tbody>
+          <tr *ngFor=" let fac of ws">
+            <td  style="font-weight:bold;">{{fac.Matricule}}</td>
+            
+            <!-- <td>{{prestation_choisi}}</td>
+            <td>{{prestataire_choisi}}</td> -->
+            <td style="font-weight:bold;">{{taux_ipm}}</td>
+            <td style="font-weight:bold;">{{fac.Montant}}</td>
+            <td style="font-weight:bold;">{{(fac.Montant*taux_ipm)/100}}</td>
+            <td style="font-weight:bold;">{{fac.Montant-(fac.Montant*taux_ipm)/100}}</td> 
+            <td style="font-weight:bold;">{{date1}}</td>
+            <!-- <td class="td_actions">
+              <button mat-raised-button type="button" class="btn btn-outline-info">
+                <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
+                (click)="getFactureById(fac)">edit</i>
+            </button> 
+            </td> -->
+
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <!-- <td></td> -->
+            <!-- <td></td> -->
+            <td></td>
+            
+            
+            <td><h4 style="font-weight:bold;">TOTAL</h4></td>
+            <td style="font-weight:bold;">{{total}}</td>
+            <td style="font-weight:bold;">{{totalChargeIpm}}</td>
+            <td style="font-weight:bold;">{{totalChargeAgent}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+            
+          </tr>
+        </tfoot>
+      </table>
+      <!--<button (click)="export()" class="btn btn-outline-info">Export!</button> -->
+      <div class="modal-footer justify-content-center">
+      <button (click)="ajoutFacture(ws)"  mat-raised-button class="btn btn-success" [disabled]="desactive" *ngIf="ws">
+        <i class="material-icons">checked</i>Ajouter Details Facture</button>
+      </div>
+    </form>
+    </div>
+  </div>
+  
+
+  
+  <!--fin liste-->
+
+
+<!-- lien.txt
+Affichage de lien.txt en cours... -->
+
+<!-- Partie Modification modification-->
+<!-- <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Modification du facture Prestataire</h4>
+      <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        <i class="material-icons">clear</i>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form #userForme="ngForm">
+        <div class="row">
+          <div class="col-md-12">
+            <label for="Montant">Montant Facture</label>
+              
+      <input type="number" class="form-control" id="montant_facture" formControlName="montant_facture"
+       (ngModel)="currrentfacture.montant_facture" > 
+            <mat-form-field class="example-full-width">
+
+              <input matInput type="text" placeholder="nom prestataire" 
+              id="nom_prestataire" name="nom_prestataire"
+              >  
+            </mat-form-field>
+          </div>
+          <div class="col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="adresse" id="adresse_prestataire"
+               name="adresse_prestataire">
+            </mat-form-field>
+          </div>
+        </div>
+       
+        <div class="row">
+        <div class="col-md-6 form-group">
+          <mat-form-field>
+           {{currentprestataire.typePres}}
+            <mat-select placeholder="Prestataire" name="listTypePrestataire" [(ngModel)]="code_presta">
+              <mat-option *ngFor="let prest of cur" [value]="prest.id_type_prestataire">
+                {{ prest.nom_type_prestaire }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> 
+        </div>
+      </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Telephone" id="telephone"
+                  name="telephone" >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Code Categorie" id="code_categorie_pretataire"
+                  name="code_categorie_pretataire" >
+              </mat-form-field>
+            </div>
+          </div>
+        
+
+
+      </form>
+
+
+      <div class="modal-footer">
+        <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round" data-dismiss="modal"
+          >modifier</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div> -->

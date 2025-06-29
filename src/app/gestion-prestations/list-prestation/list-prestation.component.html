@@ -1,0 +1,200 @@
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modification des  prestations</h4>
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+        <!-- Tab panels -->
+        <div class="tab-content">
+            <!--Body-->
+            <div class="modal-body mb-1">
+              <form>
+<!--              <div class="col-md-6 form-group">                -->
+<!--                <input type="text" id="code_prestation" -->
+<!--                 name="code_prestation"  [(ngModel)]="currentprestation.code_prestation"-->
+<!--                  class="form-control">-->
+<!--              </div>-->
+              <div class="col-md-6 form-group" >
+                  <libelle><b>libelle</b></libelle>
+                <input type="text" id="libelle" name="libelle"
+                 [(ngModel)]="currentprestation.libelle" class="form-control">
+              </div>
+              <div class="col-md-6 form-group"*ngIf="!currentprestation.forfait">
+                  <libelle>T<b>agré</b> </libelle>
+                <input type="text" id="taux_agrees"
+                 name="taux_agrees" [(ngModel)]="currentprestation.taux_agrees" class="form-control">
+              </div>
+              <div class="col-md-6 form-group" *ngIf="!currentprestation.forfait">
+                  <libelle><b>Taux non agré</b></libelle>
+                <input type="text" id="taux_non_agrees"
+                 name="taux_non_agrees" [(ngModel)]="currentprestation.taux_non_agrees" class="form-control">
+              </div>
+                  <div class="col-md-6 form-group" *ngIf="currentprestation.forfait">
+                      <libelle><b>Forfait</b></libelle>
+                      <input type="number" id="montant_forfait"
+                             name="montant_forfait" [(ngModel)]="currentprestation.montant_forfait" class="form-control" placeholder="Montant Forfait">
+                  </div>
+            </form>
+              <div class="text-center mt-2">
+                <button  mat-raised-button class="btn btn-info" 
+                data-dismiss="modal" (click)="updatePrestation()">Modifer<i class="fas fa-sign-in-alt ml-1"></i></button>
+              </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-outline-info waves-effect ml-auto btn-round" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Prise en Compte des prestations</h4>
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+        <!-- Tab panels -->
+        <div class="tab-content">
+            <!--Body-->
+            <div class="modal-body mb-1">
+                <div class="col-md-6 form-group" style="float: right">
+<!--                    <input type="radio" [(ngModel)]="afficheForfait" value="true" name="libelle">-->
+                    <mat-checkbox [(ngModel)]="isForfait"><b>Forfait</b></mat-checkbox>
+                </div>
+<!--              <div class="col-md-6 form-group">                -->
+<!--                <input type="text" id="code_prestation" -->
+<!--                 name="code_prestation"  [(ngModel)]="prestation.code_prestation" class="form-control" placeholder="Code prestation">-->
+<!--              </div>-->
+              <div class="col-md-6 form-group">
+                <input type="text" id="libelle" name="libelle"
+                 [(ngModel)]="prestation.libelle" class="form-control" placeholder="Libelle">
+              </div>
+              <div class="col-md-6 form-group" *ngIf="!isForfait">
+                <input type="number" id="taux_agrees" 
+                 name="taux_agrees" [(ngModel)]="prestation.taux_agrees" class="form-control" placeholder="Taux Agree">
+              </div>
+              <div class="col-md-6 form-group" *ngIf="!isForfait">
+                <input type="number" id="taux_non_agrees" 
+                 name="taux_non_agrees" [(ngModel)]="prestation.taux_non_agrees" class="form-control" placeholder="Taux Non Agree">
+              </div>
+                <div class="col-md-6 form-group" *ngIf="isForfait">
+                    <input type="number" id="montant_forfait"
+                           name="montant_forfait" [(ngModel)]="prestation.montant_forfait" class="form-control" placeholder="Montant Forfait">
+                </div>
+
+
+
+
+
+              
+              <div class="text-center mt-2">
+                <button class="btn btn-info btn-round" data-dismiss="modal"
+                (click)="ajouterPrestation()">Enregistrer<i class="fas fa-sign-in-alt ml-1"></i></button>
+              </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              
+      <button mat-raised-button type="button" class="btn btn-outline-info waves-effect ml-auto"
+       data-dismiss="modal">Close</button>
+            </div>
+              
+<!-- <input type="date" (change)="refreshPage()"> -->
+        </div>
+
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login / Register Form-->
+<!--Fin-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header-rose">
+                        <div class="card-icon">
+                          <i class="material-icons">assignment</i>
+                        </div>
+                        <button mat-raised-button type="button" class="btn btn-success" *ngIf="!isSecretaire() && !isOperateur()">
+                          <i class="material-icons" data-toggle="modal" data-target="#modalLRForm"
+                          >add_circle</i>
+                      </button>  
+                        <h4 class="card-title">Liste des Prestations</h4>
+                        
+                       
+                    </div>
+                        <div class="card-body table-full-width">
+                            <div class="material-datatable">
+                                <table id="datatable" class="table table-striped" cellspacing="0" width="100%" style="width:100%" class="table table-hover">
+                                    <thead class="text-primary"> 
+                                    <tr>
+
+                                             <th scope="col">Libelle</th>
+                                             <th scope="col">TAUX AGREES</th>
+                                             <th scope="col">TAUX NON AGREES</th>
+                                             <th scope="col">Montant Forfait</th>
+                                             <th *ngIf="!isSecretaire() && !isOperateur()" scope="col">ACTIONS</th>
+    
+                                           </tr>
+                                    </thead>
+                                    <tbody >
+                                          <tr *ngFor=" let prestation of  listPrestation">
+<!--                                              <td >{{prestation.code_prestation}}</td>-->
+                                              <td >{{prestation.libelle}}</td>
+                                              <td >{{prestation.taux_agrees}}</td>
+                                              <td >{{prestation.taux_non_agrees}}</td>
+                                              <td >{{prestation.montant_forfait}}</td>
+
+                          
+                            
+                                              <td class="td-actions" *ngIf="!isSecretaire() && !isOperateur()">
+                                                
+                                                
+
+                                                <button mat-raised-button type="button" class="btn btn-primary">
+                                                    <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
+                                                    (click)="getPrestationById(prestation)">edit</i>
+                                                </button>                                      
+<!--                                                <button mat-raised-button type="button" class="btn btn-success">-->
+<!--                                                  <i class="material-icons" [routerLink]="['/gestion-factures/Ajouterfactures/']" -->
+<!--                                                  >perm_identity</i>-->
+<!--                                              </button>  -->
+                                              </td>
+                                              
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    
+

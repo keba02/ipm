@@ -1,0 +1,296 @@
+<!-- Partie Modification prestatatire-->
+<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modification du prestataire</h4>
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form #userForme="ngForm">
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+
+                <input matInput type="text" placeholder="nom prestataire" id="nom_prestataire" name="nom_prestataire"
+                  [(ngModel)]="currentprestataire.nom_prestataire">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="adresse" id="adresse_prestataire" name="adresse_prestataire"
+                  [(ngModel)]="currentprestataire.adresse_prestataire">
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="email" id="email"
+                name="email" [(ngModel)]="currentprestataire.email">
+            </mat-form-field>
+          </div>
+        </div> -->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <mat-form-field>
+                {{this.currentprestataire.ipm_type_prestataire?.nom_type_prestaire}} 
+                <mat-select name="listTypePrestataire" [(ngModel)]="code_presta">   
+                  <mat-option *ngFor="let prest of cur" [value]="prest.id_type_prestataire" (click)="getTypePrest()">
+                    {{ prest.nom_type_prestaire }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Telephone" id="telephone" name="telephone"
+                  [(ngModel)]="currentprestataire.telephone">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" placeholder="Code Categorie" id="code_categorie_pretataire"
+                  name="code_categorie_pretataire" [(ngModel)]="currentprestataire.code_categorie_pretataire">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+
+              <div class="col-sm-2 checkbox-radios">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="active" name="active" value="true"> Active
+                    <span class="form-check-sign">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </form>
+
+
+        <div class="modal-footer">
+          <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round" data-dismiss="modal"
+            (click)="update()">modifier</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Ajouter prestataire-->
+<div class="modal fade" id="ajouter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Prise en Compte des Prestataires</h4>
+        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+
+      </div>
+      <div class="modal-body">
+
+        <form #userForme="ngForm" [formGroup]="prestataireForm">
+          <div class="row">
+            <div class="col-md-12">
+
+              <mat-form-field class="example-full-width" style="width:50%">
+                <pre><label>Nom Prestataire</label> <span style="color: red; margin-right: 17%">*</span></pre>
+                <input matInput type="text"   id="nom_prestataire" name="nom_prestataire"
+                  [(ngModel)]="prestataire.nom_prestataire" formControlName="nom_pestataire">
+              </mat-form-field>
+
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 50%">
+                <pre><label>Adress Prestataire</label> <span style="color: red; margin-right: 17%">*</span></pre>
+                <input matInput type="text" ng-required=”true”
+                  ng-pattern="^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$" id="adresse_prestataire"
+                  name="adresse_prestataire" [(ngModel)]="prestataire.adresse_prestataire" formControlName="adresse_prest">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 50%">
+                <label>Email</label>
+                <input matInput type="email"  id="email" name="email"
+                  [(ngModel)]="prestataire.email" formControlName="email">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 50%">
+                <label>Raison Social</label>
+                <input matInput type="text"  id="raison_social" name="raison_social"
+                  [(ngModel)]="prestataire.raison_social" formControlName="raison_sociale">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 50%">
+                <label>Telephone</label>
+                <input matInput type="text"  id="telephone" name="telephone"
+                  [(ngModel)]="prestataire.telephone" formControlName="telephone">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <mat-form-field >
+                <pre><label>Type Prestataire</label> <span style="color: red; margin-right: 17%">*</span></pre>
+                <mat-select  name="listTypePrestataire" [(ngModel)]="code_presta" formControlName="typePrest">
+                  <mat-option *ngFor="let prest of listTypePrestataire" [value]="prest.id_type_prestataire">
+                    {{ prest.nom_type_prestaire }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-md-6">
+              <mat-form-field>
+                <pre><label>Code Categorie</label> <span style="color: red; margin-right: 17%">*</span></pre>
+                <mat-select id="code_categorie_pretataire" name="code_categorie_pretataire"
+                  [(ngModel)]="prestataire.code_categorie_pretataire" formControlName="codePrest">
+
+                  <mat-option [value]="1">1:Agree</mat-option>
+                  <mat-option [value]="2">2:Non Agree</mat-option>
+
+
+                </mat-select>
+              </mat-form-field>
+
+              <!-- <div class="col-md-6 form-group">
+                <mat-form-field>
+                  <mat-select id="code_categorie_pretataire" name="code_categorie_pretataire"
+                    placeholder="Code Categorie" [(ngModel)]="prestataire.code_categorie_pretataire">
+                    <mat-option [value]="1">1:Agree</mat-option>
+                    <mat-option [value]="2">2:Non Agree</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div> -->
+              <div class="btn btn-file" style="margin-left:30% ;">Lettre d'Agrément
+                <input type="file" class="form-control" name="file" (change)="selctLettreAgre($event)"
+                  accept=".PNG ,.jpeg, .jpg,.pdf,.doc,.docx" >
+                <img [src]="AgrementURL" height=" 100" width="100" *ngIf="AgrementURL">
+
+
+
+              </div>
+            </div>
+            <span style="color: red;margin-right:35%">les champs avec * sont  <strong> obligatoires</strong></span>
+       </div>
+
+        </form>
+
+
+        <div class="modal-footer">
+          <button mat-raised-button type="submit" class="btn btn-fill btn-success btn-round" data-dismiss="modal"
+                  [disabled]="!prestataireForm.valid" (click)="ajouterPres()">Enregistrer</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Fin-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title "> Liste des Prestataires</h4>
+          </div>
+          <div class="card-body table-full-width">
+            <div class="table-responsive">
+              <h2 class="text-center" style="background-color:whitesmoke; color: black; padding: 2px; width: 40%;">Liste
+                des prestataires </h2>
+              <button mat-raised-button type="button" style="float:right;margin-top:-1cm; font-size: 16px;" *ngIf="!isSecretaire() && !isOperateur()"
+                data-toggle="modal" data-target="#ajouter" class="btn btn-success">
+                <i class="material-icons">add_circle</i> Ajouter un prestataire
+              </button>
+
+              <table id="datatable" class="table table-striped" cellspacing="0" width="100%" style="width:100%"
+                class="table table-hover">
+                <thead class="text-primary">
+
+                  <tr>
+<!--                    <th cope="col">Code Prestataire</th>-->
+                    <th cope="col">Nom Prestataire</th>
+                    <th cope="col">Adresse</th>
+                    <!-- <th cope="col">Email</th> -->
+                    <th cope="col">Type Prestataire</th>
+                    <th cope="col">Telephone</th>
+                    <th cope="col">Nature</th>
+                    <th cope="col">Actions</th>
+                    <!-- <th >{{ dataTable.headerRow[8] }}</th> -->
+                    <!-- <th class="disabled-sorting text-right">{{ dataTable.headerRow[7] }}</th> -->
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let prestataire of listPrestataire">
+<!--                    <td>{{prestataire.code_prestataire}}</td>-->
+                    <td>{{prestataire.nom_prestataire}}</td>
+                    <td>{{prestataire.adresse_prestataire}}</td>
+                    <!-- <td >{{prestataire.email}}</td> -->
+                    <td>{{prestataire.ipm_type_prestataire?.nom_type_prestaire}}</td>
+                    <td>{{prestataire.telephone}}</td>
+                    <!-- <td>{{prestataire.code_categorie_pretataire}}</td>  -->
+                    <td>
+                      <span *ngIf="prestataire.code_categorie_pretataire==2" class="badge badge-danger">Non Agree</span>
+                      <span *ngIf="prestataire.code_categorie_pretataire==1" class="badge badge-success">Agree</span>
+                    </td>
+
+                    <td class="td-actions">
+                      <!-- <button  type="button" class="btn btn-success" 
+                              > 
+                              
+                                                <i class="fa fa-pencil-square-o"></i></button> -->
+
+
+                      <button mat-raised-button type="button" class="btn btn-outline-info">
+                        <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
+                          (click)="getPrestaById(prestataire)">edit</i>
+                      </button>
+
+                    </td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

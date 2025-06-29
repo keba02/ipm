@@ -1,0 +1,264 @@
+<!---->
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="card">
+      <div class="card-header card-header-icon">
+<!--        <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">-->
+<!--          <i class="material-icons">search</i>-->
+<!--        </div>-->
+        <h3 class="text-center" style="background-color:rgba(17, 17, 227, 0.88);font-weight: bold;color: whitesmoke; pading: 8px; width: 40%;">Rapport
+          global </h3>
+      </div>
+      <div class="card-body">
+        <form #form="ngForm">
+
+          <div class="row">
+
+
+
+
+            <!-- <div class="col-md-3 form-group" style="margin-top: -12px;">
+          <label for="Numéro"><b>Numéro Facture</b></label>
+          
+          <input type="number" class="form-control" id="Numéro" name="Numéro" [(ngModel)]="NumeroFacture">
+        </div> -->
+            <div class="col-md-3" style="margin-top: 0px;">
+              <!-- <legend>date Facture</legend> -->
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder=" la date du" id="date1" name="date1"
+                  [(ngModel)]="date1" (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3" style="margin-top: 0px;">
+              <!-- <legend>date Facture</legend> -->
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Au" id="date2" name="date2" [(ngModel)]="date2"
+                  (click)="picker1.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 startView="year"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3 form-group" style="margin-top: -1px;">
+              <mat-form-field>
+                <mat-select placeholder="Entité" name="entity" [(ngModel)]="entity">
+
+
+                  <mat-option [value]="tout" (click)="getEntout()">
+                    {{"tout" }}
+
+
+                  </mat-option>
+
+                  <mat-option *ngFor="let ent of listEntiy" [value]="ent.idEntity" (click)="getEntity(ent)">
+
+
+                    {{ ent.nom_entity }}
+                  </mat-option>
+
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="card-footer" style="padding-left: 40%;">
+              <button mat-raised-button type="submit" (click)="getCreanceglobale();form.resetForm()"
+                class="btn btn-fill btn-success"><i class="material-icons">search</i>Rechercher</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--liste creances-->
+    <div class="col-md-12" *ngIf="listCreanceEntites else test">
+      <div class="card" *ngIf="affiche">
+        <div class="card-header card-header-icon">
+          <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+            <i class="material-icons">list</i>
+
+          </div>
+          <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste
+            creance {{attente}} du {{d1}} au {{d2}} </h2>
+
+        </div>
+        <div class="card-body">
+          <div class="material-datatable">
+            <table id="datatable" class="table table-bordered " #TABLE cellspacing="0" width="100%" style="width:100%">
+
+              <thead style="font-weight:bold;">
+
+
+
+
+
+                <tr>
+
+                  <th cope="col"> Matricule</th>
+                  <th cope="col">Nom Participant</th>
+                  <th cope="col">Prenom Participant</th>
+
+                  <th cope="col">MontantFacture</th>
+                  <th cope="col">ChargeIpm</th>
+                  <th cope="col">ChargeAgent</th>
+
+
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let element of listCreanceEntites; let i=index">
+                  <td><b>{{element.ipm_employe?.matricule}}</b></td>
+                  <td><b>{{element.ipm_employe?.nom}}</b></td>
+                  <td><b>{{element.ipm_employe?.prenom}}</b></td>
+                  <td><b>{{element.montant_facture}}</b></td>
+                  <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
+                  <td><b>{{element.part_ipm}}</b></td>
+                  <td><b>{{element.part_patient}}</b></td>
+
+                  <!-- <td class="td_actions">
+                <i class="material-icons" class="btn btn-danger" ><span
+                    class="fa fa-trash-o"></span></i>
+              </td> -->
+                  <!-- <td>
+                <button class="btn btn-info btn-block" 
+               data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
+                </button></td> -->
+
+
+                </tr>
+              </tbody>
+              <!-- <tfoot style="font-weight:bold;">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <h4>TOTAL</h4>
+              </td>
+              <td>{{}}</td>
+              <td>{{}}</td>
+              <td>{{}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+  
+            </tr>
+          </tfoot> -->
+
+            </table>
+          </div>
+          <button class="btn btn-raised btn-round btn-success" (click)="imprimer() ">imprimer
+          </button>
+          <!-- <div class="modal-footer justify-content-center">
+          <button class="btn btn-raised btn-round btn-success" [disabled]="validerFact" >Valider facture
+          </button>
+        </div> -->
+          <div class="col-md-6" style="font-weight:bold;color: black;float: right;">
+            <i mat-raised-button type="button" class="nav-link"
+               data-toggle="tab"  style="width: 100px;" (click)="retourserach()"  role="tablist" class="btn btn-info btn-round">
+              <span class="material-icons">arrow_back</span></i>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <ng-template #test>
+      <div class="col-md-12" *ngIf="listCreanceGlobales">
+        <div class="card">
+          <div class="card-header card-header-icon">
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+              <i class="material-icons">list</i>
+
+            </div>
+            <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 0px; width: 100%;">liste
+              creance {{attente}} du {{d1}} au {{d2}}
+            </h2>
+
+          </div>
+          <div class="card-body">
+            <div class="material-datatable">
+              <table id="datatable" class="table table-bordered " #TABLE cellspacing="0" width="100%"
+                style="width:100%">
+
+                <thead style="font-weight:bold;">
+
+                  <tr>
+
+
+                    <th cope="col"> Matricule</th>
+                    <th cope="col">Nom Participant</th>
+                    <th cope="col">Prenom Participant</th>
+
+                    <th cope="col">MontantFacture</th>
+                    <th cope="col">ChargeIpm</th>
+                    <th cope="col">ChargeAgent</th>
+
+
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let element of listCreanceGlobales; let i=index">
+                    <td><b>{{element.ipm_employe?.matricule}}</b></td>
+                    <td><b>{{element.ipm_employe?.nom}}</b></td>
+                    <td><b>{{element.ipm_employe?.prenom}}</b></td>
+                    <td><b>{{element.montant_facture}}</b></td>
+                    <!-- <td>{{element.ipm_prestation?.code_prestation}}</td> -->
+                    <td><b>{{element.part_ipm}}</b></td>
+                    <td><b>{{element.part_patient}}</b></td>
+
+                    <!-- <td class="td_actions">
+                <i class="material-icons" class="btn btn-danger" ><span
+                    class="fa fa-trash-o"></span></i>
+              </td> -->
+                    <!-- <td>
+                <button class="btn btn-info btn-block"
+               data-toggle="modal" data-target="#noticeModal" (click)="editDetails(i)"><span class="fa fa-edit fa-lg"></span>
+                </button></td> -->
+
+
+                  </tr>
+                </tbody>
+                <!-- <tfoot style="font-weight:bold;">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <h4>TOTAL</h4>
+              </td>
+              <td>{{}}</td>
+              <td>{{}}</td>
+              <td>{{}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+
+            </tr>
+          </tfoot> -->
+
+              </table>
+            </div>
+            <!-- <div class="modal-footer justify-content-center">
+          <button class="btn btn-raised btn-round btn-success" [disabled]="validerFact" >Valider facture
+          </button>
+        </div> -->
+            <button class="btn btn-raised btn-round btn-success" (click)="imprimerTout() ">imprimer
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </ng-template>
+
+    <!--liste creances-->
+   
+
+    <!--fin liste2-->
+  </div>
+</div>

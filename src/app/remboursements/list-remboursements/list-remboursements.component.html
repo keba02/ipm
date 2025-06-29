@@ -1,0 +1,87 @@
+<!--liste facture-->
+<style>
+    tr{font-weight: bold;}
+</style>
+<div class="col-md-12">
+    <div class="card">
+        <div class="material-datatable">
+            <div class="card-header card-header-icon" >
+                <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                  <i class="material-icons">list</i>
+                </div>
+                <h2 class="text-center" style="background-color:whitesmoke; color: black; pading: 2px; width: 50%;">Liste des remboursement </h2>
+            </div>
+            <div class="card-body">
+
+                <table id="datatable" class="table table-hover table-bordered" cellspacing="0"
+                    width="100%" style="width:100%">
+                    <!-- <div *ngFor="let item of pageOfItems">{{item.nom}}</div> -->
+                    <thead style="background-color: whitesmoke; ">
+
+                        <tr>
+                            
+                            <th  style="font-weight:bold;" cope="col"> Numero </th>
+                            <th style="font-weight:bold;text-align: center;" cope="col" >Date</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col">Montant remboursement</th>
+                            <th style="font-weight:bold;text-align: center;" cope="col">Status</th>
+
+                    
+                            <th *ngIf="!isSecretaire() && !isOperateur() " style="font-weight:bold;text-align: center;" cope="col">Action</th>
+                    
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor=" let fac of liste">
+                            <td ><b>{{fac.idRemboursement}}</b></td>
+                        <td ><b>{{fac.dateRemboursement | date:'yyyy-MM-dd'}}</b></td>
+                        <td class="text-center"><b>{{fac.montantRemboursement}}</b></td>
+                        <td class="text-center" *ngIf="fac.certifier"><b style="color: red;">Remboursement déja certifié</b></td>
+                        <td class="text-center" *ngIf="!fac.certifier"><b style="color: #00c853;">En instance de certification</b></td>
+
+                      
+                            <td class="td_actions text-right" *ngIf="!isSecretaire() && !isOperateur() ">
+                                
+                                <button mat-raised-button (click)="getDetrembouById(fac)" type="button" class="btn btn-round btn-xs" id="edit">
+                                    <i class="material-icons" >help</i></button>
+                                        
+                            </td>
+               
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+
+
+                <!-- <thead class="text-primary">
+
+            
+         
+          <tfoot class="text-primary">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><h4>TOTAL<p><div></div>{{montantTotals}}<p></h4></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              
+            </tr>
+          </tfoot> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal modification -->
+
+        
+    
+

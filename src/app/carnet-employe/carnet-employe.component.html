@@ -1,0 +1,1262 @@
+<style>
+    label {
+        color: black;
+        font-size: 18px;
+    }
+</style>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon ">
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">list</i>
+            </div>
+            <legend class="card-title p-2"
+                    style="background-color:whitesmoke;font-weight: 500; color: black; width: 30%;">
+                Entité : {{currentemploye.ipmEntity?.nom_entity}}</legend>
+
+            <!-- <div class="card-icon" *ngIf="currentemploye.photo==''" href="#"><img class="card-img-top img-responsive"
+            src= "{{currentemploye.photo}}"
+           style = "height :100px;"
+          alt="">
+        </div>  -->
+
+
+        </div>
+        <div class="card-body p-4">
+            <form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <label class="rounded"
+                                   style="padding: 10px; font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white;">Carnet
+                                employe : {{currentemploye.prenom}}
+                                {{currentemploye.nom}}</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row p-4 rounded shadow" style="background-color: whitesmoke;width:66%;margin: 0 auto;">
+                    <div class="col-md-4">
+                        <img class="rounded-circle" src="{{currentemploye.photo}}"
+                             style="height :150px;margin-top: 1cm  ;" alt="">
+
+                        <!-- <a *ngIf="currentemploye.photo"> -->
+                        <a>
+                            <button class="rounded" style="margin-top: 1px" type="button" class="btn btn-warning"
+                                    data-toggle="modal"
+                                    data-target="#modiftof">charger photo
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <!-- dffdfdf -->
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Age : <b> {{agemploye}}</b></label> <br>
+                            <label>Sexe : <b> {{ currentemploye.sexe}}</b> </label> <br>
+                            <label>Matricule : <b> {{ currentemploye.matricule}}</b></label>
+                            <label>Telephone : <b> {{ currentemploye.telephone}}</b></label>
+                            <label>Situation Familial : <b> {{ currentemploye.situation_familial}}</b></label>
+                            <label>Service : <b> {{ currentemploye.ipmService?.type_service}}</b></label> <br>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Numero Carnet : <b>{{ currentemploye.numero_carnet}}</b></label><br>
+                            <label>Adresse : <b> {{ currentemploye.adresse_domicile}}</b></label><br>
+                            <label>Reference : <b> {{currentemploye.reference}}</b></label><br>
+                            <label>Categorie : <b> {{ currentemploye.ipm_categorie?.libelle}}</b></label>
+                            <label>Date Recrutement :<b> {{currentemploye.date_recrutement}}</b></label>
+                            <label>Date et Lieu de Naissance :<b> {{currentemploye.date_nais | date:'dd/MM/yyyy'}} à
+                                {{currentemploye.lieu_nais}}</b></label>
+                        </div>
+                        <a>
+                            <button mat-raised-button style="margin:2px;" type="button" class="btn btn-warning"
+                                    data-toggle="modal"
+                                    data-target="#modifjustif">charger Justficatif
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <!-- dffdfdf -->
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+                <!-- modif justficatif -->
+                <div class="modal fade" id="modifjustif" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-notice ">
+                        <div class="modal-content" style="width: 500px;">
+                            <div class="modal-header" *ngIf="!currentemploye.justificatif">
+                                <h3 class="modal-title btn-round" id="myModalLabel">
+                                    <label class="rounded"
+                                           style="padding: 10px; width: auto ;font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white;">
+                                        Ajouter un Justificatif</label></h3>
+                                <button mat-button type="button" class=" btn btn-danger btn-round" style="width: auto"
+                                        data-dismiss="modal">
+                                    <i class="material-icons">close</i>Fermer
+                                </button>
+                            </div>
+                            <div class="modal-header" *ngIf="currentemploye.justificatif">
+                                <h3 class="modal-title btn-round" id="myModalLabel">
+                                    <label class="rounded"
+                                           style="padding: 10px; width: auto ;font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white;">Modifier
+                                        un Justificatif</label></h3> <br>
+                                <button mat-button type="button" class=" btn btn-danger btn-round" style="width: auto"
+                                        data-dismiss="modal">
+                                    <i class="material-icons">close</i>
+                                    Fermer
+                                </button>
+                            </div>
+                            <form class="form-horizontal">
+
+                                <!--                <i class="material-icons">-->
+                                <!--                  backup-->
+                                <!--                </i>-->
+                                <div class="col-md-4 btn btn-file" style="margin-left:30% ;">Click ici...
+                                    <input type="file" (change)="editfchierJustificatif($event)">
+                                    <img [src]="fichierURL" height=" 100" width="100" *ngIf="fichierURL">
+                                    <img [src]="fichierURL" height=" 100" width="100"
+                                         *ngIf="currentemploye.justificatif">
+                                    <!--                  <img [src]="fichierURL" height=" 100" width="100"  *ngIf="currentemploye.justificatif == null " >-->
+                                    <!--                  <img [src]="fichierURL" height=" 100" width="100"  *ngIf="currentemploye.justificatif != null " >-->
+                                </div>
+                                <span> </span>
+                                <a target="_blank" href="{{chemintelechargementFichier}}{{justificatifEmp}}">
+                                    <span>{{justificatifEmp}}</span>
+                                </a>
+                                <div *ngIf="currentemploye.justificatif">
+                                    <label class="rounded"
+                                           style="padding: 2px; width: auto ;font-size: 16px;background-color:rgba(17, 17, 227, 0.88); color: white;">
+                                        Le Fichier existe déjà</label>
+                                </div>
+
+
+                                <!-- </div> -->
+                            </form>
+                            <div class="modal-footer justify-content-center">
+                                <button mat-raised-button type="button" class="btn btn-success btn-round"
+                                        (click)="ModifierfichierEmploye()">
+                  <span class="btn-label" *ngIf="!currentemploye.justificatif">
+                    <i class="material-icons">check</i>
+                    Enregistrer
+                  </span>
+                                    <span class="btn-label" *ngIf="currentemploye.justificatif">
+                    <i class="material-icons">check</i>
+                  Modification
+                  </span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin  modif  -->
+
+
+                <!-- modif photo -->
+                <div class="modal fade" id="modiftof" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-notice ">
+                        <div class="modal-content" style="width: 500px;">
+                            <div class="modal-header">
+                                <h4 class="modal-title p-2 rounded"
+                                    style="background-color:whitesmoke; font-weight: 400;"
+                                    id="myModalLabel">modification du photo</h4>
+                                <button mat-button type="button" class=" btn btn-danger" data-dismiss="modal">
+                                    <i class="material-icons">close</i>Fermer
+                                </button>
+                            </div>
+                            <form class="form-horizontal">
+
+                                <img class="rounded-circle col-md-4" src="{{currentemploye.photo}}"
+                                     style="height :150px;margin-top: 1cm; margin-left: 160px;" alt="" *ngIf="!imgURL3">
+                                <img class="rounded-circle col-md-4" [src]="imgURL3" *ngIf="imgURL3"
+                                     style="height :150px;margin-top: 1cm; margin-left: 100px;">
+                                <input type="file" (change)="editphoto($event)">
+                                <i class="material-icons">
+                                    backup
+                                </i>
+
+
+                                <!-- </div> -->
+                            </form>
+                            <div class="modal-footer justify-content-center">
+                                <button mat-raised-button type="button" class="btn btn-success btn-round"
+                                        (click)="Modifier()">
+                  <span class="btn-label">
+                    <i class="material-icons">check</i>
+                  </span>Enregistrer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- fin modif photo -->
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon">
+            <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">list</i>
+            </div>
+            <h4 class="text-center p-2" style="background-color:whitesmoke;font-weight: 500; color: black; width: 40%;">
+                Carnet
+                Familial </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <ul role="tablist" class="nav nav-pills nav-pills-rose flex-column">
+                        <li class="nav-item" *ngIf="condition!=true">
+                            <a data-toggle="tab" href="#link4" role="tablist" class="nav-link active"> Conjoint(e)
+                            </a>
+                        </li>
+                        <li class="nav-item"><a data-toggle="tab" href="#link5" role="tablist" class="nav-link">
+                            Enfant(s) </a></li>
+                        <li class="nav-item"><a data-toggle="tab" href="#link6" role="tablist" class="nav-link"
+                                                (click)="listFacture()"> Factures </a></li>
+                        <li class="nav-item"><a data-toggle="tab" href="#link7" role="tablist" class="nav-link"
+                                                (click)="consulter()"> Bons </a></li>
+
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content">
+                        <div id="link4" class="tab-pane active">
+                            <div class="col-md-12">
+                                <div class="">
+
+                                    <div class="" *ngIf="condition!=true">
+                                        <div class="table-responsive">
+                                            <button mat-raised-button type="button" data-toggle="modal"
+                                                    data-target="#conjoints"
+                                                    *ngIf="controlSexe=='' "
+                                                    class="mat-raised-button mat-button-base btn btn-success"><span
+                                                    class="mat-button-wrapper"><i class="material-icons">add_circle</i> Ajouter un
+                          conjoint</span></button>
+                                            <table class="table table-hover table-bordered rounded"
+                                                   style="background-color:whitesmoke;">
+                                                <thead>
+                                                <tr style="background-color:rgb(215, 215, 215);">
+                                                    <!-- <th class="text-center">Numero</th> -->
+                                                    <th style="font-weight: 500;">Nom</th>
+                                                    <th style="font-weight: 500;">Prenom</th>
+                                                    <th style="font-weight: 500;">Date de Naissance</th>
+                                                    <th style="font-weight: 500;">Lieu de Naissance</th>
+                                                    <th style="font-weight: 500;">Sexe</th>
+                                                    <th style="font-weight: 500;">Téléphone</th>
+                                                    <!--
+                                                    <th style="font-weight: 500;">Photo</th> -->
+                                                    <th style="font-weight: 500;" class="text-right">Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr style="font-weight: 600;" class="ng-star-inserted"
+                                                    *ngFor=" let conjoint of conjoints">
+                                                    <!--<td class="text-center">{{conjoint.idconj}}</td>-->
+                                                    <td>{{conjoint.nom_conjoint}}</td>
+                                                    <td>{{conjoint.prenom_conjoint}}</td>
+                                                    <td>{{conjoint.date_naiss_conj | date: 'dd/MM/yyyy'}}</td>
+                                                    <td>{{conjoint.lieu_naiss_conj}}</td>
+                                                    <td>{{conjoint.sexe_conjoint}}</td>
+                                                    <td>{{conjoint.telephone}}</td>
+
+
+                                                    <!-- <td>
+                                                      <a *ngIf="conjoint.photos!=''">
+                                                        <img class="rounded-circle" src="{{conjoint.photos}}" style="height :100px;" alt=""></a>
+                                                      <a *ngIf="conjoint.photos==''"><img class="card-img-top img-responsive"
+                                                          src="/assets/img/angular2-logo-white.png" style="height :100px;" alt=""></a>
+                                                    </td> -->
+                                                    <td class="td-actions text-right">
+                                                        <button mat-raised-button="button" type="button"
+                                                                class="mat-raised-button mat-button-base btn btn-warning"><span
+                                                                class="mat-button-wrapper">
+                                  <i class="material-icons" data-toggle="modal" data-target="#conjointss"
+                                     (click)="getConjointByIdsansPhoto(conjoint)">edit</i></span>
+                                                            <div matripple=""
+                                                                 class="mat-ripple mat-button-ripple"></div>
+                                                            <div class="mat-button-focus-overlay"></div>
+                                                        </button>
+                                                        <button mat-raised-button="" type="button" class="btn btn-info"><span
+                                                                class="mat-button-wrapper"><i class="material-icons"
+                                                                                              (click)="getConjointById(conjoint)"
+                                                                                              data-toggle="modal"
+                                                                                              data-target="#detailModalConjoints">person</i></span>
+                                                            <div matripple=""
+                                                                 class="mat-ripple mat-button-ripple"></div>
+                                                            <div class="mat-button-focus-overlay"></div>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <!--Modification Nouveau Conjoint-->
+                                                <div class="modal fade" id="conjointss" tabindex="-1" role="dialog"
+                                                     aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-notice ">
+                                                        <div class="modal-content" style="width: 700px;">
+                                                            <div class="modal-header">
+                                                                <!--                                  <h4 class="modal-title p-2 rounded"-->
+                                                                <!--                                    style="background-color:whitesmoke; font-weight: 400;" id="myModalLabel">-->
+                                                                <!--&lt;!&ndash;                                    Modification de Conjoint</h4>-->
+                                                                <h2 style="background-color:#0d47a1;color: white;border-radius: inherit; font-weight: 400;"
+                                                                    id="myModalLabel"> Modification de Conjoint</h2>
+
+                                                                <button mat-button type="button" class="btn btn-danger"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </div>
+                                                            <hr>
+                                                            <form class="form-horizontal">
+
+                                                                <div class="form-group row card-header">
+
+                                                                    <div class="col-md-4 form-group">
+                                                                        <label>Nom Conjoint(e)</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="nom_conjoint"
+                                                                               [(ngModel)]="nom_conjoint"
+                                                                               name="nom_conjoint">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group">
+                                                                        <label>Prenom Conjoint(e)</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="prenom_conjoint"
+                                                                               [(ngModel)]="prenom_conjoint"
+                                                                               name="prenom_conjoint">
+                                                                    </div>
+
+                                                                    <div class="col-md-4 form-group"
+                                                                         style="margin-top: 0px;">
+                                                                        <mat-form-field>
+                                                                            <label>Choissir le sexe</label>
+                                                                            <mat-select name="sexe" id="sexe"
+                                                                                        [(ngModel)]="sexe_conjoint">
+                                                                                <mat-option *ngFor="let sex of sexe"
+                                                                                            [value]="sex.value">
+                                                                                    {{ sex.value }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-4 form-group">
+                                                                        <label>Date Naissance</label><br>
+                                                                        <input type="date" class="form-control"
+                                                                               id="date_naiss_conj"
+                                                                               [(ngModel)]="date_naiss_conj"
+                                                                               name="date_naiss_conj">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group">
+                                                                        <label>Lieu Naissance</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="lieu_naiss_conj"
+                                                                               [(ngModel)]="lieu_naiss_conj"
+                                                                               name="lieu_naiss_conj">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group">
+                                                                        <label>Téléphone</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="telephone" [(ngModel)]="telephone"
+                                                                               name="telephone">
+                                                                    </div>
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 btn btn-file"> Changer
+                                                                                Photo
+                                                                                <input type="file" class="form-control"
+                                                                                       name="image"
+                                                                                       (change)="getFile($event)">
+                                                                                <img [src]="imgURL" height=" 100"
+                                                                                     width="100" *ngIf="imgURL"
+                                                                                     data-toggle="modal"
+                                                                                     data-target="#noticeModal1">
+                                                                            </div>
+                                                                            <div class="col-md-3 btn btn-file"
+                                                                                 style="margin-left:30px ;">Certificat
+                                                                                de mariage
+                                                                                <input type="file" class="form-control"
+                                                                                       name="image"
+                                                                                       (change)="selectCertificat($event)">
+                                                                                <img [src]="CertifURL" height=" 100"
+                                                                                     width="100" data-toggle="modal"
+                                                                                     data-target="#noticeModal">
+                                                                                <span> </span>
+                                                                                <a target="_blank"
+                                                                                   href="{{chemintelechargementFichier}}{{certificat}}">
+                                                                                    <span>{{certificat}}</span>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col-md-3 btn btn-file"
+                                                                                 *ngIf="genreEmp"
+                                                                                 style="margin-left:60% ;margin-inline: auto"
+                                                                                 [formGroup]="FormControlEmpployes">
+                                                                                Joindre Attestation de chomage
+                                                                                <input type="file"
+                                                                                       formControlName="AttestationChomageURL"
+                                                                                       (change)="selectAttestationChomage($event);">
+                                                                                <img [src]="AttestationChomageURL"
+                                                                                     height=" 100" width="100">
+                                                                                <span> </span>
+                                                                                <a target="_blank"
+                                                                                   href="{{chemintelechargementFichier}}{{attestationDeChomage}}">
+                                                                                    <span>{{attestationDeChomage}}</span>
+                                                                                </a>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <h4>{{message}} </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <div class="modal-footer justify-content-center">
+                                                                <button mat-raised-button type="button"
+                                                                        class="btn btn-success btn-round"
+                                                                        data-dismiss="modal"
+                                                                        (click)="ModifConjointNow()">
+                                                                    modifier
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Ajouter Nouveau Conjoints-->
+                                                <div class="modal fade" id="conjoints" tabindex="-1" role="dialog"
+                                                     aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-notice ">
+                                                        <div class="modal-content" style="width: 700px;">
+                                                            <div class="modal-header">
+                                                                <!--                                <h2 style="background-color:whitesmoke; font-weight: 400;" id="myModalLabel">Ajout de Conjoint(s)</h2>-->
+                                                                <h2 style="background-color:#0d47a1;color: white;border-radius: inherit; font-weight: 400;"
+                                                                    id="myModalLabel">
+                                                                    Ajout de Conjoint(s)</h2>
+
+                                                                <span> </span>
+                                                                <button mat-button type="button"
+                                                                        class=" btn btn-danger  rounded"
+                                                                        data-dismiss="modal">
+                                                                    <i class="material-icons">close</i>Fermer
+
+                                                                </button>
+                                                            </div>
+                                                            <form class="form-horizontal">
+
+                                                                <div class="form-group row card-header">
+
+                                                                    <div class="col-md-4 "
+                                                                         [formGroup]="FormControlEmpployes">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput type="text"
+                                                                                   placeholder="Nom Conjoint(e)"
+                                                                                   id="nom_conjoint"
+                                                                                   [(ngModel)]="nom_conjoint"
+                                                                                   formControlName="nom_conjoint">
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-4"
+                                                                         [formGroup]="FormControlEmpployes">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput type="text"
+                                                                                   placeholder="Prenom Conjoint(e)"
+                                                                                   id="prenom_conjoint"
+                                                                                   [(ngModel)]="prenom_conjoint"
+                                                                                   formControlName="prenom_conjoint">
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-4 " style="margin-top: 0px;"
+                                                                         [formGroup]="FormControlEmpployes">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Choissir le sexe"
+                                                                                        formControlName="sexee"
+                                                                                        class="form-control"
+                                                                                        [(ngModel)]="sexChoisi">
+                                                                                <mat-option *ngFor="let sex of sexe"
+                                                                                            [value]="sex.value"
+                                                                                            (click)="sexeEnfant(sex)">
+                                                                                    {{ sex.value }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEmpployes">
+
+                                                                        <!-- <input type="date" class="form-control" id="date_naiss_conj"
+                                                               [(ngModel)]="conjoint.date_naiss_conj" name="date_naiss_conj">  -->
+                                                                        <mat-form-field>
+
+
+                                                                            <input matInput [matDatepicker]="picker"
+                                                                                   (click)="picker.open()"
+                                                                                   id="date_naiss_conj"
+                                                                                   placeholder="Date de naissance"
+                                                                                   id="date_naiss_conj"
+                                                                                   [(ngModel)]="date_naiss_conj"
+                                                                                   formControlName="date_naiss_conj">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                                   [for]="picker"></mat-datepicker-toggle>
+                                                                            <mat-datepicker #picker
+                                                                                            startView="year"></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEmpployes">
+                                                                        <mat-form-field class="example-full-width">
+
+                                                                            <input matInput type="text"
+                                                                                   placeholder="lieu de naissance"
+                                                                                   id="lieu_naiss_conj"
+                                                                                   [(ngModel)]="lieu_naiss_conj"
+                                                                                   formControlName="lieu_naiss_conj">
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEmpployes">
+                                                                        <mat-form-field class="example-full-width">
+                                                                            <input matInput type="text"
+                                                                                   placeholder="Téléphone"
+                                                                                   id="telephone"
+                                                                                   [(ngModel)]="telephone"
+                                                                                   formControlName="telephone">
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-3 btn btn-file"
+                                                                         [formGroup]="FormControlEmpployes"> Changer
+                                                                        Photo
+                                                                        <input type="file" formControlName="image"
+                                                                               (change)="getFile($event)">
+                                                                        <img [src]="imgURL" height=" 100" width="100"
+                                                                             *ngIf="imgURL">
+                                                                    </div>
+                                                                    <div class="col-md-3 btn btn-file"
+                                                                         style="margin-left:30px ;"
+                                                                         [formGroup]="FormControlEmpployes">
+                                                                        Joindre Certificat de mariage
+                                                                        <input type="file"
+                                                                               formControlName="selectCertif"
+                                                                               (change)="selectCertificat($event);">
+                                                                        <img [src]="CertifURL" height=" 100" width="100"
+                                                                             *ngIf="CertifURL">
+                                                                    </div>
+                                                                    <div class="col-md-3 btn btn-file" *ngIf="genreEmp"
+                                                                         style="margin-left:60% ;margin-inline: auto"
+                                                                         [formGroup]="FormControlEmpployes">
+                                                                        Joindre Attestation de chomage
+                                                                        <input type="file"
+                                                                               formControlName="AttestationChomageURL"
+                                                                               (change)="selectAttestationChomage($event);">
+                                                                        <img [src]="AttestationChomageURL" height=" 100"
+                                                                             width="100" *ngIf="AttestationChomageURL">
+                                                                        <span> </span>
+                                                                        <a target="_blank"
+                                                                           href="{{chemintelechargementFichier}}{{attestationDeChomage}}">
+                                                                            <span>{{attestationDeChomage}}</span>
+                                                                        </a>
+                                                                    </div>
+
+
+                                                                    <div class="modal-footer justify-content-center">
+                                                                        <button mat-raised-button type="button"
+                                                                                class="btn btn-success btn-round"
+                                                                                (click)="ConjointNow();form.resetForm()"
+                                                                                data-dismiss="modal">
+                                                                            Enregistrer
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="link5" class="tab-pane">
+                            <div class="col-md-12">
+                                <div class="">
+                                    <div class="">
+                                        <div class="table-responsive">
+                                            <button mat-raised-button type="button" data-toggle="modal"
+                                                    data-target="#enfants"
+                                                    class="mat-raised-button mat-button-base btn btn-success"><span
+                                                    class="mat-button-wrapper"><i
+                                                    class="material-icons">add_circle</i> Ajouter un enfant</span>
+                                            </button>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr style="background-color:#d5d5d5 ;">
+                                                    <!-- <th class="text-center">#</th> -->
+                                                    <th style="font-weight: 500;">Age</th>
+                                                    <th style="font-weight: 500;">Nom</th>
+                                                    <th style="font-weight: 500;">Prenom</th>
+                                                    <th style="font-weight: 500;">Date de Naissance</th>
+                                                    <th style="font-weight: 500;">Lieu de Naissance</th>
+                                                    <th style="font-weight: 500;">Sexe</th>
+                                                    <!-- <th style="font-weight: 500;">Photo</th> -->
+                                                    <th style="font-weight: 500;" class="text-right">Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="ng-star-inserted" *ngFor=" let enfant of enfants"
+                                                    style="font-weight: 500; text-align: center;">
+                                                    <!-- <td class="text-center">1</td>-->
+                                                    <td class="text-center">
+                                                        <span *ngIf="enfant.active==''"
+                                                              class="badge badge-danger">{{enfant.agenfant}}</span>
+                                                        <span *ngIf="enfant.active!=''"
+                                                              class="badge badge-success">{{enfant.agenfant}}</span>
+                                                    </td>
+                                                    <td>{{enfant.nom_enfant}}</td>
+                                                    <td>{{enfant.prenom_enfant}}</td>
+                                                    <td>{{enfant.date_nais_enfant | date: 'dd/MM/yyyy'}}</td>
+                                                    <!-- <td>{{this.agenfant}}</td> -->
+                                                    <td>{{enfant.lieu_nais_enfant}}</td>
+                                                    <!-- <td>{{enfant.adresse}}</td> -->
+                                                    <td>{{enfant.sexe_enfant}}</td>
+                                                    <!-- <td rowspan="3"><a *ngIf="enfant.chemin!=''"><img class="rounded-circle"
+                                                          src="{{enfant.chemin}}" style="height :100px;" alt="">
+                                                      </a>
+                                                      <a *ngIf="enfant.chemin==''"><img class="card-img-top img-responsive"
+                                                          src="/assets/img/angular2-logo-white.png" style="height :100px;" alt=""></a>
+                                                    </td> -->
+                                                    <td class="td-actions text-right">
+                                                        <button mat-raised-button="" type="button"
+                                                                class="mat-raised-button mat-button-base btn btn-warning"
+                                                                data-toggle="modal"
+                                                                data-target="#enfantss"><span
+                                                                class="mat-button-wrapper"><i class="material-icons"
+                                                                                              (click)="getEnfantById(enfant)">edit</i></span>
+                                                            <div matripple=""
+                                                                 class="mat-ripple mat-button-ripple"></div>
+                                                            <div class="mat-button-focus-overlay"></div>
+                                                        </button>
+                                                        <button mat-raised-button="" type="button" class="btn btn-info"
+                                                                data-toggle="modal"
+                                                                data-target="#moadalphoto"
+                                                                (click)="getEnfantbyPhoto(enfant)"><span
+                                                                class="mat-button-wrapper"><i class="material-icons">person</i></span>
+                                                            <div matripple=""
+                                                                 class="mat-ripple mat-button-ripple"></div>
+                                                            <div class="mat-button-focus-overlay"></div>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <!--Ajouter de Nouvel Enfant-->
+                                                <div class="modal fade" id="enfantss" tabindex="-1" role="dialog"
+                                                     aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-notice ">
+                                                        <div class="modal-content" style="width: 700px;">
+                                                            <div class="modal-header">
+                                                                <!--                                  <h4 class="modal-title rounded p-2"-->
+                                                                <!--                                    style="background-color:whitesmoke; font-weight: 400;" id="myModalLabel">-->
+                                                                <!--                                    Modification des enfants</h4>-->
+                                                                <h2 style="background-color:#0d47a1;color: white;border-radius: inherit; font-weight: 400;"
+                                                                    id="myModalLabel">Modifier un Enfant</h2>
+                                                                <button mat-button type="button" class="btn btn-danger"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </div>
+                                                            <form class="form-horizontal">
+
+                                                                <div class="form-group row card-header">
+
+                                                                    <div class="col-md-4 form-group">
+                                                                        <label>Nom Enfant</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="nom_enfant" [(ngModel)]="nom_enfant"
+                                                                               name="nom_enfant">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group">
+                                                                        <label>Prenom Enfant</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="prenom_enfant"
+                                                                               [(ngModel)]="prenom_enfant"
+                                                                               name="prenom_enfant">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         style="margin-top: 20px;">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Choissir le sexe"
+                                                                                        name="sexe" class="form-control"
+                                                                                        id="sexe"
+                                                                                        [(ngModel)]="sexe_enfant">
+                                                                                <mat-option *ngFor="let sex of sexe"
+                                                                                            [value]="sex.value">
+                                                                                    {{ sex.value }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         style="margin-top: 5px;">
+                                                                        <label>Date Naissance </label><br>
+
+
+                                                                        <input type="date" class="form-control"
+                                                                               id="date_nais_enfant"
+                                                                               [(ngModel)]="date_nais_enfant"
+                                                                               name="date_nais_enfant">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         style="margin-top: 25px;">
+                                                                        <label>Lieu Naissance </label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="lieu_nais_enfant"
+                                                                               [(ngModel)]="lieu_nais_enfant"
+                                                                               name="lieu_nais_enfant">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         style="margin-top: 25px;">
+                                                                        <label>Adresse</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="adresse" [(ngModel)]="adresse"
+                                                                               name="adresse">
+                                                                    </div>
+
+
+                                                                    <!-- <div class="col-md-4 form-group">
+                                                                      <mat-option>Choisir le Sexe
+                                                                        <select class="form-control" id="sexe_enfant" [(ngModel)]="enfant.sexe_enfant"
+                                                                          name="sexe_enfant">
+                                                                          <option value="masculin">Masculin</option>
+                                                                          <option value="feminin">Feminin</option>
+                                                                        </select>
+                                                                      </mat-option>
+                                                                    </div> -->
+
+                                                                    <div class="col-md-4 btn btn-file">Choisir Photo
+
+                                                                        <input type="file" class="form-control"
+                                                                               name="image" (change)="getFile($event)">
+                                                                        <img [src]="imgURL" *ngIf="imgURL" height=" 100"
+                                                                             width="100">
+                                                                        <a *ngIf="imgEnfant"><img class="rounded-circle"
+                                                                                                  src="{{imgEnfant}}"
+                                                                                                  style="height :100px;"
+                                                                                                  alt=""></a>
+
+                                                                    </div>
+                                                                    <div class="col-md-4 btn btn-file"
+                                                                         style="margin-left:30% ;">Extrait de naissance
+                                                                        <input type="file" class="form-control"
+                                                                               name="image"
+                                                                               (change)="selctExtrait($event)">
+                                                                        <img [src]="ExtraitURL" height=" 100"
+                                                                             width="100">
+
+                                                                    </div>
+                                                                    <!-- <div class="row">
+                                                                  <label>Joindre acte de Naissance</label>
+                                                                    <input type="file" class="form-control"  name="image" (change)="getFile($event)" >
+                                                                </div> -->
+                                                                    <div>
+                                                                        <h4>{{message}} </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <div class="modal-footer justify-content-center">
+                                                                <button mat-raised-button type="button"
+                                                                        class="btn btn-info btn-round"
+                                                                        (click)="modifEnfant()" data-dismiss="modal">
+                                                                    Modification
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Ajouter de Nouvel Enfant-->
+                                                <div class="modal fade" id="enfants" tabindex="-1" role="dialog"
+                                                     aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-notice ">
+                                                        <div class="modal-content" style="width: 700px;">
+                                                            <div class="modal-header">
+                                                                <!--                                  <h4 class="modal-title rounded p-2"-->
+                                                                <!--                                    style="background-color:whitesmoke; font-weight: 400;" id="myModalLabel">Ajout-->
+                                                                <!--                                    d'Enfant(s)</h4>-->
+                                                                <h2 style="background-color:#0d47a1;color: white;border-radius: inherit; font-weight: 400;"
+                                                                    id="myModalLabel">Ajout
+                                                                    d'Enfant(s)</h2>
+                                                                <button mat-button type="button" class=" btn btn-danger"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">
+                                                                    <i class="material-icons"
+                                                                       style="color:red">close</i>Fermer
+                                                                </button>
+                                                            </div>
+                                                            <form class="form-horizontal">
+                                                                <input type="hidden" class="form-control">
+                                                                <div class="form-group row card-header">
+
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEnfant">
+                                                                        <label>Nom Enfant</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="nom_enfant"
+                                                                               [(ngModel)]="nom_enfant"
+                                                                               formControlName="nom_enfant">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEnfant">
+                                                                        <label>Prenom Enfant</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="prenom_enfant"
+                                                                               [(ngModel)]="prenom_enfant"
+                                                                               formControlName="prenom_enfant">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEnfant">
+                                                                        <label>Date Naissance </label>
+                                                                        <!-- <input type="date" class="form-control" id="date_nais_enfant"
+                                                                          [(ngModel)]="enfant.date_nais_enfant" name="date_nais_enfant"> -->
+                                                                        <mat-form-field>
+                                                                            <input matInput [matDatepicker]="picker1"
+                                                                                   (click)="picker1.open()"
+                                                                                   id="date_nais_enfant"
+                                                                                   placeholder="Date Naissance"
+                                                                                   [(ngModel)]="date_nais_enfant"
+                                                                                   formControlName="date_nais_enfant">
+                                                                            <mat-datepicker-toggle matSuffix
+                                                                                                   [for]="picker1"></mat-datepicker-toggle>
+                                                                            <mat-datepicker #picker1
+                                                                                            startView="year"></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEnfant">
+                                                                        <label>Lieu Naissance </label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="lieu_nais_enfant"
+                                                                               [(ngModel)]="lieu_nais_enfant"
+                                                                               formControlName="lieu_nais_enfant">
+                                                                    </div>
+                                                                    <div class="col-md-4 form-group"
+                                                                         [formGroup]="FormControlEnfant">
+                                                                        <label>Adresse</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="adresse" [(ngModel)]="adresse"
+                                                                               formControlName="adresse">
+                                                                    </div>
+
+
+                                                                    <div [formGroup]="FormControlEnfant"
+                                                                         class="col-md-4 form-group"
+                                                                         style="margin-top: 20px;">
+                                                                        <mat-form-field>
+                                                                            <mat-select placeholder="Choissir le sexM"
+                                                                                        formControlName="sexM"
+                                                                                        class="form-control"
+                                                                                        id="sexM" [(ngModel)]="sexM">
+                                                                                <mat-option *ngFor="let sex of sexe"
+                                                                                            [value]="sex.value"
+                                                                                            (click)="sexeEnfant(sex) ">
+
+                                                                                    {{ sex.value }}
+                                                                                </mat-option>
+                                                                            </mat-select>
+                                                                        </mat-form-field>
+                                                                    </div>
+
+                                                                    <div class="col-md-4 btn btn-file"
+                                                                         [formGroup]="FormControlEnfant">Choisir Photo
+
+                                                                        <input type="file" class="form-control"
+                                                                               formControlName="image"
+                                                                               (change)="getFile($event)">
+                                                                        <img [src]="imgURL" height=" 100" width="100"
+                                                                             *ngIf="imgURL">
+
+                                                                    </div>
+                                                                    <div class="col-md-4 btn btn-file"
+                                                                         [formGroup]="FormControlEnfant"
+                                                                         style="margin-left:30% ;">extrait de Naissance
+                                                                        <input type="file" class="form-control"
+                                                                               formControlName="file"
+                                                                               (change)="selctExtrait($event)"
+                                                                               accept=".PNG ,.jpeg, .jpg,.pdf,.doc,.docx">
+                                                                        <img [src]="ExtraitURL" height=" 100"
+                                                                             width="100" *ngIf="ExtraitURL">
+
+
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <h4>{{message}} </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <div class="modal-footer justify-content-center">
+                                                                <button mat-raised-button type="button"
+                                                                        class="btn btn-success btn-round"
+                                                                        (click)="EnfantNow()" data-dismiss="modal">
+                                                                    <i class="material-icons">check</i> Enregistrer
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- table facture -->
+                        <div id="link6" class="tab-pane">
+                            <div class="col-md-12">
+                                <div class="">
+
+                                    <div class="">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                <tr style="background-color:#d5d5d5 ;">
+
+                                                    <th style="font-weight: 500;" cope="col">Facture</th>
+                                                    <th style="font-weight: 500;" cope="col">Prestation</th>
+                                                    <th style="font-weight: 500;" cope="col">Date</th>
+                                                    <th style="font-weight: 500;" cope="col">Taux</th>
+
+                                                    <th style="font-weight: 500;" cope="col">Montant total</th>
+                                                    <th style="font-weight: 500;" cope="col">Part Patient</th>
+                                                    <th style="font-weight: 500;" cope="col">Part IPM</th>
+                                                </tr>
+
+
+                                                </thead>
+                                                <tbody>
+                                                <tr style="font-weight: 500; text-align: center;"
+                                                    *ngFor="let element of listFactures">
+                                                    <td><b>{{element.ipmFacture.numerofacture}}</b></td>
+
+                                                    <td><b>{{element.ipm_prestation.libelle}}</b></td>
+                                                    <td><b>{{element.datePrestation}}</b></td>
+                                                    <td><b>{{element.taux_ipm}}</b></td>
+                                                    <td><b>{{element.montant_facture}}</b></td>
+                                                    <td><b>{{element.part_patient}}</b></td>
+                                                    <td><b>{{element.part_ipm}}</b></td>
+
+
+                                                </tr>
+                                                </tbody>
+                                                <tfoot style="font-weight:bold;">
+                                                <tr style="font-weight: 500; text-align: center;">
+
+
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total</td>
+                                                    <td>{{montant}} </td>
+                                                    <td>{{partIpm}} </td>
+                                                    <td>{{partPatient}}</td>
+                                                    <td></td>
+
+                                                </tr>
+                                                </tfoot>
+
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- table bons -->
+                        <div id="link7" class="tab-pane">
+                            <div class="col-md-12">
+                                <div class="">
+
+                                    <div class="">
+                                        <span class="badge badge-success"
+                                              style="font-size: 15px;">Nombre de Bon:{{nombre}}</span>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+
+                                                <th cope="col">Numero Bon</th>
+                                                <th cope="col">Type de Bon</th>
+                                                <th cope="col">Prestataire</th>
+                                                <th cope="col">Date</th>
+
+
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let element of currentBon">
+                                                    <td><b>{{element.numeroBon}}</b></td>
+                                                    <td><b>{{element.decriminatorValue}}</b></td>
+                                                    <td><b>{{element.ipm_prestataire?.nom_prestataire}}</b></td>
+
+                                                    <td><b>{{element.dateEtablissement | date:'dd/MM/yy'}}</b></td>
+
+
+                                                </tr>
+                                                </tbody>
+                                                <tfoot style="font-weight:bold;">
+                                                <tr>
+
+
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <!-- <td>Total</td>
+                                                    <td>{{montant}} </td>
+                                                    <td>{{partIpm}} </td>
+                                                    <td>{{partPatient}}</td> -->
+                                                    <td></td>
+
+                                                </tr>
+                                                </tfoot>
+
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----------Fin table Bon -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="modal-footer justify-content-center">
+          <button mat-raised-button class="btn btn-info" data-toggle="modal" data-target="#bonempl" style="width: 100px;;" (click)="consulter()"><i
+            class="material-icons">person_pin</i> Bons
+        </button>
+        </div> -->
+        <button mat-raised-button class="btn btn-danger" style="width: 100px;" (click)="retourner()"><i
+                class="material-icons">arrow_back</i> retour
+        </button>
+
+    </div>
+</div>
+<ng-template #test>
+    <button mat-raised-button class="btn btn-danger" style="width: 100px;" (click)="retourner()"><i
+            class="material-icons">arrow_back</i> retour
+    </button>
+</ng-template>
+<!---->
+<div class="modal fade" id="noticeM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal tof</h4>
+                <button mat-button type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <a [src]="CertifURL" height=" 100" width="100" *ngIf="CertifURL"></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="noticeModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal tof</h4>
+                <button mat-button type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img [src]="imgURL" height="100%" width="100%" *ngIf="imgURL">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!----------------Modal Conjoints Details-->
+<div class="modal fade col-md-12" id="detailModalConjoints" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog  modal-notice">
+        <div class="modal-content " style="width: 700px;">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal tof</h4>
+                <button mat-button type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row p-4 rounded shadow" style="background-color: whitesmoke;width:66%;margin: 0 auto;">
+
+                    <div class="col-md-4">
+                        <img class="rounded-circle " src="{{currentconjoint.photos}}"
+                             style="height :150px;margin-top: 1cm  ;"
+                             *ngIf="!imgURL4" alt="">
+                        <img class="rounded-circle " src="{{imgURL4}}" *ngIf="imgURL4"
+                             style="height :150px;margin-top: 1cm  ;"
+                             alt="">
+                    </div>
+                    <h4 style="color:black;">Modifier la photo</h4>
+                    <div class="row">
+                        <button mat-button type="button" class="btn btn-success" data-dismiss="modal" *ngIf="imgURL4"
+                                (click)="modifierPhotoConjoint()" style="margin-top: 0cm">
+                            Valider
+                        </button>
+
+                        <input type="file" class="btn btn-warning" (change)="editphotoConjoint($event)"
+                               style="margin-top: 0cm">
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>prenom : <b> {{prenom_conjoint}}</b></label> <br>
+                            <label>Date de Naissance : <b> {{date_naiss_conj}}</b> </label> <br>
+                            <label>Telephone : <b> {{telephone}}</b></label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nom : <b>{{nom_conjoint}}</b></label><br>
+                            <label>Sexe : <b> {{sexe_conjoint}}</b></label><br>
+                            <!-- <label>Age : <b> {{ Age}}</b></label><br> -->
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!----------------Modal Conjoints Details fin-->
+<!----------------Modal enfant Details-->
+<div class="modal fade col-md-12" id="moadalphoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog  modal-notice">
+        <div class="modal-content " style="width: 700px;">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal tof</h4>
+                <button mat-button type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row p-4 rounded shadow" style="background-color: whitesmoke;width:66%;margin: 0 auto;">
+                    <div class="col-md-4">
+                        <img class="rounded-circle " src="{{enfant.chemin}}" style="height :150px;margin-top: 1cm  ;"
+                             *ngIf="!imgURL5" alt="">
+                        <img class="rounded-circle " src="{{imgURL5}}" *ngIf="imgURL5"
+                             style="height :150px;margin-top: 1cm  ;"
+                             alt="">
+
+
+                    </div>
+                    <h4 style="color:black;">Modifier la photo</h4>
+
+                    <div class="row">
+
+                        <button mat-button type="button" class="btn btn-success" data-dismiss="modal" *ngIf="imgURL5"
+                                (click)="modifierPhotoEnfant()" style="margin-top: 0cm">
+                            Valider
+                        </button>
+                        <input style="margin-top: 0cm" type="file" class="btn btn-warning"
+                               (change)="editphotoEnfant($event)">
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>prenom : <b> {{prenom_enfant}}</b></label> <br>
+                            <label>Date de Naissance : <b> {{date_naiss_enfant}}</b> </label> <br>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nom : <b>{{nom_enfant}}</b></label><br>
+                            <label>Sexe : <b> {{sexe_enfant}}</b></label><br>
+                            <label>Age : <b> {{ agenfant}}</b></label><br>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- modal facture -->
+<!-- <div class="modal fade col-md-12" id="noticeMod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" >
+  <div class="modal-dialog  modal-notice">
+    <div class="modal-content " style="width: 1000px; margin-left: -3cm;">
+      <div class="modal-header">
+        <h4 class="modal-title">Facture</h4>
+        <button mat-button type="button" class="close btn-danger" data-dismiss="modal" aria-hidden="true">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-icon">
+              <div class="card-icon" style="background-color:rgba(17, 17, 227, 0.88)">
+                <i class="material-icons">list</i>
+
+              </div>
+              <h3 style="background-color:whitesmoke; color: black; pading: 5px; width: 40%;">liste Facture
+              </h3>
+            </div>
+            <div class="card-body">
+
+
+              <div class="modal-footer justify-content-center">
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> -->
